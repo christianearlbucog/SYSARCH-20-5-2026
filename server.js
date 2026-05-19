@@ -574,9 +574,10 @@ app.get("/leaderboard", (req, res) => {
     db.all(sql, [], (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
         const result = rows.map(r => {
+            const totalMinutes = Math.max(r.totalMinutes || 0, 0);
             const completion = r.sitins || 0;
-            const timeBonus  = Math.min(Math.floor((r.totalMinutes || 0) / 20), 5);
-            const longBonus  = (r.totalMinutes || 0) >= 120 ? 2 : 0;
+            const timeBonus  = Math.min(Math.floor(totalMinutes / 20), 5);
+            const longBonus  = totalMinutes >= 120 ? 2 : 0;
             const manual     = r.manualPoints || 0;
             const points     = completion + timeBonus + longBonus + manual;
             return { ...r, points };
@@ -625,7 +626,7 @@ app.get("/admin/leaderboard", (req, res) => {
                 END
             ), 0) AS longestMinutes
         FROM users u
-        LEFT JOIN reservations r ON u.idNumber = r.idNumber
+        LEFT JOIN reservations r ON u.idNumber = r.idNumber AND r.status = 'Active'
         LEFT JOIN student_points sp ON u.idNumber = sp.idNumber
         WHERE u.idNumber != 'Admin'
         GROUP BY u.idNumber

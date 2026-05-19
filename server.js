@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
-const dbPath = path.resolve(__dirname, "klent.db");
+const dbPath = path.resolve(__dirname, "Admin.db");
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
         console.error("Database Connection Error:", err.message);

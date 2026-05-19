@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,181 +9,201 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             z-index: 500;
             justify-content: center;
             align-items: center;
             backdrop-filter: blur(5px);
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0, 0, 0, 0.4);
         }
 
-        .modal-content { 
-            background: #fff; 
-            border-radius: 10px; 
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); 
-            overflow: hidden; 
-            animation: slideDown 0.3s ease-out; 
+        .modal-content {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            animation: slideDown 0.3s ease-out;
         }
-        .modal-header { 
-            background: #2c3e70;
+
+        .modal-header {
+            background: linear-gradient(135deg, #2f6df8, #5b82ff);
             padding: 15px 20px;
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            color: white; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
         }
-        
-        .search-wrapper { 
-            display: flex; 
-            align-items: center; 
-            background: #ffffff; 
-            border: 2px solid #e3e6f0; 
-            border-radius: 10px; 
-            transition: all 0.2s; 
+
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border: 2px solid #e3e6f0;
+            border-radius: 10px;
+            transition: all 0.2s;
         }
-        .search-wrapper:focus-within { 
-            box-shadow: 0 0 8px rgba(44, 62, 112, 0.2); 
+
+        .search-wrapper:focus-within {
+            box-shadow: 0 0 8px rgba(44, 62, 112, 0.2);
         }
-        .search-wrapper input { 
-            flex: 1; border: none !important; 
-            padding: 12px; 
-            font-size: 15px; 
-            outline: none !important; 
+
+        .search-wrapper input {
+            flex: 1;
+            border: none !important;
+            padding: 12px;
+            font-size: 15px;
+            outline: none !important;
         }
 
         /* --- Search Result Card (From Image) --- */
-        #searchResultsList { 
-            margin-top: 15px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 10px; 
+        #searchResultsList {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
+
         .search-result-item {
-            display: flex; 
-            align-items: center; 
-            background: #f8f9fc; 
-            border-radius: 12px; 
-            padding: 12px; 
-            cursor: pointer; 
+            display: flex;
+            align-items: center;
+            background: #f8f9fc;
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
             transition: all 0.2s;
         }
-        .search-result-item:hover { 
-            background: #fff; 
-            transform: translateY(-2px); 
+
+        .search-result-item:hover {
+            background: #fff;
+            transform: translateY(-2px);
         }
-        
+
         .user-avatar {
-            width: 45px; 
-            height: 45px; 
-            background: #4e73df; 
-            color: white; 
+            width: 45px;
+            height: 45px;
+            background: #4e73df;
+            color: white;
             border-radius: 50%;
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            font-weight: 700; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
             margin-right: 15px;
         }
-        .user-info-text .name { 
-            display: block; 
-            font-weight: 700; 
-            color: #2c3e70; 
-            font-size: 14px; 
+
+        .user-info-text .name {
+            display: block;
+            font-weight: 700;
+            color: #2c3e70;
+            font-size: 14px;
         }
-        .user-info-text .meta { 
-            font-size: 11px; 
-            color: #858796; 
-            display: flex; 
-            gap: 8px; 
+
+        .user-info-text .meta {
+            font-size: 11px;
+            color: #858796;
+            display: flex;
+            gap: 8px;
         }
-        .user-status-badges { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: flex-end; 
-            flex: 1; 
-            font-size: 11px; 
-            font-weight: 800; 
+
+        .user-status-badges {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            flex: 1;
+            font-size: 11px;
+            font-weight: 800;
         }
-        .badge-sessions { 
-            color: #1cc88a; 
+
+        .badge-sessions {
+            color: #1cc88a;
         }
 
         /* --- Sit-in Form Styles --- */
-        .student-profile-card { 
-            background: #f8f9fc; 
-            border-left: 5px solid #2c3e70; 
-            border-radius: 8px; 
-            padding: 20px; 
-            margin: 20px; 
-        }
-        .profile-name { 
-            display: block; 
-            font-size: 1.1rem; 
-            font-weight: 600; 
-            color: #2c3e70; 
-            margin-bottom: 10px; 
-            text-transform: uppercase; 
-        }
-        .profile-meta { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; gap: 15px; 
-        }
-        .meta-item label { 
-            display: block; 
-            font-size: 10px; 
-            text-transform: uppercase; 
-            color: #858796; 
-            font-weight: 800; 
-        }
-        .meta-item span { 
-            font-weight: 600; 
-            color: #444; 
-        }
-        .modern-select { 
-            width: 100%; 
-            padding: 12px; 
-            border: 1px solid #d1d3e2; 
-            border-radius: 8px; 
-            cursor: pointer; 
-        }
-        
-        .modal-footer { 
-            padding: 15px 20px; 
-            background: #f8f9fc; 
-            border-top: 1px solid #e3e6f0; 
-            display: flex; 
-            justify-content: flex-end; 
-            gap: 10px; 
+        .student-profile-card {
+            background: #f8f9fc;
+            border-left: 5px solid #2f6df8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
         }
 
-        .btn-confirm { 
-            background: #2c3e70; 
-            color: white; 
-            border: none; 
-            padding: 10px 20px; 
-            border-radius: 6px; 
-            cursor: pointer; 
-            font-weight: 600; 
+        .profile-name {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2f6df8;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
-        .btn-cancel { 
+        .profile-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .meta-item label {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #858796;
+            font-weight: 800;
+        }
+
+        .meta-item span {
+            font-weight: 600;
+            color: #444;
+        }
+
+        .modern-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d3e2;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .modal-footer {
+            padding: 15px 20px;
+            background: #f8f9fc;
+            border-top: 1px solid #e3e6f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-confirm {
+            background: linear-gradient(135deg, #2f6df8, #5b82ff);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-cancel {
             background: #858796;
-            color: white; 
-            border: none; 
-            padding: 10px 20px; 
-            border-radius: 6px; 
-            cursor: pointer; 
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
         }
 
         .btn-confirm:hover {
-            background: #2c3e70;
+            background: linear-gradient(135deg, #2558d4, #4a6fe8);
             transform: translateY(-1px);
         }
 
@@ -192,34 +213,260 @@
         }
 
         @keyframes slideDown {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
-        
+
         .admin-container {
-            padding: 50px;
+            margin-left: 280px !important;
+            padding: 40px !important;
+            max-width: calc(100% - 280px) !important;
+            width: auto !important;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
-            max-width: 1500px;
-            margin: auto;
+            transition: all 0.3s ease;
+        }
+
+        /* ── Gradient body background matching dashboard.html ── */
+        body {
+            font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top left, rgba(47, 109, 248, 0.25), transparent 22%),
+                radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.18), transparent 18%),
+                var(--bg-page) !important;
+            transition: background 0.3s ease, color 0.3s ease;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ── Glassmorphic Left Sidebar ── */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(20px) !important;
+            border-right: 1px solid rgba(67, 97, 179, 0.15) !important;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 16px;
+            z-index: 1000;
+            box-shadow: 4px 0 24px rgba(15, 23, 42, 0.04);
+            overflow-y: auto;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        [data-theme="dark"] .sidebar {
+            background: rgba(15, 23, 42, 0.9) !important;
+            border-right: 1px solid rgba(148, 163, 184, 0.12) !important;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 12px 20px 12px;
+            border-bottom: 1px solid rgba(67, 97, 179, 0.1);
+            margin-bottom: 20px;
+        }
+        [data-theme="dark"] .sidebar .nav-brand {
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .sidebar .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(47, 109, 248, 0.25);
+        }
+
+        .sidebar .logo-text {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .sidebar .logo-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .sidebar .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .sidebar .nav-links li {
+            width: 100%;
+        }
+
+        .sidebar .nav-links a,
+        .sidebar .theme-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px !important;
+            color: var(--text-muted) !important;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            background: transparent !important;
+            transition: all 0.2s ease !important;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar .nav-links a i,
+        .sidebar .theme-toggle-btn i {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .sidebar .nav-links a:hover,
+        .sidebar .theme-toggle-btn:hover {
+            color: var(--text-main) !important;
+            background: rgba(47, 109, 248, 0.08) !important;
+            transform: translateX(4px);
+        }
+        [data-theme="dark"] .sidebar .nav-links a:hover,
+        [data-theme="dark"] .sidebar .theme-toggle-btn:hover {
+            background: rgba(124, 58, 237, 0.12) !important;
+        }
+
+        .sidebar .nav-links a.active {
+            color: white !important;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+            box-shadow: 0 4px 12px rgba(47, 109, 248, 0.2);
+        }
+        [data-theme="dark"] .sidebar .nav-links a.active {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .sidebar .nav-links a.active:hover {
+            transform: none;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+        }
+        [data-theme="dark"] .sidebar .nav-links a.active:hover {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+        }
+
+        .sidebar .nav-links a.logout {
+            margin-top: auto;
+            color: #ef4444 !important;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .sidebar .nav-links a.logout:hover {
+            background: rgba(239, 68, 68, 0.1) !important;
+            color: #ef4444 !important;
+        }
+
+        /* Responsive Sidebar */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 80px;
+                padding: 24px 8px;
+                align-items: center;
+            }
+            .sidebar .nav-brand {
+                padding: 0 0 20px 0;
+                justify-content: center;
+                border-bottom: none;
+            }
+            .sidebar .nav-brand div:last-child {
+                display: none;
+            }
+            .sidebar .nav-links a span,
+            .sidebar .theme-toggle-btn span {
+                display: none;
+            }
+            .sidebar .nav-links a,
+            .sidebar .theme-toggle-btn {
+                justify-content: center;
+                padding: 12px;
+            }
+            .sidebar .nav-links a:hover,
+            .sidebar .theme-toggle-btn:hover {
+                transform: scale(1.05);
+            }
+            .admin-container {
+                margin-left: 80px !important;
+                max-width: calc(100% - 80px) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 20px;
+                border-right: none !important;
+                border-bottom: 1px solid rgba(67, 97, 179, 0.15) !important;
+            }
+            .sidebar .nav-brand {
+                padding: 0;
+                margin: 0;
+                border-bottom: none;
+            }
+            .sidebar .nav-links {
+                display: none;
+            }
+            .admin-container {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+                padding: 20px !important;
+            }
         }
 
         .card {
-            background: #fff;
-            border: 1px solid #e3e6f0;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: var(--bg-card, #fff);
+            border: 1px solid rgba(67, 97, 179, 0.15);
+            border-radius: 24px;
+            box-shadow: 0 22px 40px rgba(15, 23, 42, 0.08);
             margin-bottom: 24px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .card-header {
-            background: #2c3e70;
-            padding: 12px 20px;
-            border-bottom: 1px solid #e3e6f0;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff);
+            padding: 18px 22px;
+            border-bottom: none;
         }
 
         .card-header span {
@@ -247,35 +494,41 @@
             text-align: center;
         }
 
-        .stat-item h3 { 
-            color: #0056b3; 
-            font-size: 2.3em; 
+        .stat-item h3 {
+            color: #2f6df8;
+            font-size: 2.3em;
             margin: 5px;
-            margin-top: 15px; 
+            margin-top: 15px;
         }
 
-        .stat-item p { 
-            color: #444; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            font-size: 12px; 
+        .stat-item p {
+            color: #444;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
         }
 
         .announcement-item {
-            background: #f6f6f6;
+            background: linear-gradient(135deg, rgba(47, 109, 248, 0.06), rgba(124, 58, 237, 0.04));
             padding: 15px;
             margin-bottom: 10px;
-            border-radius: 15px;
-            border: 1px solid #ccc;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 18px;
+            border: 1px solid rgba(67, 97, 179, 0.15);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .announcement-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
         }
 
         .broadcast-btn {
             width: 100%;
-            background: #2c3e70;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff);
             color: #fff;
             border: none;
-            border-radius: 10px;
+            border-radius: 999px;
             padding: 15px 25px;
             font-size: 14px;
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -286,10 +539,13 @@
             position: relative;
             overflow: hidden;
             margin-top: 15px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
         .broadcast-btn:hover {
-            background: #2d2d4e;
-            transform: translateY(-1px);
+            background: linear-gradient(135deg, #2558d4, #4a6fe8);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(47, 109, 248, 0.3);
         }
 
         .delete-btn {
@@ -297,23 +553,25 @@
             background: #e74a3b;
             color: #fff;
             border: none;
-            border-radius: 10px;
-            padding: 8px 12px;
+            border-radius: 999px;
+            padding: 8px 16px;
             font-size: 13px;
             cursor: pointer;
             font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .delete-btn:hover {
             background: #c0392b;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 74, 59, 0.3);
         }
 
         .theme-toggle-btn {
             display: flex;
             align-items: center;
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.22);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
             color: white;
             padding: 3px;
             border-radius: 20px;
@@ -321,13 +579,13 @@
         }
 
         .theme-toggle-btn:hover {
-            background: rgba(255,255,255,0.22);
+            background: rgba(255, 255, 255, 0.22);
             transform: translateY(-1px);
         }
 
         [data-theme="dark"] .theme-toggle-btn {
-            background: rgba(255,193,7,0.15);
-            border-color: rgba(255,193,7,0.4);
+            background: rgba(255, 193, 7, 0.15);
+            border-color: rgba(255, 193, 7, 0.4);
             color: #ffc107;
         }
 
@@ -335,74 +593,92 @@
            DARK / LIGHT MODE — CSS VARIABLES
         ══════════════════════════════════════════════ */
         :root {
-            --bg-page:        #f0f2f5;
-            --bg-card:        #ffffff;
-            --bg-card-alt:    #f8f9fc;
-            --bg-input:       #ffffff;
-            --bg-header:      #2c3e70;
-            --bg-footer:      #f8f9fc;
-            --bg-table-head:  #f0f2f5;
-            --bg-table-row:   #ffffff;
+            --bg-page: #eef4fb;
+            --bg-card: #ffffff;
+            --bg-card-alt: #f7f9ff;
+            --bg-input: #ffffff;
+            --bg-accent: #2f6df8;
+            --bg-accent-soft: rgba(47, 109, 248, 0.14);
+            --bg-header: linear-gradient(135deg, #2f6df8, #5b82ff);
+            --bg-footer: #f7f9ff;
+            --bg-table-head: #f0f2f5;
+            --bg-table-row: #ffffff;
             --bg-table-hover: #f8f9fc;
-            --text-main:      #1a1a2e;
-            --text-muted:     #858796;
-            --text-label:     #333333;
-            --text-meta:      #444444;
-            --border-color:   #e3e6f0;
-            --border-inner:   #dee2e6;
-            --shadow:         0 4px 20px rgba(0,0,0,0.08);
-            --shadow-card:    0 2px 12px rgba(0,0,0,0.07);
-            --input-border:   #d1d3e2;
-            --scrollbar-bg:   #e0e0e0;
-            --scrollbar-thumb:#b0b0b0;
+            --text-main: #17233d;
+            --text-muted: #5f6d85;
+            --text-invert: #ffffff;
+            --text-label: #333333;
+            --text-meta: #444444;
+            --border-color: rgba(67, 97, 179, 0.15);
+            --border-inner: #dee2e6;
+            --shadow: 0 22px 40px rgba(15, 23, 42, 0.08);
+            --shadow-card: 0 22px 40px rgba(15, 23, 42, 0.08);
+            --input-border: #d1d3e2;
+            --scrollbar-bg: #e0e0e0;
+            --scrollbar-thumb: #b0b0b0;
         }
- 
+
         [data-theme="dark"] {
-            --bg-page:        #0f1117;
-            --bg-card:        #1a1d27;
-            --bg-card-alt:    #1e2235;
-            --bg-input:       #252839;
-            --bg-header:      #111827;
-            --bg-footer:      #161928;
-            --bg-table-head:  #1e2235;
-            --bg-table-row:   #1a1d27;
+            --bg-page: #090c17;
+            --bg-card: #111827;
+            --bg-card-alt: #151d34;
+            --bg-input: #252839;
+            --bg-accent: #7c3aed;
+            --bg-accent-soft: rgba(124, 58, 237, 0.18);
+            --bg-header: linear-gradient(135deg, #7c3aed, #a78bfa);
+            --bg-footer: #151d34;
+            --bg-table-head: #1e2235;
+            --bg-table-row: #111827;
             --bg-table-hover: #222640;
-            --text-main:      #e0e6f0;
-            --text-muted:     #8892a4;
-            --text-label:     #c8d0e0;
-            --text-meta:      #b0b8cc;
-            --border-color:   #2a2f47;
-            --border-inner:   #2e3450;
-            --shadow:         0 4px 20px rgba(0,0,0,0.4);
-            --shadow-card:    0 2px 12px rgba(0,0,0,0.35);
-            --input-border:   #3a3f5c;
-            --scrollbar-bg:   #1e2235;
-            --scrollbar-thumb:#3a3f5c;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-invert: #ffffff;
+            --text-label: #c8d0e0;
+            --text-meta: #b0b8cc;
+            --border-color: rgba(148, 163, 184, 0.12);
+            --border-inner: #2e3450;
+            --shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+            --shadow-card: 0 16px 36px rgba(0, 0, 0, 0.45);
+            --input-border: #3a3f5c;
+            --scrollbar-bg: #1e2235;
+            --scrollbar-thumb: #3a3f5c;
         }
- 
+
         /* ── BODY & NAVBAR ── */
-        body {
-            background: var(--bg-page) !important;
+        [data-theme="dark"] body {
+            background: radial-gradient(circle at top left, rgba(124, 58, 237, 0.2), transparent 22%),
+                radial-gradient(circle at bottom right, rgba(47, 109, 248, 0.15), transparent 18%),
+                var(--bg-page) !important;
             color: var(--text-main) !important;
-            transition: background 0.3s ease, color 0.3s ease;
         }
-        [data-theme="dark"] .navbar {
-            background: linear-gradient(to right, #0d1117, #111827) !important;
-        }
- 
+
         /* ── CARDS (shared: .card, .dash-card, .table-card, .lb-card, .rw-card, .stat-card, .chart-card, .panel) ── */
-        .card, .dash-card, .table-card, .lb-card, .rw-card,
-        .stat-card, .chart-card, .panel {
+        .card,
+        .dash-card,
+        .table-card,
+        .lb-card,
+        .rw-card,
+        .stat-card,
+        .chart-card,
+        .panel {
             background: var(--bg-card);
             border-color: var(--border-color);
             box-shadow: var(--shadow-card);
             transition: background 0.3s, border-color 0.3s;
         }
-        .card-header, .lb-card-header, .rw-card-header,
-        .chart-card-header, .panel-header {
-            background: var(--bg-header) !important;
-            border-bottom: 1px solid var(--border-inner);
+
+        .card-header,
+        .lb-card-header,
+        .rw-card-header,
+        .chart-card-header,
+        .panel-header {
+            border-bottom: none;
         }
+
+        [data-theme="dark"] .card-header {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+        }
+
         [data-theme="dark"] .card-body,
         [data-theme="dark"] .panel-body,
         [data-theme="dark"] .rw-card-body,
@@ -410,198 +686,536 @@
             background: var(--bg-card);
             color: var(--text-main);
         }
- 
+
         /* ── PAGE WRAPPER & TITLE ── */
-        .page-wrapper { background: var(--bg-page); }
-        .page-title   { color: var(--text-main); }
- 
+        .page-wrapper {
+            background: var(--bg-page);
+        }
+
+        .page-title {
+            color: var(--text-main);
+        }
+
         /* ── MODALS ── */
         .modal-content {
             background: var(--bg-card) !important;
             border: 1px solid var(--border-color);
         }
-        .modal-body  { background: var(--bg-card); color: var(--text-main); }
-        .modal-footer{ background: var(--bg-footer) !important; border-top: 1px solid var(--border-color); }
-        [data-theme="dark"] .modal-footer { background: var(--bg-footer) !important; }
- 
+
+        .modal-body {
+            background: var(--bg-card);
+            color: var(--text-main);
+        }
+
+        .modal-footer {
+            background: var(--bg-footer) !important;
+            border-top: 1px solid var(--border-color);
+        }
+
+        [data-theme="dark"] .modal-footer {
+            background: var(--bg-footer) !important;
+        }
+
         /* ── SEARCH WRAPPER & INPUTS ── */
         .search-wrapper {
             background: var(--bg-input) !important;
             border-color: var(--border-color) !important;
         }
+
         .search-wrapper input {
             background: transparent !important;
             color: var(--text-main) !important;
         }
-        .search-wrapper input::placeholder { color: var(--text-muted) !important; }
- 
-        input, select, textarea, .modern-select {
+
+        .search-wrapper input::placeholder {
+            color: var(--text-muted) !important;
+        }
+
+        input,
+        select,
+        textarea,
+        .modern-select {
             background: var(--bg-input) !important;
             color: var(--text-main) !important;
             border-color: var(--input-border) !important;
         }
-        input::placeholder, textarea::placeholder { color: var(--text-muted) !important; }
-        input[readonly], input:disabled {
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--text-muted) !important;
+        }
+
+        input[readonly],
+        input:disabled {
             background: var(--bg-card-alt) !important;
             color: var(--text-muted) !important;
         }
-        [data-theme="dark"] .form-row label { color: var(--text-label) !important; }
-        [data-theme="dark"] .form-group label { color: var(--text-label) !important; }
-        [data-theme="dark"] .control-group label { color: var(--text-label) !important; }
- 
+
+        [data-theme="dark"] .form-row label {
+            color: var(--text-label) !important;
+        }
+
+        [data-theme="dark"] .form-group label {
+            color: var(--text-label) !important;
+        }
+
+        [data-theme="dark"] .control-group label {
+            color: var(--text-label) !important;
+        }
+
         /* ── TABLES ── */
-        [data-theme="dark"] table { color: var(--text-main); border-color: var(--border-color); }
+        [data-theme="dark"] table {
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+
         [data-theme="dark"] thead tr,
-        [data-theme="dark"] .lb-table thead tr { background: var(--bg-table-head) !important; color: var(--text-muted) !important; }
-        [data-theme="dark"] tbody tr { background: var(--bg-table-row); border-color: var(--border-inner); }
+        [data-theme="dark"] .lb-table thead tr {
+            background: var(--bg-table-head) !important;
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] tbody tr {
+            background: var(--bg-table-row);
+            border-color: var(--border-inner);
+        }
+
         [data-theme="dark"] tbody tr:hover,
-        [data-theme="dark"] .lb-table tbody tr:hover { background: var(--bg-table-hover) !important; }
-        [data-theme="dark"] th, [data-theme="dark"] td { border-color: var(--border-inner) !important; color: var(--text-main) !important; }
- 
+        [data-theme="dark"] .lb-table tbody tr:hover {
+            background: var(--bg-table-hover) !important;
+        }
+
+        [data-theme="dark"] th,
+        [data-theme="dark"] td {
+            border-color: var(--border-inner) !important;
+            color: var(--text-main) !important;
+        }
+
         /* ── SEARCH RESULT CARDS ── */
-        .search-result-item { background: var(--bg-card-alt) !important; }
-        .search-result-item:hover { background: var(--bg-card) !important; }
-        .student-profile-card { background: var(--bg-card-alt) !important; border-left-color: #4e73df !important; }
-        [data-theme="dark"] .student-profile-card { background: var(--bg-card-alt) !important; }
-        [data-theme="dark"] .profile-name { color: #7b9cff !important; }
-        [data-theme="dark"] .user-info-text .name { color: #7b9cff !important; }
-        [data-theme="dark"] .meta-item label { color: var(--text-muted) !important; }
-        [data-theme="dark"] .meta-item span  { color: var(--text-main) !important; }
- 
+        .search-result-item {
+            background: var(--bg-card-alt) !important;
+        }
+
+        .search-result-item:hover {
+            background: var(--bg-card) !important;
+        }
+
+        .student-profile-card {
+            background: var(--bg-card-alt) !important;
+            border-left-color: #4e73df !important;
+        }
+
+        [data-theme="dark"] .student-profile-card {
+            background: var(--bg-card-alt) !important;
+        }
+
+        [data-theme="dark"] .profile-name {
+            color: #7b9cff !important;
+        }
+
+        [data-theme="dark"] .user-info-text .name {
+            color: #7b9cff !important;
+        }
+
+        [data-theme="dark"] .meta-item label {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .meta-item span {
+            color: var(--text-main) !important;
+        }
+
         /* ── STAT CARDS ── */
-        [data-theme="dark"] .stat-card { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .stat-label { color: var(--text-muted) !important; }
-        [data-theme="dark"] .stat-value { color: var(--text-main) !important; }
-        [data-theme="dark"] .icon-blue  { background: #1e2f5a !important; }
-        [data-theme="dark"] .icon-amber { background: #2d2810 !important; }
-        [data-theme="dark"] .icon-green { background: #0e2a1e !important; }
- 
+        [data-theme="dark"] .stat-card {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .stat-label {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .stat-value {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .icon-blue {
+            background: #1e2f5a !important;
+        }
+
+        [data-theme="dark"] .icon-amber {
+            background: #2d2810 !important;
+        }
+
+        [data-theme="dark"] .icon-green {
+            background: #0e2a1e !important;
+        }
+
         /* ── LEADERBOARD ── */
-        [data-theme="dark"] .lb-card { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .student-name { color: var(--text-main) !important; }
-        [data-theme="dark"] .student-id   { color: var(--text-muted) !important; }
-        [data-theme="dark"] .course-chip  { background: #1e2a50 !important; color: #7b9cff !important; }
-        [data-theme="dark"] .hours-val    { color: var(--text-main) !important; }
-        [data-theme="dark"] .hours-sub    { color: var(--text-muted) !important; }
-        [data-theme="dark"] .points-val   { color: #ffc107 !important; }
-        [data-theme="dark"] .rank-1  { background: #2d2810 !important; color: #ffc107 !important; }
-        [data-theme="dark"] .rank-2  { background: #252839 !important; color: #a0aec0 !important; }
-        [data-theme="dark"] .rank-3  { background: #2a1e10 !important; color: #e0a050 !important; }
-        [data-theme="dark"] .rank-other { background: #1e2235 !important; color: #8892a4 !important; }
- 
+        [data-theme="dark"] .lb-card {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .student-name {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .student-id {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .course-chip {
+            background: #1e2a50 !important;
+            color: #7b9cff !important;
+        }
+
+        [data-theme="dark"] .hours-val {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .hours-sub {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .points-val {
+            color: #ffc107 !important;
+        }
+
+        [data-theme="dark"] .rank-1 {
+            background: #2d2810 !important;
+            color: #ffc107 !important;
+        }
+
+        [data-theme="dark"] .rank-2 {
+            background: #252839 !important;
+            color: #a0aec0 !important;
+        }
+
+        [data-theme="dark"] .rank-3 {
+            background: #2a1e10 !important;
+            color: #e0a050 !important;
+        }
+
+        [data-theme="dark"] .rank-other {
+            background: #1e2235 !important;
+            color: #8892a4 !important;
+        }
+
         /* ── RESERVATION PANELS & CARDS ── */
-        [data-theme="dark"] .panel { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .res-card { background: var(--bg-card-alt) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .res-card p { color: var(--text-main) !important; }
-        [data-theme="dark"] .res-card p b { color: #7b9cff !important; }
-        [data-theme="dark"] .control-group select { background: var(--bg-input) !important; color: var(--text-main) !important; border-color: var(--input-border) !important; }
-        [data-theme="dark"] #infoBody { color: var(--text-main) !important; }
-        [data-theme="dark"] #infoBody b { color: #7b9cff !important; }
- 
+        [data-theme="dark"] .panel {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .res-card {
+            background: var(--bg-card-alt) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .res-card p {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .res-card p b {
+            color: #7b9cff !important;
+        }
+
+        [data-theme="dark"] .control-group select {
+            background: var(--bg-input) !important;
+            color: var(--text-main) !important;
+            border-color: var(--input-border) !important;
+        }
+
+        [data-theme="dark"] #infoBody {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] #infoBody b {
+            color: #7b9cff !important;
+        }
+
         /* ── ADMIN DASHBOARD (admindashboard.html) ── */
-        [data-theme="dark"] .admin-container { background: var(--bg-page) !important; }
-        [data-theme="dark"] .stats-grid .stat-item h3 { color: var(--text-main) !important; }
-        [data-theme="dark"] .stats-grid .stat-item p  { color: var(--text-muted) !important; }
-        [data-theme="dark"] .announcement-item { border-color: var(--border-inner) !important; color: var(--text-main) !important; }
- 
+        [data-theme="dark"] .admin-container {
+            background: var(--bg-page) !important;
+        }
+
+        [data-theme="dark"] .stats-grid .stat-item h3 {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .stats-grid .stat-item p {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .announcement-item {
+            border-color: var(--border-inner) !important;
+            color: var(--text-main) !important;
+        }
+
         /* ── SOFTWARE ── */
-        [data-theme="dark"] .software-container { background: var(--bg-page) !important; }
-        [data-theme="dark"] .dropzone { background: var(--bg-card-alt) !important; border-color: var(--input-border) !important; }
-        [data-theme="dark"] .dropzone:hover, [data-theme="dark"] .dropzone.dragover { background: #1e2a50 !important; border-color: #4e73df !important; }
-        [data-theme="dark"] .dropzone p { color: var(--text-muted) !important; }
-        [data-theme="dark"] .file-preview { background: var(--bg-card-alt) !important; border-color: var(--input-border) !important; }
- 
+        [data-theme="dark"] .software-container {
+            background: var(--bg-page) !important;
+        }
+
+        [data-theme="dark"] .dropzone {
+            background: var(--bg-card-alt) !important;
+            border-color: var(--input-border) !important;
+        }
+
+        [data-theme="dark"] .dropzone:hover,
+        [data-theme="dark"] .dropzone.dragover {
+            background: #1e2a50 !important;
+            border-color: #4e73df !important;
+        }
+
+        [data-theme="dark"] .dropzone p {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .file-preview {
+            background: var(--bg-card-alt) !important;
+            border-color: var(--input-border) !important;
+        }
+
         /* ── REWARDS ── */
-        [data-theme="dark"] .rw-card { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
+        [data-theme="dark"] .rw-card {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
         [data-theme="dark"] .form-group input,
         [data-theme="dark"] .form-group select,
-        [data-theme="dark"] .form-group textarea { background: var(--bg-input) !important; color: var(--text-main) !important; border-color: var(--input-border) !important; }
+        [data-theme="dark"] .form-group textarea {
+            background: var(--bg-input) !important;
+            color: var(--text-main) !important;
+            border-color: var(--input-border) !important;
+        }
+
         [data-theme="dark"] .form-group input::placeholder,
-        [data-theme="dark"] .form-group textarea::placeholder { color: var(--text-muted) !important; }
- 
+        [data-theme="dark"] .form-group textarea::placeholder {
+            color: var(--text-muted) !important;
+        }
+
         /* ── ANALYTICS CHARTS ── */
-        [data-theme="dark"] .chart-card { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
- 
+        [data-theme="dark"] .chart-card {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
         /* ── TABLE-PAGES (sitin, viewsitin, sitinreports, studentlist, feedback) ── */
-        [data-theme="dark"] .table-card { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .table-controls { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .entries-control select { background: var(--bg-input) !important; color: var(--text-main) !important; border-color: var(--input-border) !important; }
-        [data-theme="dark"] .search-control input  { background: var(--bg-input) !important; color: var(--text-main) !important; border-color: var(--input-border) !important; }
-        [data-theme="dark"] .search-box { background: var(--bg-input) !important; color: var(--text-main) !important; border-color: var(--input-border) !important; }
-        .badge-active  { background: #d4edda; color: #155724; }
-        .badge-timeout { background: #f8d7da; color: #721c24; }
-        [data-theme="dark"] .badge-active  { background: #0e2a1e !important; color: #48c78e !important; }
-        [data-theme="dark"] .badge-timeout { background: #2a0e0e !important; color: #f87171 !important; }
-        [data-theme="dark"] .no-data { color: var(--text-muted) !important; }
+        [data-theme="dark"] .table-card {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .table-controls {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .entries-control select {
+            background: var(--bg-input) !important;
+            color: var(--text-main) !important;
+            border-color: var(--input-border) !important;
+        }
+
+        [data-theme="dark"] .search-control input {
+            background: var(--bg-input) !important;
+            color: var(--text-main) !important;
+            border-color: var(--input-border) !important;
+        }
+
+        [data-theme="dark"] .search-box {
+            background: var(--bg-input) !important;
+            color: var(--text-main) !important;
+            border-color: var(--input-border) !important;
+        }
+
+        .badge-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-timeout {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        [data-theme="dark"] .badge-active {
+            background: #0e2a1e !important;
+            color: #48c78e !important;
+        }
+
+        [data-theme="dark"] .badge-timeout {
+            background: #2a0e0e !important;
+            color: #f87171 !important;
+        }
+
+        [data-theme="dark"] .no-data {
+            color: var(--text-muted) !important;
+        }
+
         /* ── SCROLLBAR ── */
-        ::-webkit-scrollbar { width: 7px; height: 7px; }
-        ::-webkit-scrollbar-track { background: var(--scrollbar-bg); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
-        [data-theme="dark"] ::-webkit-scrollbar-track { background: var(--scrollbar-bg); }
-        [data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); }
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-bg);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 4px;
+        }
+
+        [data-theme="dark"] ::-webkit-scrollbar-track {
+            background: var(--scrollbar-bg);
+        }
+
+        [data-theme="dark"] ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+        }
 
         /* ── NOTIFICATION DROPDOWN ── */
-        [data-theme="dark"] .notif-dropdown { background: var(--bg-card) !important; border-color: var(--border-color) !important; }
-        [data-theme="dark"] .notif-list > div { background: var(--bg-card) !important; border-color: var(--border-inner) !important; color: var(--text-main) !important; }
-        [data-theme="dark"] .notif-list > div[style*="eaf3fb"] { background: var(--bg-card-alt) !important; }
+        [data-theme="dark"] .notif-dropdown {
+            background: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .notif-list>div {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .notif-list>div[style*="eaf3fb"] {
+            background: var(--bg-card-alt) !important;
+        }
+
         /* ── MISCELLANEOUS ── */
-        [data-theme="dark"] .page-title { color: var(--text-main) !important; }
-        [data-theme="dark"] .header-section h1 { color: var(--text-main) !important; }
-        [data-theme="dark"] .controls { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .filter-group label { color: var(--text-label) !important; }
-        [data-theme="dark"] .filter-group select { background: var(--bg-input) !important; color: var(--text-main) !important; border-color: var(--input-border) !important; }
+        [data-theme="dark"] .page-title {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .header-section h1 {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .controls {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .filter-group label {
+            color: var(--text-label) !important;
+        }
+
+        [data-theme="dark"] .filter-group select {
+            background: var(--bg-input) !important;
+            color: var(--text-main) !important;
+            border-color: var(--input-border) !important;
+        }
+
         /* ── Admin container background ── */
-        [data-theme="dark"] .admin-container { background: transparent !important; }
+        [data-theme="dark"] .admin-container {
+            background: transparent !important;
+        }
+
         /* ── Cards ── */
-        [data-theme="dark"] .card { background: #1a1d27 !important; border-color: #2a2f47 !important; }
-        [data-theme="dark"] .card-body { background: #1a1d27 !important; color: #e0e6f0 !important; }
+        [data-theme="dark"] .card {
+            background: #1a1d27 !important;
+            border-color: #2a2f47 !important;
+        }
+
+        [data-theme="dark"] .card-body {
+            background: #1a1d27 !important;
+            color: #e0e6f0 !important;
+        }
+
         /* ── Stat numbers and labels ── */
-        [data-theme="dark"] .stat-item h3 { color: #7b9cff !important; }
-        [data-theme="dark"] .stat-item p { color: #8892a4 !important; }
+        [data-theme="dark"] .stat-item h3 {
+            color: #7b9cff !important;
+        }
+
+        [data-theme="dark"] .stat-item p {
+            color: #8892a4 !important;
+        }
+
         /* ── Announcement items ── */
-        [data-theme="dark"] .announcement-item {background: #1e2235 !important; border-color: #2a2f47 !important; color: #e0e6f0 !important; }
-        [data-theme="dark"] .announcement-item p { color: #e0e6f0 !important; }
+        [data-theme="dark"] .announcement-item {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(47, 109, 248, 0.06)) !important;
+            border-color: rgba(148, 163, 184, 0.12) !important;
+            color: #e2e8f0 !important;
+        }
+
+        [data-theme="dark"] .announcement-item p {
+            color: #e2e8f0 !important;
+        }
+
         /* ── Textarea ── */
-        [data-theme="dark"] #announcementText { background: #252839 !important; color: #e0e6f0 !important; border-color: #3a3f5c !important; }
-        [data-theme="dark"] #announcementText::placeholder { color: #8892a4 !important; }
+        [data-theme="dark"] #announcementText {
+            background: #252839 !important;
+            color: #e0e6f0 !important;
+            border-color: #3a3f5c !important;
+        }
+
+        [data-theme="dark"] #announcementText::placeholder {
+            color: #8892a4 !important;
+        }
+
         /* ── Left and right panes ── */
-        [data-theme="dark"] .left-pane, [data-theme="dark"] .right-pane { background: transparent !important; }
+        [data-theme="dark"] .left-pane,
+        [data-theme="dark"] .right-pane {
+            background: transparent !important;
+        }
     </style>
 </head>
+
 <body>
 
-    <nav class="navbar">
-        <div class="logo-text"><i class="fa-solid fa-user-shield"></i> College of Computer Studies Admin</div>
+    <aside class="sidebar">
+        <div class="nav-brand">
+            <div class="logo-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <div>
+                <div class="logo-text">Admin Dashboard</div>
+                <div class="logo-sub">Sit-in Monitoring</div>
+            </div>
+        </div>
         <ul class="nav-links">
-            <li><a href="admindashboard.html" class="active"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="javascript:void(0)" onclick="openUnifiedModal()"><i class="fa fa-search"></i> Search</a></li>
-            <li><a href="studentlist.html"><i class="fa fa-users"></i> Students</a></li>
-            <li><a href="sitin.html"><i class="fa fa-laptop"></i>  Sit-in</a></li>
-            <li><a href="viewsitin.html"><i class="fa fa-list-alt"></i> View Sit-in Records</a></li>
-            <li><a href="sitinreports.html"><i class="fa fa-bar-chart"></i> Sit-in Reports</a></li>
-            <li><a href="feedback.html"><i class="fa fa-comments"></i> Feedback Reports</a></li>
-            <li><a href="adminreservation.html"><i class="fa fa-calendar"></i> Reservation</a></li>
-            <li><a href="adminleaderboard.html"><i class="fa fa-trophy"></i> Leaderboard</a></li>
-            <li><a href="analytics.html"><i class="fa fa-line-chart"></i> Analytics</a></li>
-            <li><a href="reward.html"><i class="fa fa-gift"></i> Reward</a></li>
-            <li><a href="software.html"><i class="fa fa-upload"></i> Software</a></li>
+            <li><a href="admindashboard.html" class="active"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li><a href="javascript:void(0)" onclick="openUnifiedModal()"><i class="fa fa-search"></i> <span>Search</span></a></li>
+            <li><a href="studentlist.html"><i class="fa fa-users"></i> <span>Students</span></a></li>
+            <li><a href="sitin.html"><i class="fa fa-laptop"></i> <span>Sit-in</span></a></li>
+            <li><a href="viewsitin.html"><i class="fa fa-list-alt"></i> <span>View Sit-in Records</span></a></li>
+            <li><a href="sitinreports.html"><i class="fa fa-bar-chart"></i> <span>Sit-in Reports</span></a></li>
+            <li><a href="feedback.html"><i class="fa fa-comments"></i> <span>Feedback Reports</span></a></li>
+            <li><a href="adminreservation.html"><i class="fa fa-calendar"></i> <span>Reservation</span></a></li>
+            <li><a href="adminleaderboard.html"><i class="fa fa-trophy"></i> <span>Leaderboard</span></a></li>
+            <li><a href="analytics.html"><i class="fa fa-line-chart"></i> <span>Analytics</span></a></li>
+            <li><a href="reward.html"><i class="fa fa-gift"></i> <span>Reward</span></a></li>
+            <li><a href="software.html"><i class="fa fa-upload"></i> <span>Software</span></a></li>
             <li>
                 <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
                     <i class="fa-solid fa-moon" id="themeIcon"></i>
-                    <span id="themeLabel"></span>
+                    <span id="themeLabel">Dark Mode</span>
                 </button>
             </li>
-            <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out-alt"></i> Log out</a></li>
+            <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out-alt"></i> <span>Log out</span></a></li>
         </ul>
-    </nav>
+    </aside>
 
     <div id="unifiedSitInModal" class="modal-overlay">
         <div class="modal-content" style="width: 450px;">
             <div class="modal-header">
                 <h3><i class="fa fa-search"></i> Find Student</h3>
-                <button onclick="closeModal('unifiedSitInModal')" style="background:none; border:none; color:white; cursor:pointer; font-size:20px;">&times;</button>
+                <button onclick="closeModal('unifiedSitInModal')"
+                    style="background:none; border:none; color:white; cursor:pointer; font-size:20px;">&times;</button>
             </div>
-            
+
             <div class="modal-body" style="padding: 10px;">
                 <div class="search-wrapper">
                     <input type="text" id="uniIdSearch" placeholder="Enter Student ID....">
@@ -638,10 +1252,12 @@
                             </select>
                         </div>
                     </div>
-                
-                <div id="uniPCSection" style="display: none; margin-top: 12px; padding: 0 5px;">
+
+                    <div id="uniPCSection" style="display: none; margin-top: 12px; padding: 0 5px;">
                         <label style="font-size: 13px; font-weight: 700; color: #4e73df;">Select PC</label>
-                        <div id="uniPCGrid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 6px; max-height: 180px; overflow-y: auto;"></div>
+                        <div id="uniPCGrid"
+                            style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 6px; max-height: 180px; overflow-y: auto;">
+                        </div>
                         <input type="hidden" id="uniPCNumber" value="">
                     </div>
 
@@ -660,13 +1276,23 @@
         <div class="left-pane">
             <div class="card">
 
-                <div class="card-header"><i class="fa-solid fa-chart-bar" style="color: white;"></i><span> Laboratory Statistics</span></div>
-                
+                <div class="card-header"><i class="fa-solid fa-chart-bar" style="color: white;"></i><span> Laboratory
+                        Statistics</span></div>
+
                 <div class="card-body">
                     <div class="stats-grid">
-                        <div class="stat-item"><h3 id="totalRegistered">0</h3> <p>Students Registered</p></div>
-                        <div class="stat-item"><h3 id="currentSitIn">0</h3><p>Current Sit-in</p></div>
-                        <div class="stat-item"><h3 id="totalSitInCount">0</h3> <p>Total Sit-in</p></div>
+                        <div class="stat-item">
+                            <h3 id="totalRegistered">0</h3>
+                            <p>Students Registered</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 id="currentSitIn">0</h3>
+                            <p>Current Sit-in</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 id="totalSitInCount">0</h3>
+                            <p>Total Sit-in</p>
+                        </div>
                     </div>
                     <div class="chart-container">
                         <canvas id="statsChart"></canvas>
@@ -678,17 +1304,22 @@
         <div class="right-pane">
             <div class="card">
 
-                <div class="card-header"><i class="fa-solid fa-bullhorn" style="color: white;"></i><span> Create Announcement</span></div>
-                
+                <div class="card-header"><i class="fa-solid fa-bullhorn" style="color: white;"></i><span> Create
+                        Announcement</span></div>
+
                 <div class="card-body">
-                    <textarea id="announcementText" style="width:100%; height:80px; padding:10px; border:1px solid #d1d3e2; border-radius:5px;" placeholder="What's happening in the lab?"></textarea>
-                    <button type="button" class="broadcast-btn" onclick="postAnnouncement()"><i class="fa-solid fa-paper-plane"></i> Broadcast</button>
+                    <textarea id="announcementText"
+                        style="width:100%; height:80px; padding:10px; border:1px solid #d1d3e2; border-radius:5px;"
+                        placeholder="What's happening in the lab?"></textarea>
+                    <button type="button" class="broadcast-btn" onclick="postAnnouncement()"><i
+                            class="fa-solid fa-paper-plane"></i> Broadcast</button>
                 </div>
             </div>
 
             <div class="card">
 
-                <div class="card-header"><i class="fa-solid fa-clock-rotate-left" style="color: white;"></i><span> Recent Updates</span></div>
+                <div class="card-header"><i class="fa-solid fa-clock-rotate-left" style="color: white;"></i><span>
+                        Recent Updates</span></div>
 
                 <div class="card-body">
                     <div id="announcementList">
@@ -701,106 +1332,108 @@
         </div>
     </div>
 
-<script>
-    /* ══════════════════════════════════════
-    DARK / LIGHT MODE
-    ══════════════════════════════════════ */
-    function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        const icon  = document.getElementById('themeIcon');
-        const label = document.getElementById('themeLabel');
-        if (theme === 'dark') {
-            icon.className  = 'fa-solid fa-sun';
-        } else {
-            icon.className  = 'fa-solid fa-moon';
+    <script>
+        /* ══════════════════════════════════════
+        DARK / LIGHT MODE
+        ══════════════════════════════════════ */
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            const icon = document.getElementById('themeIcon');
+            const label = document.getElementById('themeLabel');
+            if (theme === 'dark') {
+                icon.className = 'fa-solid fa-sun';
+                if (label) label.textContent = 'Light Mode';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+                if (label) label.textContent = 'Dark Mode';
+            }
         }
-    }
-    
-    function toggleTheme() {
-        const current = document.documentElement.getAttribute('data-theme');
-        const next    = current === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('ccs_theme', next);
-        applyTheme(next);
-    
-        // Animate the icon on toggle
-        const icon = document.getElementById('themeIcon');
-        icon.style.transform = 'rotate(360deg)';
-        icon.style.transition = 'transform 0.4s ease';
-        setTimeout(() => { icon.style.transform = ''; icon.style.transition = ''; }, 400);
-    }
-    
-    // Load saved theme on page start
-    (function() {
-        const saved = localStorage.getItem('ccs_theme') || 'light';
-        applyTheme(saved);
-    })();
 
-    let myChart = null;
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('ccs_theme', next);
+            applyTheme(next);
 
-    async function loadDashboardStats() {
-        try {
-            const response = await fetch('http://localhost:3000/admin/dashboard-data');
-            const data = await response.json();
-            
-            document.getElementById('totalRegistered').innerText = data.registered || 0;
-            document.getElementById('currentSitIn').innerText = data.currentSitin || 0;
-            document.getElementById('totalSitInCount').innerText = data.totalSitin || 0;
+            // Animate the icon on toggle
+            const icon = document.getElementById('themeIcon');
+            icon.style.transform = 'rotate(360deg)';
+            icon.style.transition = 'transform 0.4s ease';
+            setTimeout(() => { icon.style.transform = ''; icon.style.transition = ''; }, 400);
+        }
 
-            const labels = data.chartData.length > 0 ? data.chartData.map(item => item.purpose) : ['No Data'];
-            const counts = data.chartData.length > 0 ? data.chartData.map(item => item.count) : [1];
+        // Load saved theme on page start
+        (function () {
+            const saved = localStorage.getItem('ccs_theme') || 'light';
+            applyTheme(saved);
+        })();
 
-            const ctx = document.getElementById('statsChart').getContext('2d');
-            if (myChart) myChart.destroy();
+        let myChart = null;
 
-            const gradient = ctx.createLinearGradient(0, 0, 500, 0);
-            gradient.addColorStop(0, '#4e73df');
-            gradient.addColorStop(1, '#224abe');
+        async function loadDashboardStats() {
+            try {
+                const response = await fetch('http://localhost:3000/admin/dashboard-data');
+                const data = await response.json();
 
-            myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: { 
-                    labels: labels, 
-                    datasets: [{ 
-                        data: counts, 
-                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
-                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#f4b619'],
-                        hoverBorderColor: "rgba(234, 236, 244, 1)",
-                        borderWidth: 1,
-                    }] 
-                },
-                options: { 
-                    maintainAspectRatio: false,
-                    cutout: '75%',
-                    plugins: { 
-                        legend: { 
-                            display: true,
-                            position: 'bottom',
-                            labels: {
-                                usePointStyle: true,
-                                padding: 20,
-                                font: { family: "'Nunito', sans-serif", size: 14 }
+                document.getElementById('totalRegistered').innerText = data.registered || 0;
+                document.getElementById('currentSitIn').innerText = data.currentSitin || 0;
+                document.getElementById('totalSitInCount').innerText = data.totalSitin || 0;
+
+                const labels = data.chartData.length > 0 ? data.chartData.map(item => item.purpose) : ['No Data'];
+                const counts = data.chartData.length > 0 ? data.chartData.map(item => item.count) : [1];
+
+                const ctx = document.getElementById('statsChart').getContext('2d');
+                if (myChart) myChart.destroy();
+
+                const gradient = ctx.createLinearGradient(0, 0, 500, 0);
+                gradient.addColorStop(0, '#4e73df');
+                gradient.addColorStop(1, '#224abe');
+
+                myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: counts,
+                            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
+                            hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#f4b619'],
+                            hoverBorderColor: "rgba(234, 236, 244, 1)",
+                            borderWidth: 1,
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        cutout: '75%',
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'bottom',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 20,
+                                    font: { family: "'Nunito', sans-serif", size: 14 }
+                                }
                             }
                         }
                     }
-                }
-            });
-        } catch (error) { 
-            console.error("Stats Error:", error); 
-        }
-    }
-
-    async function loadAnnouncements() {
-        try {
-            const res = await fetch('http://localhost:3000/announcements');
-            const announcements = await res.json();
-            const list = document.getElementById('announcementList');
-
-            if (announcements.length === 0) {
-                list.innerHTML = '<p style="color:#aaa;">No announcements yet.</p>';
-                return;
+                });
+            } catch (error) {
+                console.error("Stats Error:", error);
             }
+        }
 
-            list.innerHTML = announcements.map(a => `
+        async function loadAnnouncements() {
+            try {
+                const res = await fetch('http://localhost:3000/announcements');
+                const announcements = await res.json();
+                const list = document.getElementById('announcementList');
+
+                if (announcements.length === 0) {
+                    list.innerHTML = '<p style="color:#aaa;">No announcements yet.</p>';
+                    return;
+                }
+
+                list.innerHTML = announcements.map(a => `
             <div class="announcement-item">
                 <small style="color: #4e73df; font-weight: bold; font-size: 16px,">
                     ${a.author} | ${a.date}
@@ -812,84 +1445,84 @@
                 </button>
             </div>
         `).join('');
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    async function postAnnouncement() {
-        const content = document.getElementById('announcementText').value.trim();
-        if (!content) return Swal.fire('Error', 'Cannot post empty announcement', 'error');
-        try {
-            const res = await fetch('http://localhost:3000/admin/announcement', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content })
-            });
-            if (res.ok) {
-                await Swal.fire({
-                    icon: 'success',
-                    title: 'Posted!',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false
-                });
-                document.getElementById('announcementText').value = '';
-                loadAnnouncements();
+            } catch (err) {
+                console.error(err);
             }
-        } catch (e) { console.error(e); }
-    }
+        }
 
-    async function deleteAnnouncement(id) {
-        const { isConfirmed } = await Swal.fire({
-            title: 'Delete Announcement?',
-            text: "This action cannot be undone.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, Delete!',
-            cancelButtonText: 'Cancel',
-            allowOutsideClick: false,
-            allowEscapeKey: false
-        });
+        async function postAnnouncement() {
+            const content = document.getElementById('announcementText').value.trim();
+            if (!content) return Swal.fire('Error', 'Cannot post empty announcement', 'error');
+            try {
+                const res = await fetch('http://localhost:3000/admin/announcement', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content })
+                });
+                if (res.ok) {
+                    await Swal.fire({
+                        icon: 'success',
+                        title: 'Posted!',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
+                    });
+                    document.getElementById('announcementText').value = '';
+                    loadAnnouncements();
+                }
+            } catch (e) { console.error(e); }
+        }
 
-        if (!isConfirmed) return;
-
-        try {
-            const res = await fetch(`http://localhost:3000/admin/announcement/${id}`, {
-                method: 'DELETE'
+        async function deleteAnnouncement(id) {
+            const { isConfirmed } = await Swal.fire({
+                title: 'Delete Announcement?',
+                text: "This action cannot be undone.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, Delete!',
+                cancelButtonText: 'Cancel',
+                allowOutsideClick: false,
+                allowEscapeKey: false
             });
 
-            if (res.ok) {
-                await Swal.fire({
-                    icon: 'success',
-                    title: 'Deleted',
-                    text: 'Announcement removed successfully.',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false
-                });
-                loadAnnouncements();
+            if (!isConfirmed) return;
 
-            } else {
+            try {
+                const res = await fetch(`http://localhost:3000/admin/announcement/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (res.ok) {
+                    await Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted',
+                        text: 'Announcement removed successfully.',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
+                    });
+                    loadAnnouncements();
+
+                } else {
+                    await Swal.fire({
+                        icon: 'error',
+                        title: 'Failed',
+                        text: 'Failed to delete announcement.'
+                    });
+                }
+
+            } catch (err) {
+                console.error("Delete error:", err);
+
                 await Swal.fire({
                     icon: 'error',
-                    title: 'Failed',
-                    text: 'Failed to delete announcement.'
+                    title: 'Server Error',
+                    text: 'Something went wrong.'
                 });
             }
-
-        } catch (err) {
-            console.error("Delete error:", err);
-
-            await Swal.fire({
-                icon: 'error',
-                title: 'Server Error',
-                text: 'Something went wrong.'
-            });
         }
-    }
 
         function openUnifiedModal() {
             document.getElementById('unifiedSitInModal').style.display = 'flex';
@@ -903,12 +1536,12 @@
 
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-                let searchTimer;
+        let searchTimer;
 
 
-        document.getElementById('uniIdSearch').addEventListener('input', function() {
+        document.getElementById('uniIdSearch').addEventListener('input', function () {
             const query = this.value.trim();
-            
+
             clearTimeout(searchTimer);
 
             if (query.length === 0) {
@@ -920,18 +1553,18 @@
 
             searchTimer = setTimeout(() => {
                 searchAndPopulate();
-            }, 300); 
+            }, 300);
         });
 
         async function searchAndPopulate() {
             const query = document.getElementById('uniIdSearch').value.trim();
-            const list  = document.getElementById('searchResultsList');
+            const list = document.getElementById('searchResultsList');
             const details = document.getElementById('studentDetailsBox');
 
             if (!query) return;
 
             try {
-                const res  = await fetch(`http://localhost:3000/search-students?q=${encodeURIComponent(query)}`);
+                const res = await fetch(`http://localhost:3000/search-students?q=${encodeURIComponent(query)}`);
                 const data = await res.json();
 
                 if (res.ok && data.length > 0) {
@@ -982,9 +1615,9 @@
                 ${remaining <= 0 ? '<p style="color:#dc3545; font-size:12px; margin-top:8px;"><i class="fa fa-exclamation-triangle"></i> This student has no remaining sessions.</p>' : ''}`;
 
             const confirmBtn = document.querySelector('#uniFooter .btn-confirm');
-            confirmBtn.disabled      = remaining <= 0;
+            confirmBtn.disabled = remaining <= 0;
             confirmBtn.style.opacity = remaining <= 0 ? '0.5' : '1';
-            confirmBtn.style.cursor  = remaining <= 0 ? 'not-allowed' : 'pointer';
+            confirmBtn.style.cursor = remaining <= 0 ? 'not-allowed' : 'pointer';
             document.getElementById('uniPCSection').style.display = 'block';
             renderUniPCGrid();
         }
@@ -1014,8 +1647,8 @@
 
         async function submitUnifiedSitIn() {
             const idNumber = document.getElementById('uniIdSearch').value.trim();
-            const purpose  = document.getElementById('uniPurpose').value;
-            const lab      = document.getElementById('uniLab').value;
+            const purpose = document.getElementById('uniPurpose').value;
+            const lab = document.getElementById('uniLab').value;
             const pcNumber = document.getElementById('uniPCNumber').value;
 
             if (!idNumber) return Swal.fire('Warning', 'No student selected. Please search and click a student first.', 'warning');
@@ -1038,62 +1671,63 @@
             } catch (e) { Swal.fire('Error', 'Connection failed.', 'error'); }
         }
 
-    window.onload = function() {
-        loadDashboardStats();
-        loadAnnouncements();
+        window.onload = function () {
+            loadDashboardStats();
+            loadAnnouncements();
 
-        if (!sessionStorage.getItem("adminWelcomeShown")) {
-            Swal.fire({
-                title: 'Welcome, Admin!',
-                text: 'System analytics and student records are ready.',
-                icon: 'success',
-                confirmButtonColor: '#0056b3',
-                background: '#fff',
+            if (!sessionStorage.getItem("adminWelcomeShown")) {
+                Swal.fire({
+                    title: 'Welcome, Admin!',
+                    text: 'System analytics and student records are ready.',
+                    icon: 'success',
+                    confirmButtonColor: '#0056b3',
+                    background: '#fff',
+                });
+
+                sessionStorage.setItem("adminWelcomeShown", "true");
+            }
+        };
+
+        async function logout() {
+            const { isConfirmed } = await Swal.fire({
+                title: 'Logout Admin?',
+                text: "This will end your admin session.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, Logout!',
+                cancelButtonText: 'Stay Logged In'
             });
 
-            sessionStorage.setItem("adminWelcomeShown", "true");
-        }
-    };
+            if (!isConfirmed) return;
 
-    async function logout() {
-        const { isConfirmed } = await Swal.fire({
-            title: 'Logout Admin?',
-            text: "This will end your admin session.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, Logout!',
-            cancelButtonText: 'Stay Logged In'
-        });
+            try {
 
-        if (!isConfirmed) return;
+                sessionStorage.removeItem("adminWelcomeShown");
+                localStorage.removeItem("adminId");
+                sessionStorage.clear();
 
-        try {
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'Logged Out',
+                    text: 'Admin session ended successfully.',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
 
-            sessionStorage.removeItem("adminWelcomeShown");
-            localStorage.removeItem("adminId");
-            sessionStorage.clear();
+                window.location.href = "index.html";
 
-            await Swal.fire({
-                icon: 'success',
-                title: 'Logged Out',
-                text: 'Admin session ended successfully.',
-                timer: 1500,
-                showConfirmButton: false
-            });
+            } catch (err) {
+                console.error("Admin logout error:", err);
 
-            window.location.href = "index.html";
+                sessionStorage.clear();
+                localStorage.removeItem("adminId");
 
-        } catch (err) {
-            console.error("Admin logout error:", err);
-
-            sessionStorage.clear();
-            localStorage.removeItem("adminId");
-
-            window.location.href = "index.html";
-        }
-    }   
-</script>
+                window.location.href = "index.html";
+            }
+        }   
+    </script>
 </body>
+
 </html>

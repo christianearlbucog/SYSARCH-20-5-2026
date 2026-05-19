@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,50 +8,53 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
-     <style>
- 
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
         /* ══ DARK / LIGHT VARIABLES ══ */
         :root {
-            --bg-page:      #f0f2f5;
-            --bg-card:      #ffffff;
-            --bg-chip:      #f0f2f5;
-            --text-main:    #333333;
-            --text-muted:   #777777;
-            --text-label:   #1a1a2e;
+            --bg-page: #f0f2f5;
+            --bg-card: #ffffff;
+            --bg-chip: #f0f2f5;
+            --text-main: #333333;
+            --text-muted: #777777;
+            --text-label: #1a1a2e;
             --border-color: #e3e6f0;
-            --shadow:       0 4px 20px rgba(0,0,0,0.08);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             --panel-header: #2c3e70;
         }
+
         [data-theme="dark"] {
-            --bg-page:      #0f1117;
-            --bg-card:      #1a1d27;
-            --bg-chip:      #1e2235;
-            --text-main:    #e0e0e0;
-            --text-muted:   #8892b0;
-            --text-label:   #c8d0e8;
+            --bg-page: #0f1117;
+            --bg-card: #1a1d27;
+            --bg-chip: #1e2235;
+            --text-main: #e0e0e0;
+            --text-muted: #8892b0;
+            --text-label: #c8d0e8;
             --border-color: #2e3347;
-            --shadow:       0 4px 20px rgba(0,0,0,0.4);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
- 
+
         body {
             background: var(--bg-page);
             color: var(--text-main);
             transition: background 0.3s ease, color 0.3s ease;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
+
         [data-theme="dark"] .navbar {
             background: linear-gradient(to right, #111827, #0a0a1a) !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
         }
- 
+
         /* ══ PAGE WRAPPER ══ */
         .labstatus-wrapper {
             padding: 25px 35px;
             max-width: 1400px;
             margin: auto;
         }
- 
+
         /* ══ SECTION PANEL ══ */
         .section-panel {
             background: var(--bg-card);
@@ -72,45 +76,62 @@
             font-size: 20px;
             font-weight: 600;
             color: #fff;
-            
+
         }
 
-        .section-panel-header i { 
-            color: #f6c23e; 
-            font-size: 14px; 
+        .section-panel-header i {
+            color: #f6c23e;
+            font-size: 14px;
         }
-        .section-panel-body { 
-            padding: 20px; 
+
+        .section-panel-body {
+            padding: 20px;
         }
- 
+
         /* ══ LIVE BADGE ══ */
         .live-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 3px 10px;
             font-size: 11px;
             font-weight: 600;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255, 255, 255, 0.8);
             margin-left: auto;
         }
+
         .live-dot {
-            width: 7px; height: 7px;
+            width: 7px;
+            height: 7px;
             background: #1cc88a;
             border-radius: 50%;
             animation: pulse 1.5s infinite;
         }
-        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(1.3);} }
- 
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.3);
+            }
+        }
+
         /* ══ LAB ROOMS GRID ══ */
         .labs-rooms-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
         }
+
         .room-card {
             background: var(--bg-chip);
             border: 1px solid var(--border-color);
@@ -118,95 +139,119 @@
             padding: 15px 17px;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .room-card:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 18px rgba(0,0,0,0.1); 
+
+        .room-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
         }
 
-        .room-top { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            margin-bottom: 12px; 
+        .room-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
         }
 
         .room-icon {
-            width: 36px; height: 36px;
-            background: #1cc88a22; color: #1cc88a;
+            width: 36px;
+            height: 36px;
+            background: #1cc88a22;
+            color: #1cc88a;
             border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px; flex-shrink: 0;
-        }
-        .room-icon.occupied { 
-            background: #e74c3c22; 
-            color: #e74c3c; 
-        }
-
-        .room-icon.full { 
-            background: #ffc10722; 
-            color: #ffc107; 
-        }
-        .room-name { 
-            font-size: 13px; 
-            font-weight: 700; 
-            color: var(--text-label); 
-            font-family: 'Sora', sans-serif; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
         }
 
-        .room-meta { 
-            font-size: 13px; 
-            color: var(--text-muted); 
-            margin-top: 6px; 
+        .room-icon.occupied {
+            background: #e74c3c22;
+            color: #e74c3c;
         }
 
-        .room-bar-wrap { 
-            background: var(--border-color); 
-            border-radius: 20px; 
-            height: 6px; 
-            overflow: hidden; 
-            margin-bottom: 8px; 
+        .room-icon.full {
+            background: #ffc10722;
+            color: #ffc107;
         }
 
-        .room-bar-fill { 
-            height: 100%; 
-            border-radius: 20px; 
-            transition: width 0.6s ease; 
+        .room-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-label);
+            font-family: 'Sora', sans-serif;
         }
 
-        .fill-low    { background: #1cc88a; }
-        .fill-medium { background: #ffc107; }
-        .fill-high   { background: #e74c3c; }
+        .room-meta {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
 
-        .room-foot { 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
+        .room-bar-wrap {
+            background: var(--border-color);
+            border-radius: 20px;
+            height: 6px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .room-bar-fill {
+            height: 100%;
+            border-radius: 20px;
+            transition: width 0.6s ease;
+        }
+
+        .fill-low {
+            background: #1cc88a;
+        }
+
+        .fill-medium {
+            background: #ffc107;
+        }
+
+        .fill-high {
+            background: #e74c3c;
+        }
+
+        .room-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .room-free-tag {
-            font-size: 14px; 
+            font-size: 14px;
             font-weight: 600;
-            color: #1cc88a; 
+            color: #1cc88a;
             background: #1cc88a18;
-            border-radius: 10px; 
+            border-radius: 10px;
             padding: 2px 9px;
         }
 
-        .room-free-tag.busy { color: #e74c3c; background: #e74c3c18; }
-        .room-free-tag.warn { color: #ffc107; background: #ffc10718; }
-
-        .room-count { 
-            font-size: 14px; 
-            font-weight: 600; 
-            color: var(--text-muted); 
+        .room-free-tag.busy {
+            color: #e74c3c;
+            background: #e74c3c18;
         }
- 
+
+        .room-free-tag.warn {
+            color: #ffc107;
+            background: #ffc10718;
+        }
+
+        .room-count {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
         /* ══ SOFTWARE GRID ══ */
         .software-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
         }
+
         .sw-card {
             display: flex;
             align-items: center;
@@ -217,70 +262,80 @@
             padding: 14px 16px;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .sw-card:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 18px rgba(0,0,0,0.1); 
+
+        .sw-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
         }
 
         .sw-icon {
-            width: 44px; height: 44px;
+            width: 44px;
+            height: 44px;
             border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px; flex-shrink: 0;
-        }
-        .sw-name { 
-            font-size: 13px; 
-            font-weight: 700; 
-            color: var(--text-label); 
-            display: block; 
-            line-height: 1.3; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
         }
 
-        .sw-desc { 
-            font-size: 11px; 
-            color: var(--text-muted); 
-            display: block; 
-            margin-top: 2px; 
+        .sw-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-label);
+            display: block;
+            line-height: 1.3;
+        }
+
+        .sw-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 2px;
         }
 
         .sw-installed {
-            display: inline-flex; 
-            align-items: center; 
+            display: inline-flex;
+            align-items: center;
             gap: 4px;
-            font-size: 10px; 
+            font-size: 10px;
             font-weight: 700;
-            color: #1cc88a; 
+            color: #1cc88a;
             background: #1cc88a18;
-            border-radius: 10px; 
-            padding: 2px 8px; 
+            border-radius: 10px;
+            padding: 2px 8px;
             margin-top: 5px;
         }
- 
+
         /* ══ LAST UPDATED ══ */
         .last-updated {
-            font-size: 13px; color: var(--text-muted);
-            margin: -10px 0 15px; text-align: right;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin: -10px 0 15px;
+            text-align: right;
         }
- 
+
         /* ══ NOTIFICATION ══ */
-        .notif-wrapper { 
-            position: relative; 
+        .notif-wrapper {
+            position: relative;
         }
 
         .notif-badge {
-            display: none; 
+            display: none;
             position: absolute;
-            top: -4px; right: -6px;
-            background: #e24b4a; 
+            top: -4px;
+            right: -6px;
+            background: #e24b4a;
             color: white;
-            font-size: 10px; 
+            font-size: 10px;
             border-radius: 50%;
-            width: 16px; 
+            width: 16px;
             height: 16px;
-            align-items: center; 
+            align-items: center;
             justify-content: center;
             border: 2px solid #2c3e70;
         }
+
         .notif-dropdown {
             display: none;
             position: absolute;
@@ -294,353 +349,368 @@
             z-index: 1000;
             overflow: hidden;
         }
-        .notif-header { 
-            background: #2c3e70; 
-            color: white; 
-            padding: 10px 14px; 
-            font-size: 14px; 
-            font-weight: bold; 
+
+        .notif-header {
+            background: #2c3e70;
+            color: white;
+            padding: 10px 14px;
+            font-size: 14px;
+            font-weight: bold;
         }
 
-        .notif-mark-btn { 
-            float: right; 
-            background: rgba(255,255,255,0.2); 
-            border: none; 
-            color: white; 
-            font-size: 11px; 
-            padding: 2px 7px; 
-            border-radius: 4px; 
-            cursor: pointer; 
+        .notif-mark-btn {
+            float: right;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 11px;
+            padding: 2px 7px;
+            border-radius: 4px;
+            cursor: pointer;
         }
-        
-        .notif-list { 
-            max-height: 300px; 
-            overflow-y: auto; 
+
+        .notif-list {
+            max-height: 300px;
+            overflow-y: auto;
         }
- 
+
         /* ══ THEME TOGGLE ══ */
         .theme-toggle-btn {
             display: flex;
             align-items: center;
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.22);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
             color: white;
             padding: 3px;
             border-radius: 20px;
             transition: background 0.25s ease, transform 0.15s ease;
         }
+
         .theme-toggle-btn:hover {
-            background: rgba(255,255,255,0.22);
+            background: rgba(255, 255, 255, 0.22);
             transform: translateY(-1px);
         }
 
         [data-theme="dark"] .theme-toggle-btn {
-            background: rgba(255,193,7,0.15);
-            border-color: rgba(255,193,7,0.4);
+            background: rgba(255, 193, 7, 0.15);
+            border-color: rgba(255, 193, 7, 0.4);
             color: #ffc107;
         }
- 
+
         /* ══ EMPTY ══ */
-        .empty-state { text-align: center; color: var(--text-muted); padding: 30px; font-size: 13px; grid-column: 1/-1; }
-        .empty-state i { font-size: 32px; display: block; margin-bottom: 10px; }
+        .empty-state {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 30px;
+            font-size: 13px;
+            grid-column: 1/-1;
+        }
+
+        .empty-state i {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
+
 <body>
 
-<!-- ── NAVBAR ── -->
-<nav class="navbar">
-    <div class="logo-text"><i class="fa fa-desktop"></i> Student Lab Status</div>
-    <ul class="nav-links">
-        <li class="notif-wrapper">
-            <a href="#" onclick="toggleNotifDropdown(event)">
-                <i class="fa fa-bell"></i> Notifications
-            </a>
-            <span id="notifBadge" class="notif-badge"></span>
-            <div id="notifDropdown" class="notif-dropdown">
-                <div class="notif-header">
-                    <i class="fa fa-bell"></i> Announcements
-                    <button onclick="markAllRead()" class="notif-mark-btn">Mark all read</button>
+    <!-- ── NAVBAR ── -->
+    <nav class="navbar">
+        <div class="logo-text"><i class="fa fa-desktop"></i> Student Lab Status</div>
+        <ul class="nav-links">
+            <li class="notif-wrapper">
+                <a href="#" onclick="toggleNotifDropdown(event)">
+                    <i class="fa fa-bell"></i> Notifications
+                </a>
+                <span id="notifBadge" class="notif-badge"></span>
+                <div id="notifDropdown" class="notif-dropdown">
+                    <div class="notif-header">
+                        <i class="fa fa-bell"></i> Announcements
+                        <button onclick="markAllRead()" class="notif-mark-btn">Mark all read</button>
+                    </div>
+                    <div id="notifList" class="notif-list"></div>
                 </div>
-                <div id="notifList" class="notif-list"></div>
-            </div>
-        </li>
-        <li><a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a></li>
-        <li><a href="editprofile.html"><i class="fa fa-pencil"></i> Edit Profile</a></li>
-        <li><a href="history.html"><i class="fa fa-history"></i> History</a></li>
-        <li><a href="reservation.html"><i class="fa fa-calendar"></i> Reservation</a></li>
-        <li><a href="leaderboard.html"><i class="fa fa-trophy"></i> Leaderboard</a></li>
-        <li><a href="mysummary.html"><i class="fa fa-chart-line"></i> My Summary</a></li>
-        <li><a href="labstatus.html" class="active"><i class="fa fa-desktop"></i> Lab Status</a></li>
-        <li>
-            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
-                <i class="fa-solid fa-moon" id="themeIcon"></i>
-                <span id="themeLabel"></span>
-            </button>
-        </li>
-        <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
-    </ul>
-</nav>
+            </li>
+            <li><a href="dashboard.html"><i class="fa fa-home"></i> Dashboard</a></li>
+            <li><a href="editprofile.html"><i class="fa fa-pencil"></i> Edit Profile</a></li>
+            <li><a href="history.html"><i class="fa fa-history"></i> History</a></li>
+            <li><a href="reservation.html"><i class="fa fa-calendar"></i> Reservation</a></li>
+            <li><a href="leaderboard.html"><i class="fa fa-trophy"></i> Leaderboard</a></li>
+            <li><a href="mysummary.html"><i class="fa fa-chart-line"></i> My Summary</a></li>
+            <li><a href="labstatus.html" class="active"><i class="fa fa-desktop"></i> Lab Status</a></li>
+            <li>
+                <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    <span id="themeLabel"></span>
+                </button>
+            </li>
+            <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out"></i> Logout</a>
+            </li>
+        </ul>
+    </nav>
 
-<!-- ── PAGE ── -->
-<div class="labstatus-wrapper">
- 
-    <!-- SECTION 1: LABORATORY STATUS -->
-    <div class="section-panel">
-        <div class="section-panel-header">
-            <i class="fa fa-desktop"></i> Laboratory Status
-            <span class="live-badge">
-                <span class="live-dot"></span> Live · updates every 30s
-            </span>
-        </div>
-        <div class="section-panel-body">
-            <div class="labs-rooms-grid" id="labsGrid">
-                <div class="empty-state" style="grid-column:1/-1;">
-                    <i class="fa fa-spinner fa-spin"></i> Loading lab status...
+    <!-- ── PAGE ── -->
+    <div class="labstatus-wrapper">
+
+        <!-- SECTION 1: LABORATORY STATUS -->
+        <div class="section-panel">
+            <div class="section-panel-header">
+                <i class="fa fa-desktop"></i> Laboratory Status
+                <span class="live-badge">
+                    <span class="live-dot"></span> Live · updates every 30s
+                </span>
+            </div>
+            <div class="section-panel-body">
+                <div class="labs-rooms-grid" id="labsGrid">
+                    <div class="empty-state" style="grid-column:1/-1;">
+                        <i class="fa fa-spinner fa-spin"></i> Loading lab status...
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
- 
-    <div class="last-updated" id="lastUpdated"></div>
- 
-    <!-- SECTION 2: AVAILABLE SOFTWARE -->
-    <div class="section-panel">
-        <div class="section-panel-header">
-            <i class="fa fa-box-open"></i> Available Software
-        </div>
-        <div class="section-panel-body">
-            <div class="software-grid" id="softwareGrid">
-                <!-- rendered by JS -->
+
+        <div class="last-updated" id="lastUpdated"></div>
+
+        <!-- SECTION 2: AVAILABLE SOFTWARE -->
+        <div class="section-panel">
+            <div class="section-panel-header">
+                <i class="fa fa-box-open"></i> Available Software
+            </div>
+            <div class="section-panel-body">
+                <div class="software-grid" id="softwareGrid">
+                    <!-- rendered by JS -->
+                </div>
             </div>
         </div>
+
     </div>
- 
-</div>
 
-<!-- ── SCRIPTS ── -->
-<script>
-/* ══════════════════════════════════════
-   DARK / LIGHT MODE
-══════════════════════════════════════ */
-function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    const icon  = document.getElementById('themeIcon');
-    const label = document.getElementById('themeLabel');
-    if (theme === 'dark') {
-        icon.className  = 'fa-solid fa-sun';
-    } else {
-        icon.className  = 'fa-solid fa-moon';
-    }
-}
- 
-function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next    = current === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('ccs_theme', next);
-    applyTheme(next);
- 
-    // Animate the icon on toggle
-    const icon = document.getElementById('themeIcon');
-    icon.style.transform = 'rotate(360deg)';
-    icon.style.transition = 'transform 0.4s ease';
-    setTimeout(() => { icon.style.transform = ''; icon.style.transition = ''; }, 400);
-}
- 
-(function() { applyTheme(localStorage.getItem('ccs_theme') || 'light'); })();
+    <!-- ── SCRIPTS ── -->
+    <script>
+        /* ══════════════════════════════════════
+           DARK / LIGHT MODE
+        ══════════════════════════════════════ */
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            const icon = document.getElementById('themeIcon');
+            const label = document.getElementById('themeLabel');
+            if (theme === 'dark') {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        }
 
-const BASE = 'http://localhost:3000';
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('ccs_theme', next);
+            applyTheme(next);
 
-// Labs config — add or rename as needed to match your actual lab names
-const LABS_CONFIG = [
-    { name: 'Lab 524', alias: 'Laboratory 524', capacity: 40 },
-    { name: 'Lab 525', alias: 'Laboratory 525', capacity: 40 },
-    { name: 'Lab 526', alias: 'Laboratory 526', capacity: 40 },
-    { name: 'Lab 527', alias: 'Laboratory 527', capacity: 40 },
-    { name: 'Lab 528', alias: 'Laboratory 528', capacity: 40 },
-];
+            // Animate the icon on toggle
+            const icon = document.getElementById('themeIcon');
+            icon.style.transform = 'rotate(360deg)';
+            icon.style.transition = 'transform 0.4s ease';
+            setTimeout(() => { icon.style.transform = ''; icon.style.transition = ''; }, 400);
+        }
 
-/* ── Default software list (also reads from software.html localStorage) ── */
-const DEFAULT_SOFTWARE = [
-    { name: 'Microsoft Office 365', desc: 'Word, Excel, PowerPoint', icon: 'fa-file-word',    color: '#d94f3d', bg: '#d94f3d22' },
-    { name: 'Visual Studio Code',   desc: 'Code editor',             icon: 'fa-code',          color: '#007acc', bg: '#007acc22' },
-    { name: 'NetBeans IDE',         desc: 'Java development',        icon: 'fa-coffee',        color: '#f39c12', bg: '#f39c1222' },
-    { name: 'XAMPP',                desc: 'Local PHP server',        icon: 'fa-server',        color: '#e74c3c', bg: '#e74c3c22' },
-    { name: 'Python 3.x',           desc: 'Interpreter + IDLE',      icon: 'fa-python',        color: '#3776ab', bg: '#3776ab22' },
-    { name: 'Android Studio',       desc: 'Mobile development',      icon: 'fa-android',       color: '#3ddc84', bg: '#3ddc8422' },
-    { name: 'MySQL Workbench',      desc: 'Database management',     icon: 'fa-database',      color: '#00758f', bg: '#00758f22' },
-    { name: 'Figma (Browser)',      desc: 'UI/UX design',            icon: 'fa-pen-ruler',     color: '#a259ff', bg: '#a259ff22' },
-    { name: 'Google Chrome',        desc: 'Web browser',             icon: 'fa-globe',         color: '#4285f4', bg: '#4285f422' },
-    { name: 'Cisco Packet Tracer',  desc: 'Network simulation',      icon: 'fa-network-wired', color: '#1ba0d8', bg: '#1ba0d822' },
-    { name: 'Adobe Photoshop',      desc: 'Photo editing',           icon: 'fa-image',         color: '#31a8ff', bg: '#31a8ff22' },
-    { name: 'VMware Workstation',   desc: 'Virtual machines',        icon: 'fa-hard-drive',    color: '#607078', bg: '#60707822' },
-];
+        (function () { applyTheme(localStorage.getItem('ccs_theme') || 'light'); })();
 
-// ── NOTIFICATION ─────────────────────────────────────────────────────────
-let _announcements = [];
-function toggleNotifDropdown(e) {
-    e.preventDefault();
-    const d = document.getElementById('notifDropdown');
-    d.style.display = d.style.display === 'block' ? 'none' : 'block';
-}
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('li:has(#notifDropdown)')) {
-        const d = document.getElementById('notifDropdown');
-        if (d) d.style.display = 'none';
-    }
-});
-function getReadIds() { return JSON.parse(localStorage.getItem('readIds') || '[]'); }
-function saveReadIds(ids) { localStorage.setItem('readIds', JSON.stringify(ids)); }
-function markAllRead() { saveReadIds(_announcements.map(a => a.id)); renderNotifs(); }
-function renderNotifs() {
-    const readIds = getReadIds();
-    const unread = _announcements.filter(a => !readIds.includes(a.id)).length;
-    const badge = document.getElementById('notifBadge');
-    badge.textContent = unread; badge.style.display = unread > 0 ? 'flex' : 'none';
-    document.getElementById('notifList').innerHTML = _announcements.length
-        ? _announcements.map(a => `
+        const BASE = 'http://localhost:3000';
+
+        // Labs config — add or rename as needed to match your actual lab names
+        const LABS_CONFIG = [
+            { name: 'Lab 524', alias: 'Laboratory 524', capacity: 40 },
+            { name: 'Lab 525', alias: 'Laboratory 525', capacity: 40 },
+            { name: 'Lab 526', alias: 'Laboratory 526', capacity: 40 },
+            { name: 'Lab 527', alias: 'Laboratory 527', capacity: 40 },
+            { name: 'Lab 528', alias: 'Laboratory 528', capacity: 40 },
+        ];
+
+        /* ── Default software list (also reads from software.html localStorage) ── */
+        const DEFAULT_SOFTWARE = [
+            { name: 'Microsoft Office 365', desc: 'Word, Excel, PowerPoint', icon: 'fa-file-word', color: '#d94f3d', bg: '#d94f3d22' },
+            { name: 'Visual Studio Code', desc: 'Code editor', icon: 'fa-code', color: '#007acc', bg: '#007acc22' },
+            { name: 'NetBeans IDE', desc: 'Java development', icon: 'fa-coffee', color: '#f39c12', bg: '#f39c1222' },
+            { name: 'XAMPP', desc: 'Local PHP server', icon: 'fa-server', color: '#e74c3c', bg: '#e74c3c22' },
+            { name: 'Python 3.x', desc: 'Interpreter + IDLE', icon: 'fa-python', color: '#3776ab', bg: '#3776ab22' },
+            { name: 'Android Studio', desc: 'Mobile development', icon: 'fa-android', color: '#3ddc84', bg: '#3ddc8422' },
+            { name: 'MySQL Workbench', desc: 'Database management', icon: 'fa-database', color: '#00758f', bg: '#00758f22' },
+            { name: 'Figma (Browser)', desc: 'UI/UX design', icon: 'fa-pen-ruler', color: '#a259ff', bg: '#a259ff22' },
+            { name: 'Google Chrome', desc: 'Web browser', icon: 'fa-globe', color: '#4285f4', bg: '#4285f422' },
+            { name: 'Cisco Packet Tracer', desc: 'Network simulation', icon: 'fa-network-wired', color: '#1ba0d8', bg: '#1ba0d822' },
+            { name: 'Adobe Photoshop', desc: 'Photo editing', icon: 'fa-image', color: '#31a8ff', bg: '#31a8ff22' },
+            { name: 'VMware Workstation', desc: 'Virtual machines', icon: 'fa-hard-drive', color: '#607078', bg: '#60707822' },
+        ];
+
+        // ── NOTIFICATION ─────────────────────────────────────────────────────────
+        let _announcements = [];
+        function toggleNotifDropdown(e) {
+            e.preventDefault();
+            const d = document.getElementById('notifDropdown');
+            d.style.display = d.style.display === 'block' ? 'none' : 'block';
+        }
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('li:has(#notifDropdown)')) {
+                const d = document.getElementById('notifDropdown');
+                if (d) d.style.display = 'none';
+            }
+        });
+        function getReadIds() { return JSON.parse(localStorage.getItem('readIds') || '[]'); }
+        function saveReadIds(ids) { localStorage.setItem('readIds', JSON.stringify(ids)); }
+        function markAllRead() { saveReadIds(_announcements.map(a => a.id)); renderNotifs(); }
+        function renderNotifs() {
+            const readIds = getReadIds();
+            const unread = _announcements.filter(a => !readIds.includes(a.id)).length;
+            const badge = document.getElementById('notifBadge');
+            badge.textContent = unread; badge.style.display = unread > 0 ? 'flex' : 'none';
+            document.getElementById('notifList').innerHTML = _announcements.length
+                ? _announcements.map(a => `
             <div onclick="markOneRead(${a.id})" style="padding:12px 14px;border-bottom:1px solid #eee;
                 cursor:pointer;background:${!readIds.includes(a.id) ? '#eaf3fb' : 'white'}">
                 <div style="font-size:11px;color:#888;">${a.author} | ${a.date}</div>
                 <div style="font-size:13px;color:#222;margin-top:3px;">${a.content}</div>
             </div>`).join('')
-        : '<p style="text-align:center;color:#aaa;padding:20px;font-size:13px;">No announcements yet.</p>';
-}
-function markOneRead(id) {
-    const ids = getReadIds();
-    if (!ids.includes(id)) { ids.push(id); saveReadIds(ids); renderNotifs(); }
-}
-async function pollAnnouncements() {
-    try { const r = await fetch(`${BASE}/announcements`); _announcements = await r.json(); renderNotifs(); } catch(e) {}
-}
-pollAnnouncements();
-setInterval(pollAnnouncements, 30000);
+                : '<p style="text-align:center;color:#aaa;padding:20px;font-size:13px;">No announcements yet.</p>';
+        }
+        function markOneRead(id) {
+            const ids = getReadIds();
+            if (!ids.includes(id)) { ids.push(id); saveReadIds(ids); renderNotifs(); }
+        }
+        async function pollAnnouncements() {
+            try { const r = await fetch(`${BASE}/announcements`); _announcements = await r.json(); renderNotifs(); } catch (e) { }
+        }
+        pollAnnouncements();
+        setInterval(pollAnnouncements, 30000);
 
-let _resNotifs = [];
+        let _resNotifs = [];
 
-async function pollResNotifs() {
-    const idNumber = localStorage.getItem('loggedInId');
-    if (!idNumber) return;
-    try {
-        const res = await fetch(`http://localhost:3000/notifications/${idNumber}`);
-        _resNotifs = await res.json();
-        renderCombinedNotifs();
-    } catch(e) {}
-}
+        async function pollResNotifs() {
+            const idNumber = localStorage.getItem('loggedInId');
+            if (!idNumber) return;
+            try {
+                const res = await fetch(`http://localhost:3000/notifications/${idNumber}`);
+                _resNotifs = await res.json();
+                renderCombinedNotifs();
+            } catch (e) { }
+        }
 
-function renderCombinedNotifs() {
-    const readIds    = getReadIds();
-    const unreadAnn  = _announcements.filter(a => !readIds.includes(a.id)).length;
-    const unreadRes  = _resNotifs.filter(n => n.isRead === 0).length;
-    const totalUnread = unreadAnn + unreadRes;
+        function renderCombinedNotifs() {
+            const readIds = getReadIds();
+            const unreadAnn = _announcements.filter(a => !readIds.includes(a.id)).length;
+            const unreadRes = _resNotifs.filter(n => n.isRead === 0).length;
+            const totalUnread = unreadAnn + unreadRes;
 
-    const badge = document.getElementById('notifBadge');
-    badge.textContent = totalUnread;
-    badge.style.display = totalUnread > 0 ? 'flex' : 'none';
+            const badge = document.getElementById('notifBadge');
+            badge.textContent = totalUnread;
+            badge.style.display = totalUnread > 0 ? 'flex' : 'none';
 
-    let html = '';
+            let html = '';
 
-    _resNotifs.forEach(n => {
-        const isAccepted = n.message.startsWith('✅');
-        html += `
+            _resNotifs.forEach(n => {
+                const isAccepted = n.message.startsWith('✅');
+                html += `
             <div onclick="markResNotifRead(${n.id})" style="padding:12px 14px;border-bottom:1px solid #eee;cursor:pointer;
                 background:${n.isRead ? 'white' : (isAccepted ? '#eaf7ee' : '#fdf0f0')};">
                 <div style="font-size:14px;color:#888;">Reservation Update | ${n.createdAt || ''}</div>
                 <div style="font-size:14px;color:${n.isRead ? '#888' : '#222'};margin-top:3px;font-family:'Sora',sans-serif;">${n.message}</div>
             </div>`;
-    });
+            });
 
-    _announcements.forEach(a => {
-        html += `
+            _announcements.forEach(a => {
+                html += `
             <div onclick="markOneRead(${a.id})" style="padding:12px 14px;border-bottom:1px solid #eee;cursor:pointer;
                 background:${!readIds.includes(a.id) ? '#eaf3fb' : 'white'}">
                 <div style="font-size:14px;color:#888;">${a.author} | ${a.date}</div>
                 <div style="font-size:14px;color:#222;margin-top:3px;font-family:'Sora',sans-serif;">${a.content}</div>
             </div>`;
-    });
-
-    document.getElementById('notifList').innerHTML = html ||
-        '<p style="text-align:center;color:#aaa;padding:20px;font-size:13px;">No notifications yet.</p>';
-}
-
-async function markResNotifRead(id) {
-    try {
-        await fetch(`http://localhost:3000/notifications/read/${id}`, { method: 'POST' });
-        const n = _resNotifs.find(x => x.id === id);
-        if (n) n.isRead = 1;
-        renderCombinedNotifs();
-    } catch(e) {}
-}
-
-// Override markAllRead to also clear reservation notifs
-const _origMarkAllRead = markAllRead;
-window.markAllRead = function() {
-    _origMarkAllRead();
-    const idNumber = localStorage.getItem('loggedInId');
-    if (idNumber) {
-        fetch(`http://localhost:3000/notifications/read-all/${idNumber}`, { method: 'POST' })
-            .then(() => { _resNotifs.forEach(n => n.isRead = 1); renderCombinedNotifs(); })
-            .catch(() => {});
-    }
-};
-
-// Override renderNotifs so announcements also trigger a combined re-render
-const _origRenderNotifs = renderNotifs;
-window.renderNotifs = function() {
-    _origRenderNotifs();
-    renderCombinedNotifs();
-};
-
-// SweetAlert popup when a new accept/deny arrives
-let _lastResNotifCount = 0;
-async function checkForNewResNotifs() {
-    const idNumber = localStorage.getItem('loggedInId');
-    if (!idNumber) return;
-    try {
-        const res    = await fetch(`http://localhost:3000/notifications/${idNumber}`);
-        const notifs = await res.json();
-        const unread = notifs.filter(n => n.isRead === 0);
-        if (unread.length > _lastResNotifCount && _lastResNotifCount !== -1) {
-            const latest     = unread[0];
-            const isAccepted = latest.message.startsWith('✅');
-            Swal.fire({
-                icon: isAccepted ? 'success' : 'error',
-                title: isAccepted ? 'Reservation Accepted!' : 'Reservation Denied',
-                text: latest.message.replace(/^[✅❌]\s*/, ''),
-                confirmButtonColor: isAccepted ? '#28a745' : '#dc3545',
-                confirmButtonText: 'OK'
             });
+
+            document.getElementById('notifList').innerHTML = html ||
+                '<p style="text-align:center;color:#aaa;padding:20px;font-size:13px;">No notifications yet.</p>';
         }
-        _lastResNotifCount = unread.length;
-        _resNotifs = notifs;
-        renderCombinedNotifs();
-    } catch(e) {}
-}
 
-pollResNotifs();
-setTimeout(async () => {
-    const idNumber = localStorage.getItem('loggedInId');
-    if (!idNumber) return;
-    try {
-        const res    = await fetch(`http://localhost:3000/notifications/${idNumber}`);
-        const notifs = await res.json();
-        _lastResNotifCount = notifs.filter(n => n.isRead === 0).length;
-    } catch(e) { _lastResNotifCount = 0; }
-}, 500);
-setInterval(checkForNewResNotifs, 15000);
+        async function markResNotifRead(id) {
+            try {
+                await fetch(`http://localhost:3000/notifications/read/${id}`, { method: 'POST' });
+                const n = _resNotifs.find(x => x.id === id);
+                if (n) n.isRead = 1;
+                renderCombinedNotifs();
+            } catch (e) { }
+        }
 
-/* ══ RENDER SOFTWARE ══ */
-function renderSoftware() {
-    let registered = [];
-    try { registered = JSON.parse(localStorage.getItem('ccs_software') || '[]'); } catch(e) {}
-    const list = registered.length > 0 ? registered : DEFAULT_SOFTWARE;
- 
-    document.getElementById('softwareGrid').innerHTML = list.map(sw => {
-        const name  = sw.name  || 'Unknown';
-        const desc  = sw.desc  || sw.category || '';
-        const icon  = sw.icon  || 'fa-box';
-        const color = sw.color || '#4e73df';
-        const bg    = sw.bg    || color + '22';
-        return `
+        // Override markAllRead to also clear reservation notifs
+        const _origMarkAllRead = markAllRead;
+        window.markAllRead = function () {
+            _origMarkAllRead();
+            const idNumber = localStorage.getItem('loggedInId');
+            if (idNumber) {
+                fetch(`http://localhost:3000/notifications/read-all/${idNumber}`, { method: 'POST' })
+                    .then(() => { _resNotifs.forEach(n => n.isRead = 1); renderCombinedNotifs(); })
+                    .catch(() => { });
+            }
+        };
+
+        // Override renderNotifs so announcements also trigger a combined re-render
+        const _origRenderNotifs = renderNotifs;
+        window.renderNotifs = function () {
+            _origRenderNotifs();
+            renderCombinedNotifs();
+        };
+
+        // SweetAlert popup when a new accept/deny arrives
+        let _lastResNotifCount = 0;
+        async function checkForNewResNotifs() {
+            const idNumber = localStorage.getItem('loggedInId');
+            if (!idNumber) return;
+            try {
+                const res = await fetch(`http://localhost:3000/notifications/${idNumber}`);
+                const notifs = await res.json();
+                const unread = notifs.filter(n => n.isRead === 0);
+                if (unread.length > _lastResNotifCount && _lastResNotifCount !== -1) {
+                    const latest = unread[0];
+                    const isAccepted = latest.message.startsWith('✅');
+                    Swal.fire({
+                        icon: isAccepted ? 'success' : 'error',
+                        title: isAccepted ? 'Reservation Accepted!' : 'Reservation Denied',
+                        text: latest.message.replace(/^[✅❌]\s*/, ''),
+                        confirmButtonColor: isAccepted ? '#28a745' : '#dc3545',
+                        confirmButtonText: 'OK'
+                    });
+                }
+                _lastResNotifCount = unread.length;
+                _resNotifs = notifs;
+                renderCombinedNotifs();
+            } catch (e) { }
+        }
+
+        pollResNotifs();
+        setTimeout(async () => {
+            const idNumber = localStorage.getItem('loggedInId');
+            if (!idNumber) return;
+            try {
+                const res = await fetch(`http://localhost:3000/notifications/${idNumber}`);
+                const notifs = await res.json();
+                _lastResNotifCount = notifs.filter(n => n.isRead === 0).length;
+            } catch (e) { _lastResNotifCount = 0; }
+        }, 500);
+        setInterval(checkForNewResNotifs, 15000);
+
+        /* ══ RENDER SOFTWARE ══ */
+        function renderSoftware() {
+            let registered = [];
+            try { registered = JSON.parse(localStorage.getItem('ccs_software') || '[]'); } catch (e) { }
+            const list = registered.length > 0 ? registered : DEFAULT_SOFTWARE;
+
+            document.getElementById('softwareGrid').innerHTML = list.map(sw => {
+                const name = sw.name || 'Unknown';
+                const desc = sw.desc || sw.category || '';
+                const icon = sw.icon || 'fa-box';
+                const color = sw.color || '#4e73df';
+                const bg = sw.bg || color + '22';
+                return `
             <div class="sw-card">
                 <div class="sw-icon" style="background:${bg};color:${color};">
                     <i class="fa-solid ${icon}"></i>
@@ -651,46 +721,46 @@ function renderSoftware() {
                     <span class="sw-installed"><i class="fa fa-circle-check"></i> Installed</span>
                 </div>
             </div>`;
-    }).join('');
-}
+            }).join('');
+        }
 
-// ── LOAD LAB STATUS ───────────────────────────────────────────────────────
-async function loadLabStatus() {
-    try {
-        const res = await fetch(`${BASE}/get-sitin`);
-        const sitins = await res.json();
- 
-        const labMap = {};
-        sitins.forEach(s => {
-            const key = s.lab || 'Unknown';
-            if (!labMap[key]) labMap[key] = [];
-            labMap[key].push(s);
-        });
- 
-        const labs = LABS_CONFIG.map(cfg => ({
-            ...cfg,
-            students: labMap[cfg.name] || labMap[cfg.alias] || []
-        }));
- 
-        // add any unknown labs from DB
-        Object.keys(labMap).forEach(k => {
-            if (!LABS_CONFIG.find(l => l.name === k || l.alias === k))
-                labs.push({ name: k, alias: k, capacity: 40, students: labMap[k] });
-        });
- 
-        document.getElementById('labsGrid').innerHTML = labs.map(lab => {
-            const count = lab.students.length;
-            const cap   = lab.capacity;
-            const free  = cap - count;
-            const pct   = Math.min(Math.round((count / cap) * 100), 100);
- 
-            const fillCls = pct >= 90 ? 'fill-high' : pct >= 50 ? 'fill-medium' : 'fill-low';
-            const iconCls = count === 0 ? '' : count >= cap ? 'full' : 'occupied';
-            const tagCls  = count === 0 ? '' : count >= cap ? 'warn' : 'busy';
-            const iconFA  = count === 0 ? 'fa-desktop' : count >= cap ? 'fa-ban' : 'fa-users';
-            const tagTxt  = count === 0 ? `${free} free` : count >= cap ? 'Full' : `${free} free`;
- 
-            return `
+        // ── LOAD LAB STATUS ───────────────────────────────────────────────────────
+        async function loadLabStatus() {
+            try {
+                const res = await fetch(`${BASE}/get-sitin`);
+                const sitins = await res.json();
+
+                const labMap = {};
+                sitins.forEach(s => {
+                    const key = s.lab || 'Unknown';
+                    if (!labMap[key]) labMap[key] = [];
+                    labMap[key].push(s);
+                });
+
+                const labs = LABS_CONFIG.map(cfg => ({
+                    ...cfg,
+                    students: labMap[cfg.name] || labMap[cfg.alias] || []
+                }));
+
+                // add any unknown labs from DB
+                Object.keys(labMap).forEach(k => {
+                    if (!LABS_CONFIG.find(l => l.name === k || l.alias === k))
+                        labs.push({ name: k, alias: k, capacity: 40, students: labMap[k] });
+                });
+
+                document.getElementById('labsGrid').innerHTML = labs.map(lab => {
+                    const count = lab.students.length;
+                    const cap = lab.capacity;
+                    const free = cap - count;
+                    const pct = Math.min(Math.round((count / cap) * 100), 100);
+
+                    const fillCls = pct >= 90 ? 'fill-high' : pct >= 50 ? 'fill-medium' : 'fill-low';
+                    const iconCls = count === 0 ? '' : count >= cap ? 'full' : 'occupied';
+                    const tagCls = count === 0 ? '' : count >= cap ? 'warn' : 'busy';
+                    const iconFA = count === 0 ? 'fa-desktop' : count >= cap ? 'fa-ban' : 'fa-users';
+                    const tagTxt = count === 0 ? `${free} free` : count >= cap ? 'Full' : `${free} free`;
+
+                    return `
                 <div class="room-card">
                     <div class="room-top">
                         <div class="room-icon ${iconCls}"><i class="fa ${iconFA}"></i></div>
@@ -707,74 +777,75 @@ async function loadLabStatus() {
                         <span class="room-count">${count} in use</span>
                     </div>
                 </div>`;
-        }).join('');
- 
-        const now = new Date();
-        document.getElementById('lastUpdated').textContent =
-            `Last updated: ${now.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit', second:'2-digit' })}`;
- 
-    } catch(err) {
-        document.getElementById('labsGrid').innerHTML = `
+                }).join('');
+
+                const now = new Date();
+                document.getElementById('lastUpdated').textContent =
+                    `Last updated: ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`;
+
+            } catch (err) {
+                document.getElementById('labsGrid').innerHTML = `
             <div class="empty-state">
                 <i class="fa fa-exclamation-circle" style="color:#e74c3c;"></i>
                 Could not load lab status. Make sure the server is running.
             </div>`;
-    }
-}
-
-// ── LOGOUT ───────────────────────────────────────────────────────────────
-async function logout() {
-    const studentId = localStorage.getItem('loggedInId');
-    
-    const { isConfirmed } = await Swal.fire({
-        title: 'Logout?',
-        text: "This will end your current lab session and log you out.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#0056b3',
-        confirmButtonText: 'Yes, Logout!'
-    });
-
-    if (isConfirmed) {
-        try {
-            if (studentId) {
-                await fetch("http://localhost:3000/record-final-logout", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ idNumber: studentId })
-                });
             }
-
-            localStorage.removeItem('loggedInId');
-            localStorage.removeItem('sessionExpiry');
-            sessionStorage.clear();
-
-            await Swal.fire({
-                icon: 'success',
-                title: 'Logged Out',
-                text: 'Your session has been closed.',
-                timer: 1500,
-                showConfirmButton: false
-            });
-            window.location.href = 'index.html';
-        } catch (err) {
-            console.error("Logout error:", err);
-            localStorage.removeItem('loggedInId');
-            window.location.href = 'index.html';
         }
-    }
-}
 
-// ── INIT + AUTO-REFRESH ───────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-    const idNumber = localStorage.getItem('loggedInId');
-    if (!idNumber) { window.location.href = 'index.html'; return; }
-    pollAnnouncements();
-    setInterval(pollAnnouncements, 30000);
-    renderSoftware();
-    loadLabStatus();
-    setInterval(loadLabStatus, 30000);
-});
-</script>
+        // ── LOGOUT ───────────────────────────────────────────────────────────────
+        async function logout() {
+            const studentId = localStorage.getItem('loggedInId');
+
+            const { isConfirmed } = await Swal.fire({
+                title: 'Logout?',
+                text: "This will end your current lab session and log you out.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0056b3',
+                confirmButtonText: 'Yes, Logout!'
+            });
+
+            if (isConfirmed) {
+                try {
+                    if (studentId) {
+                        await fetch("http://localhost:3000/record-final-logout", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ idNumber: studentId })
+                        });
+                    }
+
+                    localStorage.removeItem('loggedInId');
+                    localStorage.removeItem('sessionExpiry');
+                    sessionStorage.clear();
+
+                    await Swal.fire({
+                        icon: 'success',
+                        title: 'Logged Out',
+                        text: 'Your session has been closed.',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                    window.location.href = 'index.html';
+                } catch (err) {
+                    console.error("Logout error:", err);
+                    localStorage.removeItem('loggedInId');
+                    window.location.href = 'index.html';
+                }
+            }
+        }
+
+        // ── INIT + AUTO-REFRESH ───────────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', () => {
+            const idNumber = localStorage.getItem('loggedInId');
+            if (!idNumber) { window.location.href = 'index.html'; return; }
+            pollAnnouncements();
+            setInterval(pollAnnouncements, 30000);
+            renderSoftware();
+            loadLabStatus();
+            setInterval(loadLabStatus, 30000);
+        });
+    </script>
 </body>
+
 </html>

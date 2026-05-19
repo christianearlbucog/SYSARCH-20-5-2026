@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,7 @@
         .page-title {
             font-size: 26px;
             font-weight: 700;
-            color: #1a1a2e;
+            color: #17233d;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -23,7 +23,7 @@
             max-width: 1200px;
         }
  
-        .page-title i { color: #0d6efd; }
+        .page-title i { color: #2f6df8; }
 
         .modal-overlay {
             display: none;
@@ -46,7 +46,7 @@
             animation: slideDown 0.3s ease-out; 
         }
         .modal-header { 
-            background: #2c3e70;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff);
             padding: 15px 20px;
             display: flex; 
             justify-content: space-between; 
@@ -108,7 +108,7 @@
         .user-info-text .name { 
             display: block; 
             font-weight: 700; 
-            color: #2c3e70; 
+            color: #2f6df8; 
             font-size: 14px; 
         }
         .user-info-text .meta { 
@@ -132,7 +132,7 @@
         /* --- Sit-in Form Styles --- */
         .student-profile-card { 
             background: #f8f9fc; 
-            border-left: 5px solid #2c3e70; 
+            border-left: 5px solid #2f6df8; 
             border-radius: 8px; 
             padding: 20px; 
             margin: 20px; 
@@ -141,7 +141,7 @@
             display: block; 
             font-size: 1.1rem; 
             font-weight: 600; 
-            color: #2c3e70; 
+            color: #2f6df8; 
             margin-bottom: 10px; 
             text-transform: uppercase; 
         }
@@ -178,7 +178,7 @@
         }
 
         .btn-confirm { 
-            background: #2c3e70; 
+            background: linear-gradient(135deg, #2f6df8, #5b82ff); 
             color: white; 
             border: none; 
             padding: 10px 20px; 
@@ -197,7 +197,7 @@
         }
 
         .btn-confirm:hover {
-            background: #2c3e70;
+            background: linear-gradient(135deg, #2558d4, #4a6fe8);
             transform: translateY(-1px);
         }
 
@@ -218,17 +218,21 @@
             letter-spacing: 0.5px;
         }   
         .page-wrapper {
-            max-width: 1300px;
-            margin: 30px auto;
-            padding: 0 20px;
-            margin-top: 50px;
+            margin-left: 280px !important;
+            padding: 40px !important;
+            max-width: calc(100% - 280px) !important;
+            width: auto !important;
+            transition: all 0.3s ease;
+            margin-top: 30px !important;
         }
 
         .table-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            background: var(--bg-card, white);
+            border-radius: 24px;
+            box-shadow: 0 22px 40px rgba(15,23,42,0.08);
             padding: 25px;
+            border: 1px solid rgba(67,97,179,0.15);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .table-controls {
@@ -248,36 +252,38 @@
         }
 
         .btn-refresh {
-            background-color: #28a745;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff);
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 8px 20px;
+            border-radius: 999px;
             cursor: pointer;
             font-size: 13px;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 6px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
+ 
         .btn-refresh:hover {
-            background-color: #218838;
-            transform: translateY(-1px);
+            background: linear-gradient(135deg, #2558d4, #4a6fe8);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(47,109,248,0.3);
         }
 
         table {
             width: 100%; 
             border-collapse: collapse; 
-            background: white; 
-            border-radius: 8px; 
+            background: var(--bg-card, white); 
+            border-radius: 16px; 
             overflow: hidden; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            box-shadow: 0 4px 15px rgba(15,23,42,0.06); 
             
         }
     
         thead tr { 
-            background: #2c3e70; 
+            background: linear-gradient(135deg, #2f6df8, #5b82ff); 
         }
         
         th {
@@ -286,19 +292,19 @@
             color: #e9f5ff;
             font-weight: 600;
             font-size: 14px;
-            border-bottom: 2px solid #eee;
+            border-bottom: none;
             cursor: pointer;
         }
 
         td { 
             padding: 12px 15px; 
-            border-bottom: 1px solid #f1f1f1; 
+            border-bottom: 1px solid rgba(67,97,179,0.1); 
             font-size: 14px; color: #333;
             font-family: 'Sora', sans-serif;
         }
 
         tbody tr:hover { 
-            background: #fcfdfe; 
+            background: rgba(47,109,248,0.04); 
         }
 
         /* BADGES */
@@ -320,31 +326,34 @@
         }
 
         .badge-session { 
-            background: #e9f5ff; 
-            color: #0056b3;
+            background: rgba(47,109,248,0.1); 
+            color: #2f6df8;
+            border-radius: 999px;
         }
 
         .btn-timeout {
             background: #dc3545;
             color: white;
             border: none;
-            padding: 5px 12px;
-            border-radius: 4px;
+            padding: 6px 14px;
+            border-radius: 999px;
             cursor: pointer;
             font-size: 12px;
             font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
         }
 
         .btn-timeout:hover {
             background: #c82333;
+            transform: translateY(-1px);
         }
 
         .btn-done {
             background: #e9ecef;
             color: #6c757d;
             border: none;
-            padding: 5px 12px;
-            border-radius: 4px;
+            padding: 6px 14px;
+            border-radius: 999px;
             cursor: not-allowed;
             font-size: 12px;
         }
@@ -375,59 +384,272 @@
            DARK / LIGHT MODE — CSS VARIABLES
         ══════════════════════════════════════════════ */
         :root {
-            --bg-page:        #f0f2f5;
+            --bg-page:        #eef4fb;
             --bg-card:        #ffffff;
-            --bg-card-alt:    #f8f9fc;
+            --bg-card-alt:    #f7f9ff;
             --bg-input:       #ffffff;
-            --bg-header:      #2c3e70;
-            --bg-footer:      #f8f9fc;
+            --bg-accent:      #2f6df8;
+            --bg-accent-soft: rgba(47,109,248,0.14);
+            --bg-header:      linear-gradient(135deg, #2f6df8, #5b82ff);
+            --bg-footer:      #f7f9ff;
             --bg-table-head:  #f0f2f5;
             --bg-table-row:   #ffffff;
             --bg-table-hover: #f8f9fc;
-            --text-main:      #1a1a2e;
-            --text-muted:     #858796;
+            --text-main:      #17233d;
+            --text-muted:     #5f6d85;
+            --text-invert:    #ffffff;
             --text-label:     #333333;
             --text-meta:      #444444;
-            --border-color:   #e3e6f0;
+            --border-color:   rgba(67,97,179,0.15);
             --border-inner:   #dee2e6;
-            --shadow:         0 4px 20px rgba(0,0,0,0.08);
-            --shadow-card:    0 2px 12px rgba(0,0,0,0.07);
+            --shadow:         0 22px 40px rgba(15,23,42,0.08);
+            --shadow-card:    0 22px 40px rgba(15,23,42,0.08);
             --input-border:   #d1d3e2;
             --scrollbar-bg:   #e0e0e0;
             --scrollbar-thumb:#b0b0b0;
         }
  
         [data-theme="dark"] {
-            --bg-page:        #0f1117;
-            --bg-card:        #1a1d27;
-            --bg-card-alt:    #1e2235;
+            --bg-page:        #090c17;
+            --bg-card:        #111827;
+            --bg-card-alt:    #151d34;
             --bg-input:       #252839;
-            --bg-header:      #111827;
-            --bg-footer:      #161928;
+            --bg-accent:      #7c3aed;
+            --bg-accent-soft: rgba(124,58,237,0.18);
+            --bg-header:      linear-gradient(135deg, #7c3aed, #a78bfa);
+            --bg-footer:      #151d34;
             --bg-table-head:  #1e2235;
-            --bg-table-row:   #1a1d27;
+            --bg-table-row:   #111827;
             --bg-table-hover: #222640;
-            --text-main:      #e0e6f0;
-            --text-muted:     #8892a4;
+            --text-main:      #e2e8f0;
+            --text-muted:     #94a3b8;
+            --text-invert:    #ffffff;
             --text-label:     #c8d0e0;
             --text-meta:      #b0b8cc;
-            --border-color:   #2a2f47;
+            --border-color:   rgba(148,163,184,0.12);
             --border-inner:   #2e3450;
-            --shadow:         0 4px 20px rgba(0,0,0,0.4);
-            --shadow-card:    0 2px 12px rgba(0,0,0,0.35);
+            --shadow:         0 16px 36px rgba(0,0,0,0.45);
+            --shadow-card:    0 16px 36px rgba(0,0,0,0.45);
             --input-border:   #3a3f5c;
             --scrollbar-bg:   #1e2235;
             --scrollbar-thumb:#3a3f5c;
         }
  
-        /* ── BODY & NAVBAR ── */
+        /* ── BODY & Left Sidebar ── */
         body {
-            background: var(--bg-page) !important;
+            font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top left, rgba(47,109,248,0.25), transparent 22%),
+                radial-gradient(circle at bottom right, rgba(124,58,237,0.18), transparent 18%),
+                var(--bg-page) !important;
             color: var(--text-main) !important;
             transition: background 0.3s ease, color 0.3s ease;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
         }
-        [data-theme="dark"] .navbar {
-            background: linear-gradient(to right, #0d1117, #111827) !important;
+
+        /* ── Glassmorphic Left Sidebar ── */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(20px) !important;
+            border-right: 1px solid rgba(67, 97, 179, 0.15) !important;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 16px;
+            z-index: 1000;
+            box-shadow: 4px 0 24px rgba(15, 23, 42, 0.04);
+            overflow-y: auto;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        [data-theme="dark"] .sidebar {
+            background: rgba(15, 23, 42, 0.9) !important;
+            border-right: 1px solid rgba(148, 163, 184, 0.12) !important;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 12px 20px 12px;
+            border-bottom: 1px solid rgba(67, 97, 179, 0.1);
+            margin-bottom: 20px;
+        }
+        [data-theme="dark"] .sidebar .nav-brand {
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .sidebar .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(47, 109, 248, 0.25);
+        }
+
+        .sidebar .logo-text {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .sidebar .logo-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .sidebar .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .sidebar .nav-links li {
+            width: 100%;
+        }
+
+        .sidebar .nav-links a,
+        .sidebar .theme-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px !important;
+            color: var(--text-muted) !important;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            background: transparent !important;
+            transition: all 0.2s ease !important;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar .nav-links a i,
+        .sidebar .theme-toggle-btn i {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .sidebar .nav-links a:hover,
+        .sidebar .theme-toggle-btn:hover {
+            color: var(--text-main) !important;
+            background: rgba(47, 109, 248, 0.08) !important;
+            transform: translateX(4px);
+        }
+        [data-theme="dark"] .sidebar .nav-links a:hover,
+        [data-theme="dark"] .sidebar .theme-toggle-btn:hover {
+            background: rgba(124, 58, 237, 0.12) !important;
+        }
+
+        .sidebar .nav-links a.active {
+            color: white !important;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+            box-shadow: 0 4px 12px rgba(47, 109, 248, 0.2);
+        }
+        [data-theme="dark"] .sidebar .nav-links a.active {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .sidebar .nav-links a.active:hover {
+            transform: none;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+        }
+        [data-theme="dark"] .sidebar .nav-links a.active:hover {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+        }
+
+        .sidebar .nav-links a.logout {
+            margin-top: auto;
+            color: #ef4444 !important;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .sidebar .nav-links a.logout:hover {
+            background: rgba(239, 68, 68, 0.1) !important;
+            color: #ef4444 !important;
+        }
+
+        /* Responsive Sidebar */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 80px;
+                padding: 24px 8px;
+                align-items: center;
+            }
+            .sidebar .nav-brand {
+                padding: 0 0 20px 0;
+                justify-content: center;
+                border-bottom: none;
+            }
+            .sidebar .nav-brand div:last-child {
+                display: none;
+            }
+            .sidebar .nav-links a span,
+            .sidebar .theme-toggle-btn span {
+                display: none;
+            }
+            .sidebar .nav-links a,
+            .sidebar .theme-toggle-btn {
+                justify-content: center;
+                padding: 12px;
+            }
+            .sidebar .nav-links a:hover,
+            .sidebar .theme-toggle-btn:hover {
+                transform: scale(1.05);
+            }
+            .page-wrapper {
+                margin-left: 80px !important;
+                max-width: calc(100% - 80px) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 20px;
+                border-right: none !important;
+                border-bottom: 1px solid rgba(67, 97, 179, 0.15) !important;
+            }
+            .sidebar .nav-brand {
+                padding: 0;
+                margin: 0;
+                border-bottom: none;
+            }
+            .sidebar .nav-links {
+                display: none;
+            }
+            .page-wrapper {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+                padding: 20px !important;
+            }
         }
  
         /* ── CARDS (shared: .card, .dash-card, .table-card, .lb-card, .rw-card, .stat-card, .chart-card, .panel) ── */
@@ -440,8 +662,13 @@
         }
         .card-header, .lb-card-header, .rw-card-header,
         .chart-card-header, .panel-header {
-            background: var(--bg-header) !important;
-            border-bottom: 1px solid var(--border-inner);
+            border-bottom: none;
+        }
+        [data-theme="dark"] .card-header {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+        }
+        [data-theme="dark"] th {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
         }
         [data-theme="dark"] .card-body,
         [data-theme="dark"] .panel-body,
@@ -595,30 +822,36 @@
     </style>
 <body>
 
-    <nav class="navbar">
-        <div class="logo-text"><i class="fa-solid fa-user-shield"></i> College of Computer Studies Admin</div>
+    <aside class="sidebar">
+        <div class="nav-brand">
+            <div class="logo-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <div>
+                <div class="logo-text">Admin Dashboard</div>
+                <div class="logo-sub">Sit-in Monitoring</div>
+            </div>
+        </div>
         <ul class="nav-links">
-            <li><a href="admindashboard.html"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="javascript:void(0)" onclick="openUnifiedModal()"><i class="fa fa-search"></i> Search</a></li>
-            <li><a href="studentlist.html"><i class="fa fa-users"></i> Students</a></li>
-            <li><a href="sitin.html"><i class="fa fa-laptop"></i>  Sit-in</a></li>
-            <li><a href="viewsitin.html" class="active"><i class="fa fa-list-alt"></i> View Sit-in Records</a></li>
-            <li><a href="sitinreports.html"><i class="fa fa-bar-chart"></i> Sit-in Reports</a></li>
-            <li><a href="feedback.html"><i class="fa fa-comments"></i> Feedback Reports</a></li>
-            <li><a href="adminreservation.html"><i class="fa fa-calendar"></i> Reservation</a></li>
-            <li><a href="adminleaderboard.html"><i class="fa fa-trophy"></i> Leaderboard</a></li>
-            <li><a href="analytics.html"><i class="fa fa-line-chart"></i> Analytics</a></li>
-            <li><a href="reward.html"><i class="fa fa-gift"></i> Reward</a></li>
-            <li><a href="software.html"><i class="fa fa-upload"></i> Software</a></li>
+            <li><a href="admindashboard.html"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li><a href="javascript:void(0)" onclick="openUnifiedModal()"><i class="fa fa-search"></i> <span>Search</span></a></li>
+            <li><a href="studentlist.html"><i class="fa fa-users"></i> <span>Students</span></a></li>
+            <li><a href="sitin.html"><i class="fa fa-laptop"></i> <span>Sit-in</span></a></li>
+            <li><a href="viewsitin.html" class="active"><i class="fa fa-list-alt"></i> <span>View Sit-in Records</span></a></li>
+            <li><a href="sitinreports.html"><i class="fa fa-bar-chart"></i> <span>Sit-in Reports</span></a></li>
+            <li><a href="feedback.html"><i class="fa fa-comments"></i> <span>Feedback Reports</span></a></li>
+            <li><a href="adminreservation.html"><i class="fa fa-calendar"></i> <span>Reservation</span></a></li>
+            <li><a href="adminleaderboard.html"><i class="fa fa-trophy"></i> <span>Leaderboard</span></a></li>
+            <li><a href="analytics.html"><i class="fa fa-line-chart"></i> <span>Analytics</span></a></li>
+            <li><a href="reward.html"><i class="fa fa-gift"></i> <span>Reward</span></a></li>
+            <li><a href="software.html"><i class="fa fa-upload"></i> <span>Software</span></a></li>
             <li>
                 <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
                     <i class="fa-solid fa-moon" id="themeIcon"></i>
-                    <span id="themeLabel"></span>
+                    <span id="themeLabel">Dark Mode</span>
                 </button>
             </li>
-            <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out-alt"></i> Log out</a></li>
+            <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out-alt"></i> <span>Log out</span></a></li>
         </ul>
-    </nav>
+    </aside>
 
     <div id="unifiedSitInModal" class="modal-overlay">
         <div class="modal-content" style="width: 450px;">
@@ -741,8 +974,10 @@
         const label = document.getElementById('themeLabel');
         if (theme === 'dark') {
             icon.className  = 'fa-solid fa-sun';
+            if (label) label.textContent = 'Light Mode';
         } else {
             icon.className  = 'fa-solid fa-moon';
+            if (label) label.textContent = 'Dark Mode';
         }
     }
     
@@ -1037,13 +1272,15 @@
         let html = '';
         for (let i = 1; i <= totalPages; i++) {
             html += `<button onclick="goToPage(${i})" style="
-                margin: 0 2px; 
-                padding: 5px 10px; 
+                margin: 0 4px; 
+                padding: 6px 12px; 
                 cursor: pointer; 
-                background: ${i === currentPage ? '#0056b3' : '#fff'}; 
-                color: ${i === currentPage ? '#fff' : '#000'}; 
-                border: 1px solid #ddd;
-                border-radius: 3px;
+                background: ${i === currentPage ? 'var(--bg-accent)' : 'var(--bg-card)'}; 
+                color: ${i === currentPage ? 'var(--text-invert)' : 'var(--text-main)'}; 
+                border: 1px solid var(--border-color);
+                border-radius: 999px;
+                font-weight: bold;
+                transition: all 0.2s;
             ">${i}</button>`;
         }
         container.innerHTML = html;

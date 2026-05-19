@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
         .page-title {
             font-size: 26px;
             font-weight: 700;
-            color: #1a1a2e;
+            color: #17233d;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -22,7 +22,7 @@
             max-width: 1200px;
         }
  
-        .page-title i { color: #4e73df; }
+        .page-title i { color: #2f6df8; }
 
         .modal-overlay {
             display: none;
@@ -45,7 +45,7 @@
             animation: slideDown 0.3s ease-out; 
         }
         .modal-header { 
-            background: #2c3e70;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff);
             padding: 15px 20px;
             display: flex; 
             justify-content: space-between; 
@@ -106,7 +106,7 @@
         .user-info-text .name { 
             display: block; 
             font-weight: 700; 
-            color: #2c3e70; 
+            color: #2f6df8; 
             font-size: 14px; 
         }
         .user-info-text .meta { 
@@ -129,7 +129,7 @@
 
         .student-profile-card { 
             background: #f8f9fc; 
-            border-left: 5px solid #2c3e70; 
+            border-left: 5px solid #2f6df8; 
             border-radius: 8px; 
             padding: 20px; 
             margin: 20px; 
@@ -138,7 +138,7 @@
             display: block; 
             font-size: 1.1rem; 
             font-weight: 600; 
-            color: #2c3e70; 
+            color: #2f6df8; 
             margin-bottom: 10px; 
             text-transform: uppercase; 
         }
@@ -175,7 +175,7 @@
         }
 
         .btn-confirm { 
-            background: #2c3e70; 
+            background: linear-gradient(135deg, #2f6df8, #5b82ff); 
             color: white; 
             border: none; 
             padding: 10px 20px; 
@@ -194,7 +194,7 @@
         }
 
         .btn-confirm:hover {
-            background: #2c3e70;
+            background: linear-gradient(135deg, #2558d4, #4a6fe8);
             transform: translateY(-1px);
         }
 
@@ -209,16 +209,20 @@
         }
 
         .page-wrapper {
-            max-width: 1300px;
-            margin: 30px auto;
-            padding: 0 20px;
-            margin-top: 50px;
+            margin-left: 280px !important;
+            padding: 40px !important;
+            max-width: calc(100% - 280px) !important;
+            width: auto !important;
+            transition: all 0.3s ease;
+            margin-top: 30px !important;
         }
         .table-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            background: var(--bg-card, white);
+            border-radius: 24px;
+            box-shadow: 0 22px 40px rgba(15,23,42,0.08);
             padding: 25px;
+            border: 1px solid rgba(67,97,179,0.15);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .reports-container { 
@@ -249,56 +253,68 @@
         table { 
             width: 100%; 
             border-collapse: collapse; 
-            background: white; 
-            border-radius: 8px; 
+            background: var(--bg-card, white); 
+            border-radius: 16px; 
             overflow: hidden; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            box-shadow: 0 4px 15px rgba(15,23,42,0.06); 
         }
 
         th { 
-            background-color: #2c3e70; 
+            background: linear-gradient(135deg, #2f6df8, #5b82ff); 
             color: #fafafa; 
             padding: 15px; 
             text-align: left; 
             font-size: 14px; 
-            border-bottom: 2px solid #dee2e6;
+            border-bottom: none;
         }
 
         td { 
             padding: 12px 15px; 
-            border-bottom: 1px solid #eee; 
+            border-bottom: 1px solid rgba(67,97,179,0.1); 
             font-size: 14px; color: #333;
             font-family: 'Sora', sans-serif; 
             color: #444; 
         }
 
         tr:nth-child(even) {
-            background-color: #fafafa;
+            background-color: rgba(47,109,248,0.02);
+        }
+
+        tr:hover {
+            background-color: rgba(47,109,248,0.04);
         }
 
         .btn-print { 
-            background-color: #28a745;
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
             border: none;
-            padding: 9px 17px;
-            border-radius: 6px;
+            padding: 8px 20px;
+            border-radius: 999px;
             cursor: pointer;
             font-size: 13px;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 6px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .btn-print:hover {
-            background-color: #218838;
-            transform: translateY(-1px);
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16,185,129,0.3);
         }
 
         #feedbackSearch { 
-            padding: 6px; 
-            border: 1px solid #ddd; 
-            border-radius: 5px; 
+            padding: 8px 14px; 
+            border: 1px solid rgba(67,97,179,0.2); 
+            border-radius: 999px; 
+            outline: none;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        #feedbackSearch:focus {
+            box-shadow: 0 0 0 3px rgba(47,109,248,0.15);
+            border-color: #2f6df8;
         }
 
         .theme-toggle-btn {
@@ -327,59 +343,278 @@
            DARK / LIGHT MODE — CSS VARIABLES
         ══════════════════════════════════════════════ */
         :root {
-            --bg-page:        #f0f2f5;
+            --bg-page:        #eef4fb;
             --bg-card:        #ffffff;
-            --bg-card-alt:    #f8f9fc;
+            --bg-card-alt:    #f7f9ff;
             --bg-input:       #ffffff;
-            --bg-header:      #2c3e70;
-            --bg-footer:      #f8f9fc;
+            --bg-accent:      #2f6df8;
+            --bg-accent-soft: rgba(47,109,248,0.14);
+            --bg-header:      linear-gradient(135deg, #2f6df8, #5b82ff);
+            --bg-footer:      #f7f9ff;
             --bg-table-head:  #f0f2f5;
             --bg-table-row:   #ffffff;
             --bg-table-hover: #f8f9fc;
-            --text-main:      #1a1a2e;
-            --text-muted:     #858796;
+            --text-main:      #17233d;
+            --text-muted:     #5f6d85;
+            --text-invert:    #ffffff;
             --text-label:     #333333;
             --text-meta:      #444444;
-            --border-color:   #e3e6f0;
+            --border-color:   rgba(67,97,179,0.15);
             --border-inner:   #dee2e6;
-            --shadow:         0 4px 20px rgba(0,0,0,0.08);
-            --shadow-card:    0 2px 12px rgba(0,0,0,0.07);
+            --shadow:         0 22px 40px rgba(15,23,42,0.08);
+            --shadow-card:    0 22px 40px rgba(15,23,42,0.08);
             --input-border:   #d1d3e2;
             --scrollbar-bg:   #e0e0e0;
             --scrollbar-thumb:#b0b0b0;
         }
  
         [data-theme="dark"] {
-            --bg-page:        #0f1117;
-            --bg-card:        #1a1d27;
-            --bg-card-alt:    #1e2235;
+            --bg-page:        #090c17;
+            --bg-card:        #111827;
+            --bg-card-alt:    #151d34;
             --bg-input:       #252839;
-            --bg-header:      #111827;
-            --bg-footer:      #161928;
+            --bg-accent:      #7c3aed;
+            --bg-accent-soft: rgba(124,58,237,0.18);
+            --bg-header:      linear-gradient(135deg, #7c3aed, #a78bfa);
+            --bg-footer:      #151d34;
             --bg-table-head:  #1e2235;
-            --bg-table-row:   #1a1d27;
+            --bg-table-row:   #111827;
             --bg-table-hover: #222640;
-            --text-main:      #e0e6f0;
-            --text-muted:     #8892a4;
+            --text-main:      #e2e8f0;
+            --text-muted:     #94a3b8;
+            --text-invert:    #ffffff;
             --text-label:     #c8d0e0;
             --text-meta:      #b0b8cc;
-            --border-color:   #2a2f47;
+            --border-color:   rgba(148,163,184,0.12);
             --border-inner:   #2e3450;
-            --shadow:         0 4px 20px rgba(0,0,0,0.4);
-            --shadow-card:    0 2px 12px rgba(0,0,0,0.35);
+            --shadow:         0 16px 36px rgba(0,0,0,0.45);
+            --shadow-card:    0 16px 36px rgba(0,0,0,0.45);
             --input-border:   #3a3f5c;
             --scrollbar-bg:   #1e2235;
             --scrollbar-thumb:#3a3f5c;
         }
  
-        /* ── BODY & NAVBAR ── */
+        /* ── BODY & Left Sidebar ── */
         body {
-            background: var(--bg-page) !important;
+            font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top left, rgba(47,109,248,0.25), transparent 22%),
+                radial-gradient(circle at bottom right, rgba(124,58,237,0.18), transparent 18%),
+                var(--bg-page) !important;
             color: var(--text-main) !important;
             transition: background 0.3s ease, color 0.3s ease;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
         }
-        [data-theme="dark"] .navbar {
-            background: linear-gradient(to right, #0d1117, #111827) !important;
+
+        /* ── Glassmorphic Left Sidebar ── */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(20px) !important;
+            border-right: 1px solid rgba(67, 97, 179, 0.15) !important;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 16px;
+            z-index: 1000;
+            box-shadow: 4px 0 24px rgba(15, 23, 42, 0.04);
+            overflow-y: auto;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        [data-theme="dark"] .sidebar {
+            background: rgba(15, 23, 42, 0.9) !important;
+            border-right: 1px solid rgba(148, 163, 184, 0.12) !important;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 12px 20px 12px;
+            border-bottom: 1px solid rgba(67, 97, 179, 0.1);
+            margin-bottom: 20px;
+        }
+        [data-theme="dark"] .sidebar .nav-brand {
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .sidebar .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(47, 109, 248, 0.25);
+        }
+
+        .sidebar .logo-text {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .sidebar .logo-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .sidebar .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .sidebar .nav-links li {
+            width: 100%;
+        }
+
+        .sidebar .nav-links a,
+        .sidebar .theme-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px !important;
+            color: var(--text-muted) !important;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            background: transparent !important;
+            transition: all 0.2s ease !important;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar .nav-links a i,
+        .sidebar .theme-toggle-btn i {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .sidebar .nav-links a:hover,
+        .sidebar .theme-toggle-btn:hover {
+            color: var(--text-main) !important;
+            background: rgba(47, 109, 248, 0.08) !important;
+            transform: translateX(4px);
+        }
+        [data-theme="dark"] .sidebar .nav-links a:hover,
+        [data-theme="dark"] .sidebar .theme-toggle-btn:hover {
+            background: rgba(124, 58, 237, 0.12) !important;
+        }
+
+        .sidebar .nav-links a.active {
+            color: white !important;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+            box-shadow: 0 4px 12px rgba(47, 109, 248, 0.2);
+        }
+        [data-theme="dark"] .sidebar .nav-links a.active {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .sidebar .nav-links a.active:hover {
+            transform: none;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+        }
+        [data-theme="dark"] .sidebar .nav-links a.active:hover {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+        }
+
+        .sidebar .nav-links a.logout {
+            margin-top: auto;
+            color: #ef4444 !important;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .sidebar .nav-links a.logout:hover {
+            background: rgba(239, 68, 68, 0.1) !important;
+            color: #ef4444 !important;
+        }
+
+        /* Responsive Sidebar */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 80px;
+                padding: 24px 8px;
+                align-items: center;
+            }
+            .sidebar .nav-brand {
+                padding: 0 0 20px 0;
+                justify-content: center;
+                border-bottom: none;
+            }
+            .sidebar .nav-brand div:last-child {
+                display: none;
+            }
+            .sidebar .nav-links a span,
+            .sidebar .theme-toggle-btn span {
+                display: none;
+            }
+            .sidebar .nav-links a,
+            .sidebar .theme-toggle-btn {
+                justify-content: center;
+                padding: 12px;
+            }
+            .sidebar .nav-links a:hover,
+            .sidebar .theme-toggle-btn:hover {
+                transform: scale(1.05);
+            }
+            .page-wrapper {
+                margin-left: 80px !important;
+                max-width: calc(100% - 80px) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 20px;
+                border-right: none !important;
+                border-bottom: 1px solid rgba(67, 97, 179, 0.15) !important;
+            }
+            .sidebar .nav-brand {
+                padding: 0;
+                margin: 0;
+                border-bottom: none;
+            }
+            .sidebar .nav-links {
+                display: none;
+            }
+            .page-wrapper {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+                padding: 20px !important;
+            }
+        }
+
+        @media print {
+            .sidebar {
+                display: none !important;
+            }
         }
  
         /* ── CARDS (shared: .card, .dash-card, .table-card, .lb-card, .rw-card, .stat-card, .chart-card, .panel) ── */
@@ -392,8 +627,13 @@
         }
         .card-header, .lb-card-header, .rw-card-header,
         .chart-card-header, .panel-header {
-            background: var(--bg-header) !important;
-            border-bottom: 1px solid var(--border-inner);
+            border-bottom: none;
+        }
+        [data-theme="dark"] .card-header {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+        }
+        [data-theme="dark"] th {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
         }
         [data-theme="dark"] .card-body,
         [data-theme="dark"] .panel-body,
@@ -549,33 +789,181 @@
         .star-display .fa-star { font-size: 15px; }
         .star-filled  { color: #f5a623; }
         .star-empty   { color: #d0d0d0; }
+
+        /* ══════════════════════════════════════════════
+           PRINT MEDIA FORMAT
+        ══════════════════════════════════════════════ */
+        .print-only-container {
+            display: none;
+        }
+
+        @media print {
+            /* Hide all regular elements */
+            body * {
+                visibility: hidden;
+            }
+            html, body {
+                background: #fff !important;
+                color: #000 !important;
+                font-family: 'Courier New', Courier, monospace !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .print-only-container, .print-only-container * {
+                visibility: visible;
+            }
+            .print-only-container {
+                display: block !important;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 40px;
+                box-sizing: border-box;
+            }
+            
+            /* Print Header Styling */
+            .print-header {
+                text-align: center;
+                margin-bottom: 25px;
+                position: relative;
+            }
+            .print-univ-title {
+                font-family: 'Times New Roman', Times, serif !important;
+                font-size: 26px;
+                font-weight: 800;
+                letter-spacing: 0.5px;
+                margin: 0 0 5px 0;
+                color: #000;
+                text-transform: uppercase;
+                text-align: center;
+            }
+            .print-univ-subtitle {
+                font-family: 'Times New Roman', Times, serif !important;
+                font-size: 13px;
+                font-weight: bold;
+                margin: 0 0 25px 0;
+                color: #000;
+                text-align: center;
+            }
+            .print-report-meta {
+                display: flex;
+                justify-content: space-between;
+                font-family: 'Courier New', Courier, monospace !important;
+                font-size: 13px;
+                font-weight: bold;
+                margin-bottom: 12px;
+                border-bottom: none;
+                padding-bottom: 2px;
+                text-transform: uppercase;
+            }
+            
+            /* Print Table Styling to match the study load EXACTLY */
+            .print-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+                font-family: 'Courier New', Courier, monospace !important;
+                font-size: 11px;
+            }
+            .print-table thead tr {
+                background: none !important;
+                border-top: 2px solid #000 !important;
+                border-bottom: 2px solid #000 !important;
+            }
+            .print-table th {
+                background: none !important;
+                color: #000 !important;
+                font-family: 'Courier New', Courier, monospace !important;
+                font-size: 11px !important;
+                font-weight: bold !important;
+                padding: 6px 4px !important;
+                border: none !important;
+                text-transform: uppercase;
+                text-align: left;
+            }
+            .print-table td {
+                padding: 6px 4px !important;
+                border: none !important;
+                border-bottom: 1px solid #ddd !important;
+                font-family: 'Courier New', Courier, monospace !important;
+                font-size: 11px !important;
+                color: #000 !important;
+                text-align: left;
+            }
+            .print-table tbody tr:hover {
+                background: none !important;
+            }
+            
+            /* Print Footer Styling to match the study load EXACTLY */
+            .print-footer {
+                margin-top: 30px;
+                font-family: 'Courier New', Courier, monospace !important;
+                font-size: 11px;
+                border-top: 2px solid #000;
+                padding-top: 8px;
+            }
+            .print-footer-top {
+                display: flex;
+                justify-content: space-between;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            .print-legend {
+                font-size: 9px;
+                color: #333;
+                margin-top: 5px;
+            }
+            
+            /* Background Watermark like in the image */
+            .print-only-container::before {
+                content: "UC";
+                position: absolute;
+                top: 40%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(-15deg);
+                font-size: 320px;
+                font-family: 'Georgia', serif;
+                font-weight: 900;
+                color: rgba(0, 86, 179, 0.05);
+                z-index: -1;
+                pointer-events: none;
+                letter-spacing: -20px;
+            }
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo-text"><i class="fa-solid fa-user-shield"></i> College of Computer Studies Admin</div>
+    <aside class="sidebar">
+        <div class="nav-brand">
+            <div class="logo-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <div>
+                <div class="logo-text">Admin Dashboard</div>
+                <div class="logo-sub">Sit-in Monitoring</div>
+            </div>
+        </div>
         <ul class="nav-links">
-            <li><a href="admindashboard.html"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="javascript:void(0)" onclick="openUnifiedModal()"><i class="fa fa-search"></i> Search</a></li>
-            <li><a href="studentlist.html"><i class="fa fa-users"></i> Students</a></li>
-            <li><a href="sitin.html"><i class="fa fa-laptop"></i>  Sit-in</a></li>
-            <li><a href="viewsitin.html"><i class="fa fa-list-alt"></i> View Sit-in Records</a></li>
-            <li><a href="sitinreports.html"><i class="fa fa-bar-chart"></i> Sit-in Reports</a></li>
-            <li><a href="feedback.html" class="active"><i class="fa fa-comments"></i> Feedback Reports</a></li>
-            <li><a href="adminreservation.html"><i class="fa fa-calendar"></i> Reservation</a></li>
-            <li><a href="adminleaderboard.html"><i class="fa fa-trophy"></i> Leaderboard</a></li>
-            <li><a href="analytics.html"><i class="fa fa-line-chart"></i> Analytics</a></li>
-            <li><a href="reward.html"><i class="fa fa-gift"></i> Reward</a></li>
-            <li><a href="software.html"><i class="fa fa-upload"></i> Software</a></li>
+            <li><a href="admindashboard.html"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li><a href="javascript:void(0)" onclick="openUnifiedModal()"><i class="fa fa-search"></i> <span>Search</span></a></li>
+            <li><a href="studentlist.html"><i class="fa fa-users"></i> <span>Students</span></a></li>
+            <li><a href="sitin.html"><i class="fa fa-laptop"></i> <span>Sit-in</span></a></li>
+            <li><a href="viewsitin.html"><i class="fa fa-list-alt"></i> <span>View Sit-in Records</span></a></li>
+            <li><a href="sitinreports.html"><i class="fa fa-bar-chart"></i> <span>Sit-in Reports</span></a></li>
+            <li><a href="feedback.html" class="active"><i class="fa fa-comments"></i> <span>Feedback Reports</span></a></li>
+            <li><a href="adminreservation.html"><i class="fa fa-calendar"></i> <span>Reservation</span></a></li>
+            <li><a href="adminleaderboard.html"><i class="fa fa-trophy"></i> <span>Leaderboard</span></a></li>
+            <li><a href="analytics.html"><i class="fa fa-line-chart"></i> <span>Analytics</span></a></li>
+            <li><a href="reward.html"><i class="fa fa-gift"></i> <span>Reward</span></a></li>
+            <li><a href="software.html"><i class="fa fa-upload"></i> <span>Software</span></a></li>
             <li>
                 <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
                     <i class="fa-solid fa-moon" id="themeIcon"></i>
-                    <span id="themeLabel"></span>
+                    <span id="themeLabel">Dark Mode</span>
                 </button>
             </li>
-            <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out-alt"></i> Log out</a></li>
+            <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out-alt"></i> <span>Log out</span></a></li>
         </ul>
-    </nav>
+    </aside>
 
     <div id="unifiedSitInModal" class="modal-overlay">
         <div class="modal-content" style="width: 450px;">
@@ -665,6 +1053,43 @@
         </div>
     </div>
 
+    <!-- Print Only Layout (Study Load style format) -->
+    <div class="print-only-container">
+        <div class="print-header">
+            <h1 class="print-univ-title">UNIVERSITY OF CEBU - MAIN</h1>
+            <p class="print-univ-subtitle">155A Sanciangko St. Cebu City</p>
+            
+            <div class="print-report-meta">
+                <div class="print-meta-left">OFFICIAL FEEDBACK RECORD</div>
+                <div class="print-meta-right">2ND SEM. SY 2025-2026</div>
+            </div>
+        </div>
+        
+        <table class="print-table">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Laboratory</th>
+                    <th>Date</th>
+                    <th>Rating</th>
+                    <th>Feedback Message</th>
+                </tr>
+            </thead>
+            <tbody id="printFeedbackBody">
+            </tbody>
+        </table>
+        
+        <div class="print-footer">
+            <div class="print-footer-top">
+                <span>DATE PRINTED: <span id="currentPrintDate">MM/DD/YY</span></span>
+                <span>TOTAL: <span id="printTotalRecords">0</span></span>
+            </div>
+            <div class="print-legend">
+                LEGEND: Ratings range from 1 Star (Lowest) to 5 Stars (Highest)
+            </div>
+        </div>
+    </div>
+
 <script>
 
     /* ══════════════════════════════════════
@@ -676,8 +1101,10 @@
         const label = document.getElementById('themeLabel');
         if (theme === 'dark') {
             icon.className  = 'fa-solid fa-sun';
+            if (label) label.textContent = 'Light Mode';
         } else {
             icon.className  = 'fa-solid fa-moon';
+            if (label) label.textContent = 'Dark Mode';
         }
     }
     
@@ -877,6 +1304,31 @@
                     <td>${f.message}</td>
                 </tr>
             `).join("");
+
+            // Update print copy table dynamically
+            const printBody = document.getElementById("printFeedbackBody");
+            printBody.innerHTML = feedback.map(f => {
+                const starsText = "★".repeat(parseInt(f.rating) || 0) + "☆".repeat(5 - (parseInt(f.rating) || 0));
+                return `
+                    <tr>
+                        <td>${f.idNumber}</td>
+                        <td>${f.lab.toUpperCase()}</td>
+                        <td>${f.date}</td>
+                        <td>${starsText}</td>
+                        <td>${f.message}</td>
+                    </tr>
+                `;
+            }).join("");
+
+            // Update footer metrics
+            document.getElementById("printTotalRecords").textContent = feedback.length;
+            
+            // Set current date in print header
+            const today = new Date();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const yy = String(today.getFullYear()).slice(-2);
+            document.getElementById("currentPrintDate").textContent = `${mm}/${dd}/${yy}`;
 
         } catch (err) {
             console.error("Error loading feedback:", err);

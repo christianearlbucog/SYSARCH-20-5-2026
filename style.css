@@ -1,87 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-page: #eef4ff;
+    --bg-surface: #ffffff;
+    --bg-soft: #f8fbff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --accent: #3b82f6;
+    --accent-soft: rgba(59, 130, 246, 0.14);
+    --border: rgba(148, 163, 184, 0.24);
+    --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="dark"] {
+    --bg-page: #090b16;
+    --bg-surface: #111827;
+    --bg-soft: #161d36;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #60a5fa;
+    --accent-soft: rgba(96, 165, 250, 0.16);
+    --border: rgba(148, 163, 184, 0.12);
+    --shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: serif, 'Plus Jakarta Sans';
-}
-body {
-    background-color: #ffffff;
-    color: #333;
-    background: linear-gradient(135deg, #f0f2f5 0%, #e8ecf3 100%);
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.14), transparent 24%), radial-gradient(circle at 100% 16%, rgba(96, 165, 250, 0.08), transparent 18%), linear-gradient(135deg, #eef4ff 0%, #f8fafc 100%);
+    color: var(--text-main);
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
 
 .navbar {
-    background: linear-gradient(to right, #2c3e70, #1a1a2e);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
-    height: 60px;
     position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    top: 15px;
+    z-index: 1000 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 1rem !important;
+    padding: 14px 24px !important;
+    background: rgba(255, 255, 255, 0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08),
+                0 1px 2px 0 rgba(255, 255, 255, 0.5) inset !important;
+    margin: 15px auto 0 !important;
+    max-width: 1200px !important;
+    width: calc(100% - 30px) !important;
+    transition: all 0.3s ease !important;
+    height: auto !important;
 }
 
-.logo-text { 
-    color: white; 
-    font-weight: bold; 
-    font-size: 18px; 
-    letter-spacing: 0.5px;
+[data-theme="dark"] .navbar {
+    background: rgba(15, 23, 42, 0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37),
+                0 1px 1px 0 rgba(255, 255, 255, 0.05) inset !important;
 }
 
-.nav-links { 
-    list-style: none; 
-    display: flex; 
-    gap: 5px; 
-    margin: 0; 
-    padding: 0; 
-    align-items: center;
+.logo-text {
+    font-family: 'Sora', sans-serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    color: var(--text-main) !important;
+    text-transform: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
 }
 
-.nav-links li a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 8px 12px;
-    border-radius: 5px;
-    transition: 0.3s ease;
+.nav-brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
 }
 
-.nav-links li a:hover, 
-.nav-links li a.active { 
-    background: rgba(255, 193, 7); 
-    color: black;
+.logo-icon {
+    width: 42px !important;
+    height: 42px !important;
+    display: grid !important;
+    place-items: center !important;
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, var(--bg-accent, var(--accent)), #5b82ff) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(47, 109, 248, 0.25) !important;
+    transition: transform 0.3s ease !important;
 }
 
-.nav-links li a.logout { 
-    background: #ffc107; 
-    color: #333; 
-    margin-left: 10px;
+.navbar:hover .logo-icon {
+    transform: rotate(15deg) scale(1.05) !important;
 }
 
-.nav-links li a.logout:hover { 
-    background: #ffc107; 
+.logo-sub {
+    font-size: 0.78rem !important;
+    color: var(--text-muted) !important;
+    margin-top: 1px !important;
 }
 
+.nav-links {
+    list-style: none !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+}
+
+.nav-links li {
+    display: flex !important;
+}
+
+.nav-links li a,
+.theme-toggle-btn,
+.nav-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 9px 16px !important;
+    border-radius: 14px !important;
+    text-decoration: none !important;
+    border: 1px solid transparent !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    color: var(--text-muted) !important;
+    background: transparent !important;
+    font-size: 0.88rem !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+}
+
+.nav-links li a i,
+.theme-toggle-btn i,
+.nav-button i {
+    font-size: 0.95rem !important;
+    transition: transform 0.2s ease !important;
+    color: inherit !important;
+}
+
+.nav-links li a:hover i,
+.theme-toggle-btn:hover i,
+.nav-button:hover i {
+    transform: scale(1.15) !important;
+}
+
+.nav-links li a.active {
+    background: linear-gradient(135deg, var(--bg-accent, var(--accent)), #5b82ff) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 12px rgba(47, 109, 248, 0.25) !important;
+}
+
+.nav-links li a:not(.active):hover,
+.theme-toggle-btn:hover,
+.nav-button:hover {
+    background: var(--bg-accent-soft, var(--accent-soft)) !important;
+    color: var(--text-main) !important;
+    transform: translateY(-2px) !important;
+}
+
+.theme-toggle-btn,
+.nav-button {
+    cursor: pointer !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .theme-toggle-btn,
+[data-theme="dark"] .nav-button {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.nav-links li a.logout {
+    color: #e24b4a !important;
+    background: transparent !important;
+    margin-left: 0 !important;
+}
+
+.nav-links li a.logout:hover {
+    background: rgba(226, 75, 74, 0.15) !important;
+    color: #e24b4a !important;
+}
+
+/* Premium Notification Dropdown */
+.notif-dropdown {
+    display: none;
+    position: absolute;
+    top: 52px !important;
+    right: 0;
+    width: 340px;
+    background: var(--bg-card, var(--bg-surface)) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 22px 50px rgba(15, 23, 42, 0.16) !important;
+    z-index: 1000 !important;
+    overflow: hidden !important;
+    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 /*BUTTONS*/
 .btn-primary, .btn-refresh, .btn-blue, .reg-submit-btn {
-    background: #4e73df;
+    background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 999px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    font-weight: 700;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 14px 30px rgba(59, 130, 246, 0.22);
 }
 
 .btn-primary:hover, .btn-refresh:hover, .btn-blue:hover, .reg-submit-btn:hover {
-    background-color: #4e73df;
+    transform: translateY(-1px);
+    box-shadow: 0 18px 34px rgba(59, 130, 246, 0.28);
 }
-
 
 /*LAYOUT*/
 .main-content {
@@ -89,7 +248,7 @@ body {
     min-height: 80vh;
     align-items: center;
     justify-content: center;
-    padding: 120px;
+    padding: 100px 24px;
 }
 
 
@@ -345,6 +504,50 @@ body {
     width: 100%;
 }
 
+
+/*----------REGISTER PAGE----------*/
+
+/* Responsive navbar and layout tweaks */
+.navbar .nav-brand { display: flex; align-items: center; gap: 12px; }
+.navbar .logo-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: linear-gradient(135deg, var(--accent), #5b82ff); color: white; }
+
+/* Mobile hamburger */
+.hamburger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 10px; cursor: pointer; }
+.hamburger .bar { width: 20px; height: 2px; background: var(--text-main); display: block; position: relative; }
+.hamburger .bar::before, .hamburger .bar::after { content: ''; position: absolute; left: 0; width: 20px; height: 2px; background: var(--text-main); }
+.hamburger .bar::before { top: -6px; }
+.hamburger .bar::after { top: 6px; }
+
+/* Make nav-links wrap and collapse on small screens */
+.nav-links { gap: 8px; }
+
+@media (max-width: 900px) {
+    .navbar { padding: 12px 16px; height: auto; align-items: flex-start; }
+    .nav-links { display: none; flex-direction: column; width: 100%; gap: 8px; margin-top: 10px; padding: 12px; background: rgba(255,255,255,0.96); border-radius: 10px; }
+    .nav-links.show { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links li a, .theme-toggle-btn, .nav-button { width: 100%; justify-content: flex-start; }
+    .hamburger { display: flex; }
+}
+
+@media (max-width: 520px) {
+    .login-card { flex-direction: column; padding: 24px; }
+    .card-image-panel, .card-form-panel { padding: 18px; }
+    .login-card h1 { font-size: 36px; }
+    .navbar .logo-text { font-size: 14px; }
+}
+
+@media (max-width: 400px) {
+    .navbar { padding: 10px; }
+    .navbar .logo-icon { width: 36px; height: 36px; }
+    .nav-links li a { padding: 10px 12px; font-size: 13px; }
+}
+
+/* Utility: stack main content on small screens */
+@media (max-width: 900px) {
+    .main-content { padding: 40px 16px; }
+    .admin-container, .admin-grid, .register-container, .page-wrapper { grid-template-columns: 1fr !important; display: block !important; }
+}
 
 /*----------REGISTER PAGE----------*/
 .register-wrapper {

@@ -193,6 +193,145 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        /* ── PODIUM STYLES ── */
+        .podium-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 10px auto 35px;
+            padding: 10px;
+            flex-wrap: wrap;
+        }
+
+        .podium-card {
+            background: var(--bg-card, white);
+            border: 1px solid rgba(67,97,179,0.15);
+            border-radius: 24px;
+            padding: 25px 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            max-width: 280px;
+            box-shadow: 0 15px 35px rgba(15,23,42,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .podium-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(15,23,42,0.12);
+        }
+
+        /* Highlight Rank 1 */
+        .rank-1-card {
+            max-width: 320px;
+            padding: 35px 25px 30px;
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-card-alt));
+            border-color: rgba(255, 193, 7, 0.4);
+            box-shadow: 0 25px 50px rgba(255, 193, 7, 0.12);
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        .rank-1-card:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 30px 60px rgba(255, 193, 7, 0.2);
+        }
+
+        .crown-icon {
+            position: absolute;
+            top: -24px;
+            font-size: 28px;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .podium-badge {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 999px;
+            margin-bottom: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .rank-1-card .podium-badge { background: #fff3cd; color: #856404; }
+        .rank-2-card .podium-badge { background: #e9ecef; color: #495057; }
+        .rank-3-card .podium-badge { background: #f8d7b0; color: #7a4f26; }
+
+        .podium-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff);
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 20px rgba(47,109,248,0.2);
+        }
+
+        .rank-1-card .podium-avatar {
+            width: 85px;
+            height: 85px;
+            font-size: 26px;
+            background: linear-gradient(135deg, #ffd700, #ffb300);
+            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.35);
+        }
+
+        .podium-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            font-family: 'Sora', sans-serif;
+        }
+
+        .podium-course {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: rgba(47,109,248,0.1);
+            padding: 2px 10px;
+            border-radius: 999px;
+            margin-bottom: 12px;
+        }
+
+        .podium-points {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffc107;
+            font-family: 'Sora', sans-serif;
+        }
+
+        /* Dark mode support for podium */
+        [data-theme="dark"] .podium-card {
+            background: #1a1d27;
+            border-color: rgba(148,163,184,0.12);
+        }
+        [data-theme="dark"] .rank-1-card {
+            background: linear-gradient(135deg, #1a1d27, #222640);
+            border-color: rgba(255, 193, 7, 0.45);
+        }
+        [data-theme="dark"] .rank-1-card .podium-badge { background: rgba(255, 193, 7, 0.15); color: #ffd700; }
+        [data-theme="dark"] .rank-2-card .podium-badge { background: rgba(160, 174, 192, 0.15); color: #a0aec0; }
+        [data-theme="dark"] .rank-3-card .podium-badge { background: rgba(224, 160, 80, 0.15); color: #e0a050; }
+
         /* ── PAGE LAYOUT ── */
         .page-wrapper {
             padding: 30px 40px;
@@ -215,7 +354,7 @@
             max-width: 1200px;
         }
  
-        .page-title i { color: #28a745; }
+        .page-title i { color: #2f6df8; }
 
         /* ── MAIN CARD ── */
         .lb-card {
@@ -230,7 +369,7 @@
 
         /* ── CARD HEADER ── */
         .lb-card-header {
-            background: #2c3e70;
+            background: var(--bg-header);
             color: white;
             padding: 14px 20px;
             display: flex;
@@ -502,61 +641,274 @@
 
         /* ══════════════════════════════════════════════
            DARK / LIGHT MODE — CSS VARIABLES
-        ══════════════════════════════════════════════ */
+         ══════════════════════════════════════════════ */
         :root {
-            --bg-page:        #f0f2f5;
+            --bg-page:        #f3f4f6;
             --bg-card:        #ffffff;
-            --bg-card-alt:    #f8f9fc;
+            --bg-card-alt:    #f8fafc;
             --bg-input:       #ffffff;
-            --bg-header:      #2c3e70;
-            --bg-footer:      #f8f9fc;
-            --bg-table-head:  #f0f2f5;
+            --bg-header:      linear-gradient(135deg, #2f6df8, #5b82ff);
+            --bg-footer:      #f9fafb;
+            --bg-table-head:  #f3f4f6;
             --bg-table-row:   #ffffff;
-            --bg-table-hover: #f8f9fc;
-            --text-main:      #1a1a2e;
-            --text-muted:     #858796;
-            --text-label:     #333333;
-            --text-meta:      #444444;
-            --border-color:   #e3e6f0;
-            --border-inner:   #dee2e6;
-            --shadow:         0 4px 20px rgba(0,0,0,0.08);
-            --shadow-card:    0 2px 12px rgba(0,0,0,0.07);
-            --input-border:   #d1d3e2;
-            --scrollbar-bg:   #e0e0e0;
-            --scrollbar-thumb:#b0b0b0;
+            --bg-table-hover: #f1f5f9;
+            --text-main:      #0f172a;
+            --text-muted:     #64748b;
+            --text-label:     #334155;
+            --text-meta:      #475569;
+            --border-color:   rgba(67,97,179,0.15);
+            --border-inner:   rgba(67,97,179,0.1);
+            --shadow:         0 10px 30px rgba(15,23,42,0.06);
+            --shadow-card:    0 4px 20px rgba(15,23,42,0.05);
+            --input-border:   rgba(67,97,179,0.2);
+            --scrollbar-bg:   #e2e8f0;
+            --scrollbar-thumb:#cbd5e1;
         }
  
         [data-theme="dark"] {
-            --bg-page:        #0f1117;
-            --bg-card:        #1a1d27;
-            --bg-card-alt:    #1e2235;
-            --bg-input:       #252839;
-            --bg-header:      #111827;
-            --bg-footer:      #161928;
-            --bg-table-head:  #1e2235;
-            --bg-table-row:   #1a1d27;
-            --bg-table-hover: #222640;
-            --text-main:      #e0e6f0;
-            --text-muted:     #8892a4;
-            --text-label:     #c8d0e0;
-            --text-meta:      #b0b8cc;
-            --border-color:   #2a2f47;
-            --border-inner:   #2e3450;
-            --shadow:         0 4px 20px rgba(0,0,0,0.4);
-            --shadow-card:    0 2px 12px rgba(0,0,0,0.35);
-            --input-border:   #3a3f5c;
-            --scrollbar-bg:   #1e2235;
-            --scrollbar-thumb:#3a3f5c;
+            --bg-page:        #090c17;
+            --bg-card:        #121626;
+            --bg-card-alt:    #181e33;
+            --bg-input:       #1e2540;
+            --bg-header:      linear-gradient(135deg, #7c3aed, #a78bfa);
+            --bg-footer:      #0e111d;
+            --bg-table-head:  #181e33;
+            --bg-table-row:   #121626;
+            --bg-table-hover: #1c223a;
+            --text-main:      #f8fafc;
+            --text-muted:     #94a3b8;
+            --text-label:     #cbd5e1;
+            --text-meta:      #cbd5e1;
+            --border-color:   rgba(255,255,255,0.08);
+            --border-inner:   rgba(255,255,255,0.06);
+            --shadow:         0 10px 30px rgba(0,0,0,0.5);
+            --shadow-card:    0 4px 20px rgba(0,0,0,0.3);
+            --input-border:   rgba(255,255,255,0.12);
+            --scrollbar-bg:   #181e33;
+            --scrollbar-thumb:#2a3356;
         }
  
-        /* ── BODY & NAVBAR ── */
+        /* ── BODY & Left Sidebar ── */
         body {
-            background: var(--bg-page) !important;
+            font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top left, rgba(47,109,248,0.25), transparent 22%),
+                radial-gradient(circle at bottom right, rgba(124,58,237,0.18), transparent 18%),
+                var(--bg-page) !important;
             color: var(--text-main) !important;
             transition: background 0.3s ease, color 0.3s ease;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
         }
-        [data-theme="dark"] .navbar {
-            background: linear-gradient(to right, #0d1117, #111827) !important;
+
+        /* ── Glassmorphic Left Sidebar ── */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(20px) !important;
+            border-right: 1px solid rgba(67, 97, 179, 0.15) !important;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 16px;
+            z-index: 1000;
+            box-shadow: 4px 0 24px rgba(15, 23, 42, 0.04);
+            overflow-y: auto;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        [data-theme="dark"] .sidebar {
+            background: rgba(15, 23, 42, 0.9) !important;
+            border-right: 1px solid rgba(148, 163, 184, 0.12) !important;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 12px 20px 12px;
+            border-bottom: 1px solid rgba(67, 97, 179, 0.1);
+            margin-bottom: 20px;
+        }
+        [data-theme="dark"] .sidebar .nav-brand {
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .sidebar .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(47, 109, 248, 0.25);
+        }
+
+        .sidebar .logo-text {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .sidebar .logo-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .sidebar .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .sidebar .nav-links li {
+            width: 100%;
+        }
+
+        .sidebar .nav-links a,
+        .sidebar .theme-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px !important;
+            color: var(--text-muted) !important;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            background: transparent !important;
+            transition: all 0.2s ease !important;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar .nav-links a i,
+        .sidebar .theme-toggle-btn i {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .sidebar .nav-links a:hover,
+        .sidebar .theme-toggle-btn:hover {
+            color: var(--text-main) !important;
+            background: rgba(47, 109, 248, 0.08) !important;
+            transform: translateX(4px);
+        }
+        [data-theme="dark"] .sidebar .nav-links a:hover,
+        [data-theme="dark"] .sidebar .theme-toggle-btn:hover {
+            background: rgba(124, 58, 237, 0.12) !important;
+        }
+
+        .sidebar .nav-links a.active {
+            color: white !important;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+            box-shadow: 0 4px 12px rgba(47, 109, 248, 0.2);
+        }
+        [data-theme="dark"] .sidebar .nav-links a.active {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .sidebar .nav-links a.active:hover {
+            transform: none;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+        }
+        [data-theme="dark"] .sidebar .nav-links a.active:hover {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+        }
+
+        .sidebar .nav-links a.logout {
+            margin-top: auto;
+            color: #ef4444 !important;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .sidebar .nav-links a.logout:hover {
+            background: rgba(239, 68, 68, 0.1) !important;
+            color: #ef4444 !important;
+        }
+
+        /* Responsive Sidebar */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 80px;
+                padding: 24px 8px;
+                align-items: center;
+            }
+            .sidebar .nav-brand {
+                padding: 0 0 20px 0;
+                justify-content: center;
+                border-bottom: none;
+            }
+            .sidebar .nav-brand div:last-child {
+                display: none;
+            }
+            .sidebar .nav-links a span,
+            .sidebar .theme-toggle-btn span {
+                display: none;
+            }
+            .sidebar .nav-links a,
+            .sidebar .theme-toggle-btn {
+                justify-content: center;
+                padding: 12px;
+            }
+            .sidebar .nav-links a:hover,
+            .sidebar .theme-toggle-btn:hover {
+                transform: scale(1.05);
+            }
+            .page-wrapper {
+                margin-left: 80px !important;
+                max-width: calc(100% - 80px) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 20px;
+                border-right: none !important;
+                border-bottom: 1px solid rgba(67, 97, 179, 0.15) !important;
+            }
+            .sidebar .nav-brand {
+                padding: 0;
+                margin: 0;
+                border-bottom: none;
+            }
+            .sidebar .nav-links {
+                display: none;
+            }
+            .page-wrapper {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+                padding: 20px !important;
+            }
+        }
+
+        @media print {
+            .sidebar {
+                display: none !important;
+            }
         }
  
         /* ── CARDS (shared: .card, .dash-card, .table-card, .lb-card, .rw-card, .stat-card, .chart-card, .panel) ── */
@@ -581,7 +933,15 @@
         }
  
         /* ── PAGE WRAPPER & TITLE ── */
-        .page-wrapper { background: var(--bg-page); }
+        .page-wrapper {
+            margin-left: 280px !important;
+            padding: 40px !important;
+            max-width: calc(100% - 280px) !important;
+            width: auto !important;
+            transition: all 0.3s ease;
+            margin-top: 30px !important;
+            background: var(--bg-page);
+        }
         .page-title   { color: var(--text-main); }
  
         /* ── MODALS ── */
@@ -771,30 +1131,36 @@
     </style>
 </head>
 <body>
-<nav class="navbar">
-    <div class="logo-text"><i class="fa-solid fa-user-shield"></i> College of Computer Studies Admin</div>
-    <ul class="nav-links">
-        <li><a href="admindashboard.html"><i class="fa fa-home"></i> Home</a></li>
-        <li><a href="javascript:void(0)" onclick="openUnifiedModal()"><i class="fa fa-search"></i> Search</a></li>
-        <li><a href="studentlist.html"><i class="fa fa-users"></i> Students</a></li>
-        <li><a href="sitin.html"><i class="fa fa-laptop"></i> Sit-in</a></li>
-        <li><a href="viewsitin.html"><i class="fa fa-list-alt"></i> View Sit-in Records</a></li>
-        <li><a href="sitinreports.html"><i class="fa fa-bar-chart"></i> Sit-in Reports</a></li>
-        <li><a href="feedback.html"><i class="fa fa-comments"></i> Feedback Reports</a></li>
-        <li><a href="adminreservation.html"><i class="fa fa-calendar"></i> Reservation</a></li>
-        <li><a href="adminleaderboard.html" class="active"><i class="fa fa-trophy"></i> Leaderboard</a></li>
-        <li><a href="analytics.html"><i class="fa fa-line-chart"></i> Analytics</a></li>
-        <li><a href="reward.html"><i class="fa fa-gift"></i> Reward</a></li>
-        <li><a href="software.html"><i class="fa fa-upload"></i> Software</a></li>
-        <li>
-            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
-                <i class="fa-solid fa-moon" id="themeIcon"></i>
-                <span id="themeLabel"></span>
-            </button>
-        </li>
-        <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out-alt"></i> Log out</a></li>
-    </ul>
-</nav>
+    <aside class="sidebar">
+        <div class="nav-brand">
+            <div class="logo-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <div>
+                <div class="logo-text">Admin Dashboard</div>
+                <div class="logo-sub">Sit-in Monitoring</div>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="admindashboard.html"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li><a href="javascript:void(0)" onclick="openUnifiedModal()"><i class="fa fa-search"></i> <span>Search</span></a></li>
+            <li><a href="studentlist.html"><i class="fa fa-users"></i> <span>Students</span></a></li>
+            <li><a href="sitin.html"><i class="fa fa-laptop"></i> <span>Sit-in</span></a></li>
+            <li><a href="viewsitin.html"><i class="fa fa-list-alt"></i> <span>View Sit-in Records</span></a></li>
+            <li><a href="sitinreports.html"><i class="fa fa-bar-chart"></i> <span>Sit-in Reports</span></a></li>
+            <li><a href="feedback.html"><i class="fa fa-comments"></i> <span>Feedback Reports</span></a></li>
+            <li><a href="adminreservation.html"><i class="fa fa-calendar"></i> <span>Reservation</span></a></li>
+            <li><a href="adminleaderboard.html" class="active"><i class="fa fa-trophy"></i> <span>Leaderboard</span></a></li>
+            <li><a href="analytics.html"><i class="fa fa-line-chart"></i> <span>Analytics</span></a></li>
+            <li><a href="reward.html"><i class="fa fa-gift"></i> <span>Reward</span></a></li>
+            <li><a href="software.html"><i class="fa fa-upload"></i> <span>Software</span></a></li>
+            <li>
+                <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    <span id="themeLabel">Dark Mode</span>
+                </button>
+            </li>
+            <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out-alt"></i> <span>Log out</span></a></li>
+        </ul>
+    </aside>
 
 <div id="unifiedSitInModal" class="modal-overlay">
         <div class="modal-content" style="width: 450px;">
@@ -860,7 +1226,10 @@
 <!-- ── PAGE ── -->
 <div class="page-wrapper">
     
-    <div class="page-title"><i class="fa fa-trophy"></i> Leaderboard</div>
+    <div class="page-title"><i class="fa fa-trophy"></i> Leaderboard Dashboard</div>
+    
+    <!-- Podium for Top 3 Students -->
+    <div id="podiumWrapper" style="width: 100%;"></div>
 
     <div class="lb-card">
 
@@ -913,8 +1282,10 @@
         const label = document.getElementById('themeLabel');
         if (theme === 'dark') {
             icon.className  = 'fa-solid fa-sun';
+            if (label) label.textContent = 'Light Mode';
         } else {
             icon.className  = 'fa-solid fa-moon';
+            if (label) label.textContent = 'Dark Mode';
         }
     }
     
@@ -960,10 +1331,58 @@ async function loadLeaderboard() {
 
 // ── RENDER TABLE ─────────────────────────────────────────────────────────
 function renderTable(data) {
+    const podiumWrapper = document.getElementById('podiumWrapper');
+    if (podiumWrapper) podiumWrapper.innerHTML = '';
+
     if (!data.length) {
         document.getElementById('tableContainer').innerHTML =
             '<div class="lb-status"><i class="fa fa-ghost" style="animation:none;"></i>No sit-in records found.</div>';
         return;
+    }
+
+    // Dynamic Podium for Top 3 Students
+    if (podiumWrapper) {
+        let podiumHTML = '<div class="podium-container">';
+        
+        // 2nd Place (Silver)
+        if (data[1]) {
+            podiumHTML += `
+            <div class="podium-card rank-2-card">
+                <div class="podium-badge"><i class="fa fa-trophy" style="color: #a0aec0;"></i> 2nd Place</div>
+                <div class="podium-avatar">${(data[1].firstName[0] + data[1].lastName[0]).toUpperCase()}</div>
+                <div class="podium-name">${data[1].firstName} ${data[1].lastName}</div>
+                <div class="podium-course">${data[1].course || '—'}</div>
+                <div class="podium-points">${data[1].points} <span style="font-size: 12px; font-weight:600; opacity:0.8;">PTS</span></div>
+            </div>`;
+        }
+        
+        // 1st Place (Gold)
+        if (data[0]) {
+            podiumHTML += `
+            <div class="podium-card rank-1-card">
+                <div class="crown-icon"><i class="fa fa-crown" style="color: #ffc107;"></i></div>
+                <div class="podium-badge"><i class="fa fa-trophy" style="color: #ffc107;"></i> 1st Place</div>
+                <div class="podium-avatar">${(data[0].firstName[0] + data[0].lastName[0]).toUpperCase()}</div>
+                <div class="podium-name">${data[0].firstName} ${data[0].lastName}</div>
+                <div class="podium-course">${data[0].course || '—'}</div>
+                <div class="podium-points">${data[0].points} <span style="font-size: 12px; font-weight:600; opacity:0.8;">PTS</span></div>
+            </div>`;
+        }
+        
+        // 3rd Place (Bronze)
+        if (data[2]) {
+            podiumHTML += `
+            <div class="podium-card rank-3-card">
+                <div class="podium-badge"><i class="fa fa-trophy" style="color: #cd7f32;"></i> 3rd Place</div>
+                <div class="podium-avatar">${(data[2].firstName[0] + data[2].lastName[0]).toUpperCase()}</div>
+                <div class="podium-name">${data[2].firstName} ${data[2].lastName}</div>
+                <div class="podium-course">${data[2].course || '—'}</div>
+                <div class="podium-points">${data[2].points} <span style="font-size: 12px; font-weight:600; opacity:0.8;">PTS</span></div>
+            </div>`;
+        }
+        
+        podiumHTML += '</div>';
+        podiumWrapper.innerHTML = podiumHTML;
     }
 
     const trophyHTML = [

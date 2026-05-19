@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,47 +9,227 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap"
+        rel="stylesheet">
 
     <style>
         /* ── MODAL (identical to sitinreports.html / admindashboard.html) ── */
         .modal-overlay {
-            display: none; position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 500; justify-content: center; align-items: center;
-            backdrop-filter: blur(5px); background-color: rgba(0,0,0,0.4);
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 500;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            background-color: rgba(0, 0, 0, 0.4);
         }
-        .modal-content { background:#fff; border-radius:10px; box-shadow:0 15px 35px rgba(0,0,0,0.4); overflow:hidden; animation:slideDown 0.3s ease-out; }
-        .modal-header  { background:#2c3e70; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; color:white; }
-        .modal-footer  { padding:15px 20px; background:#f8f9fc; border-top:1px solid #e3e6f0; display:flex; justify-content:flex-end; gap:10px; }
-        .search-wrapper { display:flex; align-items:center; background:#fff; border:2px solid #e3e6f0; border-radius:10px; transition:all 0.2s; }
-        .search-wrapper:focus-within { box-shadow:0 0 8px rgba(44,62,112,0.2); }
-        .search-wrapper input { flex:1; border:none !important; padding:12px; font-size:15px; outline:none !important; }
-        #searchResultsList { margin-top:15px; display:flex; flex-direction:column; gap:10px; }
-        .search-result-item { display:flex; align-items:center; background:#f8f9fc; border-radius:12px; padding:12px; cursor:pointer; transition:all 0.2s; }
-        .search-result-item:hover { background:#fff; transform:translateY(-2px); }
-        .user-avatar { width:45px; height:45px; background:#4e73df; color:white; border-radius:50%; display:flex; justify-content:center; align-items:center; font-weight:700; margin-right:15px; }
-        .user-info-text .name { display:block; font-weight:700; color:#2c3e70; font-size:14px; }
-        .user-info-text .meta { font-size:11px; color:#858796; display:flex; gap:8px; }
-        .user-status-badges { display:flex; flex-direction:column; align-items:flex-end; flex:1; font-size:11px; font-weight:800; }
-        .badge-sessions { color:#1cc88a; }
-        .student-profile-card { background:#f8f9fc; border-left:5px solid #2c3e70; border-radius:8px; padding:20px; margin:20px; }
-        .profile-name { display:block; font-size:1.1rem; font-weight:600; color:#2c3e70; margin-bottom:10px; text-transform:uppercase; }
-        .profile-meta { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
-        .meta-item label { display:block; font-size:10px; text-transform:uppercase; color:#858796; font-weight:800; }
-        .meta-item span  { font-weight:600; color:#444; }
-        .modern-select { width:100%; padding:12px; border:1px solid #d1d3e2; border-radius:8px; cursor:pointer; }
-        .btn-confirm { background:#2c3e70; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; font-weight:600; }
-        .btn-cancel  { background:#858796; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; }
-        .btn-confirm:hover { background:#2c3e70; transform:translateY(-1px); }
-        .btn-cancel:hover  { transform:translateY(-1px); }
-        @keyframes slideDown { from{transform:translateY(-50px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .modal-header {
+            background: #2c3e70;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .modal-footer {
+            padding: 15px 20px;
+            background: #f8f9fc;
+            border-top: 1px solid #e3e6f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border: 2px solid #e3e6f0;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        .search-wrapper:focus-within {
+            box-shadow: 0 0 8px rgba(44, 62, 112, 0.2);
+        }
+
+        .search-wrapper input {
+            flex: 1;
+            border: none !important;
+            padding: 12px;
+            font-size: 15px;
+            outline: none !important;
+        }
+
+        #searchResultsList {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            background: #f8f9fc;
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .search-result-item:hover {
+            background: #fff;
+            transform: translateY(-2px);
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: #4e73df;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+
+        .user-info-text .name {
+            display: block;
+            font-weight: 700;
+            color: #2c3e70;
+            font-size: 14px;
+        }
+
+        .user-info-text .meta {
+            font-size: 11px;
+            color: #858796;
+            display: flex;
+            gap: 8px;
+        }
+
+        .user-status-badges {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            flex: 1;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .badge-sessions {
+            color: #1cc88a;
+        }
+
+        .student-profile-card {
+            background: #f8f9fc;
+            border-left: 5px solid #2c3e70;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .profile-name {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e70;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .profile-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .meta-item label {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #858796;
+            font-weight: 800;
+        }
+
+        .meta-item span {
+            font-weight: 600;
+            color: #444;
+        }
+
+        .modern-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d3e2;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .btn-confirm {
+            background: #2c3e70;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-cancel {
+            background: #858796;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn-confirm:hover {
+            background: #2c3e70;
+            transform: translateY(-1px);
+        }
+
+        .btn-cancel:hover {
+            transform: translateY(-1px);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
 
         /* ── LAYOUT ── */
         .page-wrapper {
-            max-width: 1300px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin-left: 280px !important;
+            padding: 40px !important;
+            max-width: calc(100% - 280px) !important;
+            width: auto !important;
+            transition: all 0.3s ease;
+            margin-top: 30px !important;
         }
 
         .page-title {
@@ -61,7 +242,9 @@
             margin-bottom: 25px;
         }
 
-        .page-title i { color: #4e73df; }
+        .page-title i {
+            color: #4e73df;
+        }
 
         /* ── STAT CARDS (white card + colored left border) ── */
         .stats-row {
@@ -75,7 +258,7 @@
             background: white;
             border-radius: 12px;
             padding: 20px 24px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
             border: 1px solid #e3e6f0;
             border-left: 4px solid;
             display: flex;
@@ -83,45 +266,79 @@
             gap: 16px;
         }
 
-        .stat-card.blue   { border-left-color: #4e73df; }
-        .stat-card.amber  { border-left-color: #ffc107; }
-        .stat-card.green  { border-left-color: #1cc88a; }
-
-        .stat-icon {
-            width: 52px; height: 52px; border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px; flex-shrink: 0;
+        .stat-card.blue {
+            border-left-color: #4e73df;
         }
 
-        .icon-blue   { background: #dbeafe; color: #4e73df; }
-        .icon-amber  { background: #fef3c7; color: #d97706; }
-        .icon-green  { background: #d1fae5; color: #059669; }
+        .stat-card.amber {
+            border-left-color: #ffc107;
+        }
+
+        .stat-card.green {
+            border-left-color: #1cc88a;
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .icon-blue {
+            background: #dbeafe;
+            color: #4e73df;
+        }
+
+        .icon-amber {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .icon-green {
+            background: #d1fae5;
+            color: #059669;
+        }
 
         .stat-label {
-            font-size: 11px; 
-            font-weight: 700; 
+            font-size: 11px;
+            font-weight: 700;
             letter-spacing: 0.08em;
             color: #858796;
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
             margin-bottom: 10px;
         }
 
         .stat-value {
-            font-size: 30px; 
-            font-weight: 600; 
+            font-size: 30px;
+            font-weight: 600;
             color: #1a1a2e;
-            font-family: 'Sora', sans-serif; 
+            font-family: 'Sora', sans-serif;
             line-height: 1;
         }
 
         /* ── CHART CARD (white card, dark header like table headers) ── */
-        .charts-top    { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-        .charts-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .charts-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .charts-bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
 
         .chart-card {
             background: white;
             border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
             border: 1px solid #e3e6f0;
             overflow: hidden;
         }
@@ -136,100 +353,176 @@
         }
 
         .chart-card-title {
-            font-size: 14px; 
+            font-size: 14px;
             font-weight: 700;
-            display: flex; 
-            align-items: center; 
+            display: flex;
+            align-items: center;
             gap: 8px;
         }
 
-        .chart-card-body { padding: 18px; }
+        .chart-card-body {
+            padding: 18px;
+        }
 
-        canvas { max-height: 260px; }
+        canvas {
+            max-height: 260px;
+        }
 
         /* ── TOGGLE BUTTONS ── */
-        .toggle-group { display: flex; gap: 5px; }
+        .toggle-group {
+            display: flex;
+            gap: 5px;
+        }
 
         .toggle-btn {
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: rgba(255,255,255,0.85);
-            font-size: 11px; font-weight: 600;
-            padding: 4px 10px; border-radius: 5px;
-            cursor: pointer; transition: all 0.2s;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        .toggle-btn.active, .toggle-btn:hover {
-            background: #ffc107; color: #333; border-color: #ffc107;
+        .toggle-btn.active,
+        .toggle-btn:hover {
+            background: #ffc107;
+            color: #333;
+            border-color: #ffc107;
         }
 
         /* ── TABLE (same look as th:{background:#2c3e70} pages) ── */
-        .an-table { width: 100%; border-collapse: collapse; background: white; }
+        .an-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
 
-        .an-table thead tr { background-color: #2c3e70; }
+        .an-table thead tr {
+            background-color: #2c3e70;
+        }
 
         .an-table th {
-            padding: 13px 15px; text-align: left;
-            font-size: 13px; color: white;
-            font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600;
+            padding: 13px 15px;
+            text-align: left;
+            font-size: 13px;
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
         }
 
         .an-table td {
-            padding: 11px 15px; border-bottom: 1px solid #eee;
-            font-size: 13px; color: #333;
+            padding: 11px 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+            color: #333;
             font-family: 'Plus Jakarta Sans', sans-serif;
             vertical-align: middle;
         }
 
-        .an-table tbody tr:hover { background-color: #f8f9ff; }
+        .an-table tbody tr:hover {
+            background-color: #f8f9ff;
+        }
 
         /* ── RANK PIP ── */
         .rank-pip {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 30px; height: 30px; border-radius: 50%;
-            font-weight: 700; font-size: 12px; font-family: 'Sora', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 12px;
+            font-family: 'Sora', sans-serif;
         }
-        .pip-1 { background:#fff3cd; color:#856404; }
-        .pip-2 { background:#e9ecef; color:#495057; }
-        .pip-3 { background:#f8d7b0; color:#7a4f26; }
-        .pip-n { background:#f0f2f5; color:#666; }
+
+        .pip-1 {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .pip-2 {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .pip-3 {
+            background: #f8d7b0;
+            color: #7a4f26;
+        }
+
+        .pip-n {
+            background: #f0f2f5;
+            color: #666;
+        }
 
         /* ── POINTS BADGE ── */
         .pts-badge {
             display: inline-block;
-            background: #fff3cd; color: #856404;
+            background: #fff3cd;
+            color: #856404;
             border: 1px solid #ffc107;
-            padding: 2px 9px; border-radius: 20px;
-            font-size: 12px; font-weight: 700;
+            padding: 2px 9px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         /* ── COURSE PROGRESS BAR ── */
-        .course-bar-wrap { background:#f0f2f5; border-radius:20px; height:7px; overflow:hidden; min-width:80px; }
-        .course-bar-fill { height:100%; border-radius:20px; }
+        .course-bar-wrap {
+            background: #f0f2f5;
+            border-radius: 20px;
+            height: 7px;
+            overflow: hidden;
+            min-width: 80px;
+        }
+
+        .course-bar-fill {
+            height: 100%;
+            border-radius: 20px;
+        }
 
         /* ── EXPORT BUTTON (same as btn-print) ── */
         .btn-export {
-            background: #28a745; color: white; border: none;
-            padding: 6px 14px; border-radius: 6px; cursor: pointer;
-            font-size: 12px; font-weight: 700;
-            display: flex; align-items: center; gap: 6px;
-            font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.2s;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: all 0.2s;
         }
-        .btn-export:hover { background: #218838; transform: translateY(-1px); }
+
+        .btn-export:hover {
+            background: #218838;
+            transform: translateY(-1px);
+        }
 
         /* ── LOADING/EMPTY ── */
         .chart-empty {
-            text-align: center; padding: 35px; color: #aaa;
-            font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif;
+            text-align: center;
+            padding: 35px;
+            color: #aaa;
+            font-size: 14px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .theme-toggle-btn {
             display: flex;
             align-items: center;
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.22);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
             color: white;
             padding: 3px;
             border-radius: 20px;
@@ -237,88 +530,327 @@
         }
 
         .theme-toggle-btn:hover {
-            background: rgba(255,255,255,0.22);
+            background: rgba(255, 255, 255, 0.22);
             transform: translateY(-1px);
         }
 
         [data-theme="dark"] .theme-toggle-btn {
-            background: rgba(255,193,7,0.15);
-            border-color: rgba(255,193,7,0.4);
+            background: rgba(255, 193, 7, 0.15);
+            border-color: rgba(255, 193, 7, 0.4);
             color: #ffc107;
         }
 
-         /* ══════════════════════════════════════════════
+        /* ══════════════════════════════════════════════
            DARK / LIGHT MODE — CSS VARIABLES
         ══════════════════════════════════════════════ */
         :root {
-            --bg-page:        #f0f2f5;
-            --bg-card:        #ffffff;
-            --bg-card-alt:    #f8f9fc;
-            --bg-input:       #ffffff;
-            --bg-header:      #2c3e70;
-            --bg-footer:      #f8f9fc;
-            --bg-table-head:  #f0f2f5;
-            --bg-table-row:   #ffffff;
+            --bg-page: #f0f2f5;
+            --bg-card: #ffffff;
+            --bg-card-alt: #f8f9fc;
+            --bg-input: #ffffff;
+            --bg-header: #2c3e70;
+            --bg-footer: #f8f9fc;
+            --bg-table-head: #f0f2f5;
+            --bg-table-row: #ffffff;
             --bg-table-hover: #f8f9fc;
-            --text-main:      #1a1a2e;
-            --text-muted:     #858796;
-            --text-label:     #333333;
-            --text-meta:      #444444;
-            --border-color:   #e3e6f0;
-            --border-inner:   #dee2e6;
-            --shadow:         0 4px 20px rgba(0,0,0,0.08);
-            --shadow-card:    0 2px 12px rgba(0,0,0,0.07);
-            --input-border:   #d1d3e2;
-            --scrollbar-bg:   #e0e0e0;
-            --scrollbar-thumb:#b0b0b0;
+            --text-main: #1a1a2e;
+            --text-muted: #858796;
+            --text-label: #333333;
+            --text-meta: #444444;
+            --border-color: #e3e6f0;
+            --border-inner: #dee2e6;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.07);
+            --input-border: #d1d3e2;
+            --scrollbar-bg: #e0e0e0;
+            --scrollbar-thumb: #b0b0b0;
         }
- 
+
         [data-theme="dark"] {
-            --bg-page:        #0f1117;
-            --bg-card:        #1a1d27;
-            --bg-card-alt:    #1e2235;
-            --bg-input:       #252839;
-            --bg-header:      #111827;
-            --bg-footer:      #161928;
-            --bg-table-head:  #1e2235;
-            --bg-table-row:   #1a1d27;
+            --bg-page: #0f1117;
+            --bg-card: #1a1d27;
+            --bg-card-alt: #1e2235;
+            --bg-input: #252839;
+            --bg-header: #111827;
+            --bg-footer: #161928;
+            --bg-table-head: #1e2235;
+            --bg-table-row: #1a1d27;
             --bg-table-hover: #222640;
-            --text-main:      #e0e6f0;
-            --text-muted:     #8892a4;
-            --text-label:     #c8d0e0;
-            --text-meta:      #b0b8cc;
-            --border-color:   #2a2f47;
-            --border-inner:   #2e3450;
-            --shadow:         0 4px 20px rgba(0,0,0,0.4);
-            --shadow-card:    0 2px 12px rgba(0,0,0,0.35);
-            --input-border:   #3a3f5c;
-            --scrollbar-bg:   #1e2235;
-            --scrollbar-thumb:#3a3f5c;
+            --text-main: #e0e6f0;
+            --text-muted: #8892a4;
+            --text-label: #c8d0e0;
+            --text-meta: #b0b8cc;
+            --border-color: #2a2f47;
+            --border-inner: #2e3450;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.35);
+            --input-border: #3a3f5c;
+            --scrollbar-bg: #1e2235;
+            --scrollbar-thumb: #3a3f5c;
         }
- 
-        /* ── BODY & NAVBAR ── */
+
+        /* ── BODY & Left Sidebar ── */
         body {
-            background: var(--bg-page) !important;
+            font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top left, rgba(47, 109, 248, 0.25), transparent 22%),
+                radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.18), transparent 18%),
+                var(--bg-page) !important;
             color: var(--text-main) !important;
             transition: background 0.3s ease, color 0.3s ease;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
         }
-        [data-theme="dark"] .navbar {
-            background: linear-gradient(to right, #0d1117, #111827) !important;
+
+        /* ── Glassmorphic Left Sidebar ── */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(20px) !important;
+            border-right: 1px solid rgba(67, 97, 179, 0.15) !important;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 16px;
+            z-index: 1000;
+            box-shadow: 4px 0 24px rgba(15, 23, 42, 0.04);
+            overflow-y: auto;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
- 
+
+        [data-theme="dark"] .sidebar {
+            background: rgba(15, 23, 42, 0.9) !important;
+            border-right: 1px solid rgba(148, 163, 184, 0.12) !important;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 12px 20px 12px;
+            border-bottom: 1px solid rgba(67, 97, 179, 0.1);
+            margin-bottom: 20px;
+        }
+
+        [data-theme="dark"] .sidebar .nav-brand {
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .sidebar .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(47, 109, 248, 0.25);
+        }
+
+        .sidebar .logo-text {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .sidebar .logo-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .sidebar .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .sidebar .nav-links li {
+            width: 100%;
+        }
+
+        .sidebar .nav-links a,
+        .sidebar .theme-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px !important;
+            color: var(--text-muted) !important;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            background: transparent !important;
+            transition: all 0.2s ease !important;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar .nav-links a i,
+        .sidebar .theme-toggle-btn i {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .sidebar .nav-links a:hover,
+        .sidebar .theme-toggle-btn:hover {
+            color: var(--text-main) !important;
+            background: rgba(47, 109, 248, 0.08) !important;
+            transform: translateX(4px);
+        }
+
+        [data-theme="dark"] .sidebar .nav-links a:hover,
+        [data-theme="dark"] .sidebar .theme-toggle-btn:hover {
+            background: rgba(124, 58, 237, 0.12) !important;
+        }
+
+        .sidebar .nav-links a.active {
+            color: white !important;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+            box-shadow: 0 4px 12px rgba(47, 109, 248, 0.2);
+        }
+
+        [data-theme="dark"] .sidebar .nav-links a.active {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .sidebar .nav-links a.active:hover {
+            transform: none;
+            background: linear-gradient(135deg, #2f6df8, #5b82ff) !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav-links a.active:hover {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+        }
+
+        .sidebar .nav-links a.logout {
+            margin-top: auto;
+            color: #ef4444 !important;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .sidebar .nav-links a.logout:hover {
+            background: rgba(239, 68, 68, 0.1) !important;
+            color: #ef4444 !important;
+        }
+
+        /* Responsive Sidebar */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 80px;
+                padding: 24px 8px;
+                align-items: center;
+            }
+
+            .sidebar .nav-brand {
+                padding: 0 0 20px 0;
+                justify-content: center;
+                border-bottom: none;
+            }
+
+            .sidebar .nav-brand div:last-child {
+                display: none;
+            }
+
+            .sidebar .nav-links a span,
+            .sidebar .theme-toggle-btn span {
+                display: none;
+            }
+
+            .sidebar .nav-links a,
+            .sidebar .theme-toggle-btn {
+                justify-content: center;
+                padding: 12px;
+            }
+
+            .sidebar .nav-links a:hover,
+            .sidebar .theme-toggle-btn:hover {
+                transform: scale(1.05);
+            }
+
+            .page-wrapper {
+                margin-left: 80px !important;
+                max-width: calc(100% - 80px) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 20px;
+                border-right: none !important;
+                border-bottom: 1px solid rgba(67, 97, 179, 0.15) !important;
+            }
+
+            .sidebar .nav-brand {
+                padding: 0;
+                margin: 0;
+                border-bottom: none;
+            }
+
+            .sidebar .nav-links {
+                display: none;
+            }
+
+            .page-wrapper {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+                padding: 20px !important;
+            }
+        }
+
+        @media print {
+            .sidebar {
+                display: none !important;
+            }
+        }
+
         /* ── CARDS (shared: .card, .dash-card, .table-card, .lb-card, .rw-card, .stat-card, .chart-card, .panel) ── */
-        .card, .dash-card, .table-card, .lb-card, .rw-card,
-        .stat-card, .chart-card, .panel {
+        .card,
+        .dash-card,
+        .table-card,
+        .lb-card,
+        .rw-card,
+        .stat-card,
+        .chart-card,
+        .panel {
             background: var(--bg-card);
             border-color: var(--border-color);
             box-shadow: var(--shadow-card);
             transition: background 0.3s, border-color 0.3s;
         }
-        .card-header, .lb-card-header, .rw-card-header,
-        .chart-card-header, .panel-header {
+
+        .card-header,
+        .lb-card-header,
+        .rw-card-header,
+        .chart-card-header,
+        .panel-header {
             background: var(--bg-header) !important;
             border-bottom: 1px solid var(--border-inner);
         }
+
         [data-theme="dark"] .card-body,
         [data-theme="dark"] .panel-body,
         [data-theme="dark"] .rw-card-body,
@@ -326,204 +858,508 @@
             background: var(--bg-card);
             color: var(--text-main);
         }
- 
+
         /* ── PAGE WRAPPER & TITLE ── */
-        .page-wrapper { background: var(--bg-page); }
-        .page-title   { color: var(--text-main); }
- 
+        .page-wrapper {
+            background: var(--bg-page);
+        }
+
+        .page-title {
+            color: var(--text-main);
+        }
+
         /* ── MODALS ── */
         .modal-content {
             background: var(--bg-card) !important;
             border: 1px solid var(--border-color);
         }
-        .modal-body  { background: var(--bg-card); color: var(--text-main); }
-        .modal-footer{ background: var(--bg-footer) !important; border-top: 1px solid var(--border-color); }
-        [data-theme="dark"] .modal-footer { background: var(--bg-footer) !important; }
- 
+
+        .modal-body {
+            background: var(--bg-card);
+            color: var(--text-main);
+        }
+
+        .modal-footer {
+            background: var(--bg-footer) !important;
+            border-top: 1px solid var(--border-color);
+        }
+
+        [data-theme="dark"] .modal-footer {
+            background: var(--bg-footer) !important;
+        }
+
         /* ── SEARCH WRAPPER & INPUTS ── */
         .search-wrapper {
             background: var(--bg-input) !important;
             border-color: var(--border-color) !important;
         }
+
         .search-wrapper input {
             background: transparent !important;
             color: var(--text-main) !important;
         }
-        .search-wrapper input::placeholder { color: var(--text-muted) !important; }
- 
-        input, select, textarea, .modern-select {
+
+        .search-wrapper input::placeholder {
+            color: var(--text-muted) !important;
+        }
+
+        input,
+        select,
+        textarea,
+        .modern-select {
             background: var(--bg-input) !important;
             color: var(--text-main) !important;
             border-color: var(--input-border) !important;
         }
-        input::placeholder, textarea::placeholder { color: var(--text-muted) !important; }
-        input[readonly], input:disabled {
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--text-muted) !important;
+        }
+
+        input[readonly],
+        input:disabled {
             background: var(--bg-card-alt) !important;
             color: var(--text-muted) !important;
         }
-        [data-theme="dark"] .form-row label { color: var(--text-label) !important; }
-        [data-theme="dark"] .form-group label { color: var(--text-label) !important; }
-        [data-theme="dark"] .control-group label { color: var(--text-label) !important; }
- 
+
+        [data-theme="dark"] .form-row label {
+            color: var(--text-label) !important;
+        }
+
+        [data-theme="dark"] .form-group label {
+            color: var(--text-label) !important;
+        }
+
+        [data-theme="dark"] .control-group label {
+            color: var(--text-label) !important;
+        }
+
         /* ── TABLES ── */
-        [data-theme="dark"] table { color: var(--text-main); border-color: var(--border-color); }
+        [data-theme="dark"] table {
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+
         [data-theme="dark"] thead tr,
-        [data-theme="dark"] .lb-table thead tr { background: var(--bg-table-head) !important; color: var(--text-muted) !important; }
-        [data-theme="dark"] tbody tr { background: var(--bg-table-row); border-color: var(--border-inner); }
+        [data-theme="dark"] .lb-table thead tr {
+            background: var(--bg-table-head) !important;
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] tbody tr {
+            background: var(--bg-table-row);
+            border-color: var(--border-inner);
+        }
+
         [data-theme="dark"] tbody tr:hover,
-        [data-theme="dark"] .lb-table tbody tr:hover { background: var(--bg-table-hover) !important; }
-        [data-theme="dark"] th, [data-theme="dark"] td { border-color: var(--border-inner) !important; color: var(--text-main) !important; }
- 
+        [data-theme="dark"] .lb-table tbody tr:hover {
+            background: var(--bg-table-hover) !important;
+        }
+
+        [data-theme="dark"] th,
+        [data-theme="dark"] td {
+            border-color: var(--border-inner) !important;
+            color: var(--text-main) !important;
+        }
+
         /* ── SEARCH RESULT CARDS ── */
-        .search-result-item { background: var(--bg-card-alt) !important; }
-        .search-result-item:hover { background: var(--bg-card) !important; }
-        .student-profile-card { background: var(--bg-card-alt) !important; border-left-color: #4e73df !important; }
-        [data-theme="dark"] .student-profile-card { background: var(--bg-card-alt) !important; }
-        [data-theme="dark"] .profile-name { color: #7b9cff !important; }
-        [data-theme="dark"] .user-info-text .name { color: #7b9cff !important; }
-        [data-theme="dark"] .meta-item label { color: var(--text-muted) !important; }
-        [data-theme="dark"] .meta-item span  { color: var(--text-main) !important; }
- 
+        .search-result-item {
+            background: var(--bg-card-alt) !important;
+        }
+
+        .search-result-item:hover {
+            background: var(--bg-card) !important;
+        }
+
+        .student-profile-card {
+            background: var(--bg-card-alt) !important;
+            border-left-color: #4e73df !important;
+        }
+
+        [data-theme="dark"] .student-profile-card {
+            background: var(--bg-card-alt) !important;
+        }
+
+        [data-theme="dark"] .profile-name {
+            color: #7b9cff !important;
+        }
+
+        [data-theme="dark"] .user-info-text .name {
+            color: #7b9cff !important;
+        }
+
+        [data-theme="dark"] .meta-item label {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .meta-item span {
+            color: var(--text-main) !important;
+        }
+
         /* ── STAT CARDS ── */
-        [data-theme="dark"] .stat-card { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .stat-label { color: var(--text-muted) !important; }
-        [data-theme="dark"] .stat-value { color: var(--text-main) !important; }
-        [data-theme="dark"] .icon-blue  { background: #1e2f5a !important; }
-        [data-theme="dark"] .icon-amber { background: #2d2810 !important; }
-        [data-theme="dark"] .icon-green { background: #0e2a1e !important; }
- 
+        [data-theme="dark"] .stat-card {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .stat-label {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .stat-value {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .icon-blue {
+            background: #1e2f5a !important;
+        }
+
+        [data-theme="dark"] .icon-amber {
+            background: #2d2810 !important;
+        }
+
+        [data-theme="dark"] .icon-green {
+            background: #0e2a1e !important;
+        }
+
         /* ── LEADERBOARD ── */
-        [data-theme="dark"] .lb-card { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .student-name { color: var(--text-main) !important; }
-        [data-theme="dark"] .student-id   { color: var(--text-muted) !important; }
-        [data-theme="dark"] .course-chip  { background: #1e2a50 !important; color: #7b9cff !important; }
-        [data-theme="dark"] .hours-val    { color: var(--text-main) !important; }
-        [data-theme="dark"] .hours-sub    { color: var(--text-muted) !important; }
-        [data-theme="dark"] .points-val   { color: #ffc107 !important; }
-        [data-theme="dark"] .rank-1  { background: #2d2810 !important; color: #ffc107 !important; }
-        [data-theme="dark"] .rank-2  { background: #252839 !important; color: #a0aec0 !important; }
-        [data-theme="dark"] .rank-3  { background: #2a1e10 !important; color: #e0a050 !important; }
-        [data-theme="dark"] .rank-other { background: #1e2235 !important; color: #8892a4 !important; }
- 
+        [data-theme="dark"] .lb-card {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .student-name {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .student-id {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .course-chip {
+            background: #1e2a50 !important;
+            color: #7b9cff !important;
+        }
+
+        [data-theme="dark"] .hours-val {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .hours-sub {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .points-val {
+            color: #ffc107 !important;
+        }
+
+        [data-theme="dark"] .rank-1 {
+            background: #2d2810 !important;
+            color: #ffc107 !important;
+        }
+
+        [data-theme="dark"] .rank-2 {
+            background: #252839 !important;
+            color: #a0aec0 !important;
+        }
+
+        [data-theme="dark"] .rank-3 {
+            background: #2a1e10 !important;
+            color: #e0a050 !important;
+        }
+
+        [data-theme="dark"] .rank-other {
+            background: #1e2235 !important;
+            color: #8892a4 !important;
+        }
+
         /* ── RESERVATION PANELS & CARDS ── */
-        [data-theme="dark"] .panel { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .res-card { background: var(--bg-card-alt) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .res-card p { color: var(--text-main) !important; }
-        [data-theme="dark"] .res-card p b { color: #7b9cff !important; }
-        [data-theme="dark"] .control-group select { background: var(--bg-input) !important; color: var(--text-main) !important; border-color: var(--input-border) !important; }
-        [data-theme="dark"] #infoBody { color: var(--text-main) !important; }
-        [data-theme="dark"] #infoBody b { color: #7b9cff !important; }
- 
+        [data-theme="dark"] .panel {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .res-card {
+            background: var(--bg-card-alt) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .res-card p {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .res-card p b {
+            color: #7b9cff !important;
+        }
+
+        [data-theme="dark"] .control-group select {
+            background: var(--bg-input) !important;
+            color: var(--text-main) !important;
+            border-color: var(--input-border) !important;
+        }
+
+        [data-theme="dark"] #infoBody {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] #infoBody b {
+            color: #7b9cff !important;
+        }
+
         /* ── ADMIN DASHBOARD (admindashboard.html) ── */
-        [data-theme="dark"] .admin-container { background: var(--bg-page) !important; }
-        [data-theme="dark"] .stats-grid .stat-item h3 { color: var(--text-main) !important; }
-        [data-theme="dark"] .stats-grid .stat-item p  { color: var(--text-muted) !important; }
-        [data-theme="dark"] .announcement-item { border-color: var(--border-inner) !important; color: var(--text-main) !important; }
- 
+        [data-theme="dark"] .admin-container {
+            background: var(--bg-page) !important;
+        }
+
+        [data-theme="dark"] .stats-grid .stat-item h3 {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .stats-grid .stat-item p {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .announcement-item {
+            border-color: var(--border-inner) !important;
+            color: var(--text-main) !important;
+        }
+
         /* ── SOFTWARE ── */
-        [data-theme="dark"] .software-container { background: var(--bg-page) !important; }
-        [data-theme="dark"] .dropzone { background: var(--bg-card-alt) !important; border-color: var(--input-border) !important; }
-        [data-theme="dark"] .dropzone:hover, [data-theme="dark"] .dropzone.dragover { background: #1e2a50 !important; border-color: #4e73df !important; }
-        [data-theme="dark"] .dropzone p { color: var(--text-muted) !important; }
-        [data-theme="dark"] .file-preview { background: var(--bg-card-alt) !important; border-color: var(--input-border) !important; }
- 
+        [data-theme="dark"] .software-container {
+            background: var(--bg-page) !important;
+        }
+
+        [data-theme="dark"] .dropzone {
+            background: var(--bg-card-alt) !important;
+            border-color: var(--input-border) !important;
+        }
+
+        [data-theme="dark"] .dropzone:hover,
+        [data-theme="dark"] .dropzone.dragover {
+            background: #1e2a50 !important;
+            border-color: #4e73df !important;
+        }
+
+        [data-theme="dark"] .dropzone p {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .file-preview {
+            background: var(--bg-card-alt) !important;
+            border-color: var(--input-border) !important;
+        }
+
         /* ── REWARDS ── */
-        [data-theme="dark"] .rw-card { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
+        [data-theme="dark"] .rw-card {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
         [data-theme="dark"] .form-group input,
         [data-theme="dark"] .form-group select,
-        [data-theme="dark"] .form-group textarea { background: var(--bg-input) !important; color: var(--text-main) !important; border-color: var(--input-border) !important; }
+        [data-theme="dark"] .form-group textarea {
+            background: var(--bg-input) !important;
+            color: var(--text-main) !important;
+            border-color: var(--input-border) !important;
+        }
+
         [data-theme="dark"] .form-group input::placeholder,
-        [data-theme="dark"] .form-group textarea::placeholder { color: var(--text-muted) !important; }
- 
+        [data-theme="dark"] .form-group textarea::placeholder {
+            color: var(--text-muted) !important;
+        }
+
         /* ── ANALYTICS CHARTS ── */
-        [data-theme="dark"] .chart-card { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
- 
+        [data-theme="dark"] .chart-card {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
         /* ── TABLE-PAGES (sitin, viewsitin, sitinreports, studentlist, feedback) ── */
-        [data-theme="dark"] .table-card { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .table-controls { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .entries-control select { background: var(--bg-input) !important; color: var(--text-main) !important; border-color: var(--input-border) !important; }
-        [data-theme="dark"] .search-control input  { background: var(--bg-input) !important; color: var(--text-main) !important; border-color: var(--input-border) !important; }
-        [data-theme="dark"] .search-box { background: var(--bg-input) !important; color: var(--text-main) !important; border-color: var(--input-border) !important; }
-        .badge-active  { background: #d4edda; color: #155724; }
-        .badge-timeout { background: #f8d7da; color: #721c24; }
-        [data-theme="dark"] .badge-active  { background: #0e2a1e !important; color: #48c78e !important; }
-        [data-theme="dark"] .badge-timeout { background: #2a0e0e !important; color: #f87171 !important; }
-        [data-theme="dark"] .no-data { color: var(--text-muted) !important; }
- 
+        [data-theme="dark"] .table-card {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .table-controls {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .entries-control select {
+            background: var(--bg-input) !important;
+            color: var(--text-main) !important;
+            border-color: var(--input-border) !important;
+        }
+
+        [data-theme="dark"] .search-control input {
+            background: var(--bg-input) !important;
+            color: var(--text-main) !important;
+            border-color: var(--input-border) !important;
+        }
+
+        [data-theme="dark"] .search-box {
+            background: var(--bg-input) !important;
+            color: var(--text-main) !important;
+            border-color: var(--input-border) !important;
+        }
+
+        .badge-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-timeout {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        [data-theme="dark"] .badge-active {
+            background: #0e2a1e !important;
+            color: #48c78e !important;
+        }
+
+        [data-theme="dark"] .badge-timeout {
+            background: #2a0e0e !important;
+            color: #f87171 !important;
+        }
+
+        [data-theme="dark"] .no-data {
+            color: var(--text-muted) !important;
+        }
+
         /* ── SCROLLBAR ── */
-        ::-webkit-scrollbar { width: 7px; height: 7px; }
-        ::-webkit-scrollbar-track { background: var(--scrollbar-bg); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
-        [data-theme="dark"] ::-webkit-scrollbar-track { background: var(--scrollbar-bg); }
-        [data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); }
- 
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-bg);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 4px;
+        }
+
+        [data-theme="dark"] ::-webkit-scrollbar-track {
+            background: var(--scrollbar-bg);
+        }
+
+        [data-theme="dark"] ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+        }
+
         /* ── NOTIFICATION DROPDOWN ── */
-        [data-theme="dark"] .notif-dropdown { background: var(--bg-card) !important; border-color: var(--border-color) !important; }
-        [data-theme="dark"] .notif-list > div { background: var(--bg-card) !important; border-color: var(--border-inner) !important; color: var(--text-main) !important; }
-        [data-theme="dark"] .notif-list > div[style*="eaf3fb"] { background: var(--bg-card-alt) !important; }
- 
+        [data-theme="dark"] .notif-dropdown {
+            background: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .notif-list>div {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .notif-list>div[style*="eaf3fb"] {
+            background: var(--bg-card-alt) !important;
+        }
+
         /* ── MISCELLANEOUS ── */
-        [data-theme="dark"] .page-title { color: var(--text-main) !important; }
-        [data-theme="dark"] .header-section h1 { color: var(--text-main) !important; }
-        [data-theme="dark"] .controls { background: var(--bg-card) !important; border-color: var(--border-inner) !important; }
-        [data-theme="dark"] .filter-group label { color: var(--text-label) !important; }
-        [data-theme="dark"] .filter-group select { background: var(--bg-input) !important; color: var(--text-main) !important; border-color: var(--input-border) !important; }
+        [data-theme="dark"] .page-title {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .header-section h1 {
+            color: var(--text-main) !important;
+        }
+
+        [data-theme="dark"] .controls {
+            background: var(--bg-card) !important;
+            border-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .filter-group label {
+            color: var(--text-label) !important;
+        }
+
+        [data-theme="dark"] .filter-group select {
+            background: var(--bg-input) !important;
+            color: var(--text-main) !important;
+            border-color: var(--input-border) !important;
+        }
     </style>
 </head>
+
 <body>
 
-<!-- ── NAVBAR ── -->
-<nav class="navbar">
-    <div class="logo-text"><i class="fa-solid fa-user-shield"></i> College of Computer Studies Admin</div>
-    <ul class="nav-links">
-        <li><a href="admindashboard.html"><i class="fa fa-home"></i> Home</a></li>
-        <li><a href="javascript:void(0)" onclick="openUnifiedModal()"><i class="fa fa-search"></i> Search</a></li>
-        <li><a href="studentlist.html"><i class="fa fa-users"></i> Students</a></li>
-        <li><a href="sitin.html"><i class="fa fa-laptop"></i> Sit-in</a></li>
-        <li><a href="viewsitin.html"><i class="fa fa-list-alt"></i> Sit-in Records</a></li>
-        <li><a href="sitinreports.html"><i class="fa fa-bar-chart"></i> Sit-in Reports</a></li>
-        <li><a href="feedback.html"><i class="fa fa-comments"></i> Feedback Reports</a></li>
-        <li><a href="adminreservation.html"><i class="fa fa-calendar"></i> Reservation</a></li>
-        <li><a href="adminleaderboard.html"><i class="fa fa-trophy"></i> Leaderboard</a></li>
-        <li><a href="analytics.html" class="active"><i class="fa fa-line-chart"></i> Analytics</a></li>
-        <li><a href="reward.html"><i class="fa fa-gift"></i> Reward</a></li>
-        <li><a href="software.html"><i class="fa fa-upload"></i> Software</a></li>
-        <li>
-            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
-                <i class="fa-solid fa-moon" id="themeIcon"></i>
-                <span id="themeLabel"></span>
-            </button>
-        </li>
-        <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out-alt"></i> Log out</a></li>
-    </ul>
-</nav>
-
-<!-- ── UNIFIED SIT-IN MODAL ── -->
-<div id="unifiedSitInModal" class="modal-overlay">
-    <div class="modal-content" style="width:450px;">
-        <div class="modal-header">
-            <h3><i class="fa fa-search"></i> Find Student</h3>
-            <button onclick="closeModal('unifiedSitInModal')" style="background:none;border:none;color:white;cursor:pointer;font-size:20px;">&times;</button>
-        </div>
-        <div class="modal-body" style="padding:10px;">
-            <div class="search-wrapper">
-                <input type="text" id="uniIdSearch" placeholder="Enter Student ID....">
-                <button class="btn-confirm" onclick="searchAndPopulate()"><i class="fa fa-search"></i></button>
+    <aside class="sidebar">
+        <div class="nav-brand">
+            <div class="logo-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <div>
+                <div class="logo-text">Admin Dashboard</div>
+                <div class="logo-sub">Sit-in Monitoring</div>
             </div>
-            <div id="searchResultsList"></div>
-            <div id="studentDetailsBox" style="display:none;">
-                <div class="student-profile-card"><div id="accountInfoDisplay"></div></div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;padding:0 20px;">
-                    <div>
-                        <label style="font-size:13px;font-weight:700;color:#4e73df;">Purpose</label>
-                        <select id="uniPurpose" class="modern-select">
-                            <option>C Programming</option><option>Java Projects</option>
-                            <option>Web Development</option><option>Python/Data Science</option>
-                        </select>
+        </div>
+        <ul class="nav-links">
+            <li><a href="admindashboard.html"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li><a href="javascript:void(0)" onclick="openUnifiedModal()"><i class="fa fa-search"></i>
+                    <span>Search</span></a></li>
+            <li><a href="studentlist.html"><i class="fa fa-users"></i> <span>Students</span></a></li>
+            <li><a href="sitin.html"><i class="fa fa-laptop"></i> <span>Sit-in</span></a></li>
+            <li><a href="viewsitin.html"><i class="fa fa-list-alt"></i> <span>View Sit-in Records</span></a></li>
+            <li><a href="sitinreports.html"><i class="fa fa-bar-chart"></i> <span>Sit-in Reports</span></a></li>
+            <li><a href="feedback.html"><i class="fa fa-comments"></i> <span>Feedback Reports</span></a></li>
+            <li><a href="adminreservation.html"><i class="fa fa-calendar"></i> <span>Reservation</span></a></li>
+            <li><a href="adminleaderboard.html"><i class="fa fa-trophy"></i> <span>Leaderboard</span></a></li>
+            <li><a href="analytics.html" class="active"><i class="fa fa-line-chart"></i> <span>Analytics</span></a></li>
+            <li><a href="reward.html"><i class="fa fa-gift"></i> <span>Reward</span></a></li>
+            <li><a href="software.html"><i class="fa fa-upload"></i> <span>Software</span></a></li>
+            <li>
+                <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    <span id="themeLabel">Dark Mode</span>
+                </button>
+            </li>
+            <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out-alt"></i>
+                    <span>Log out</span></a></li>
+        </ul>
+    </aside>
+
+    <!-- ── UNIFIED SIT-IN MODAL ── -->
+    <div id="unifiedSitInModal" class="modal-overlay">
+        <div class="modal-content" style="width:450px;">
+            <div class="modal-header">
+                <h3><i class="fa fa-search"></i> Find Student</h3>
+                <button onclick="closeModal('unifiedSitInModal')"
+                    style="background:none;border:none;color:white;cursor:pointer;font-size:20px;">&times;</button>
+            </div>
+            <div class="modal-body" style="padding:10px;">
+                <div class="search-wrapper">
+                    <input type="text" id="uniIdSearch" placeholder="Enter Student ID....">
+                    <button class="btn-confirm" onclick="searchAndPopulate()"><i class="fa fa-search"></i></button>
+                </div>
+                <div id="searchResultsList"></div>
+                <div id="studentDetailsBox" style="display:none;">
+                    <div class="student-profile-card">
+                        <div id="accountInfoDisplay"></div>
                     </div>
-                    <div>
-                        <label style="font-size:12px;font-weight:700;color:#4e73df;">Lab Room</label>
-                        <select id="uniLab" class="modern-select" onchange="renderUniPCGrid()">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;padding:0 20px;">
+                        <div>
+                            <label style="font-size:13px;font-weight:700;color:#4e73df;">Purpose</label>
+                            <select id="uniPurpose" class="modern-select">
+                                <option>C Programming</option>
+                                <option>Java Projects</option>
+                                <option>Web Development</option>
+                                <option>Python/Data Science</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:12px;font-weight:700;color:#4e73df;">Lab Room</label>
+                            <select id="uniLab" class="modern-select" onchange="renderUniPCGrid()">
                                 <option>Lab 524</option>
                                 <option>Lab 525</option>
                                 <option>Lab 526</option>
@@ -532,356 +1368,364 @@
                             </select>
                         </div>
                     </div>
-                
-                <div id="uniPCSection" style="display: none; margin-top: 12px; padding: 0 5px;">
-                    <label style="font-size: 13px; font-weight: 700; color: #4e73df;">Select PC</label>
-                    <div id="uniPCGrid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 6px; max-height: 180px; overflow-y: auto;"></div>
-                    <input type="hidden" id="uniPCNumber" value="">
+
+                    <div id="uniPCSection" style="display: none; margin-top: 12px; padding: 0 5px;">
+                        <label style="font-size: 13px; font-weight: 700; color: #4e73df;">Select PC</label>
+                        <div id="uniPCGrid"
+                            style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 6px; max-height: 180px; overflow-y: auto;">
+                        </div>
+                        <input type="hidden" id="uniPCNumber" value="">
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
-
-        <div class="modal-footer" id="uniFooter" style="display:none;">
-            <button class="btn-cancel" onclick="closeModal('unifiedSitInModal')">Cancel</button>
-            <button class="btn-confirm" onclick="submitUnifiedSitIn()">Confirm Sit-In</button>
-        </div>
-    </div>
-</div>
-
-<!-- ── PAGE ── -->
-<div class="page-wrapper">
-    
-    <div class="page-title"><i class="fa fa-line-chart"></i> Analytics & Reports</div>
-
-    <!-- STAT CARDS -->
-    <div class="stats-row">
-        <div class="stat-card blue">
-            <div class="stat-icon icon-blue"><i class="fa-solid fa-user-graduate"></i></div>
-            <div>
-                <div class="stat-label">Registered Students</div>
-                <div class="stat-value" id="statRegistered">—</div>
-            </div>
-        </div>
-        <div class="stat-card amber">
-            <div class="stat-icon icon-amber"><i class="fa-solid fa-laptop"></i></div>
-            <div>
-                <div class="stat-label">Total Sit-ins</div>
-                <div class="stat-value" id="statTotalSitin">—</div>
-            </div>
-        </div>
-        <div class="stat-card green">
-            <div class="stat-icon icon-green"><i class="fa-solid fa-circle-dot"></i></div>
-            <div>
-                <div class="stat-label">Active Now</div>
-                <div class="stat-value" id="statActiveNow">—</div>
+            <div class="modal-footer" id="uniFooter" style="display:none;">
+                <button class="btn-cancel" onclick="closeModal('unifiedSitInModal')">Cancel</button>
+                <button class="btn-confirm" onclick="submitUnifiedSitIn()">Confirm Sit-In</button>
             </div>
         </div>
     </div>
 
-    <!-- TOP CHARTS -->
-    <div class="charts-top">
-        <div class="chart-card">
-            <div class="chart-card-header">
-                <div class="chart-card-title"><i class="fa fa-bar-chart"></i> Sit-ins Over Time</div>
-                <div class="toggle-group">
-                    <button class="toggle-btn active" onclick="switchTime('daily',this)">Daily</button>
-                    <button class="toggle-btn" onclick="switchTime('weekly',this)">Weekly</button>
-                    <button class="toggle-btn" onclick="switchTime('monthly',this)">Monthly</button>
+    <!-- ── PAGE ── -->
+    <div class="page-wrapper">
+
+        <div class="page-title"><i class="fa fa-line-chart"></i> Analytics & Reports</div>
+
+        <!-- STAT CARDS -->
+        <div class="stats-row">
+            <div class="stat-card blue">
+                <div class="stat-icon icon-blue"><i class="fa-solid fa-user-graduate"></i></div>
+                <div>
+                    <div class="stat-label">Registered Students</div>
+                    <div class="stat-value" id="statRegistered">—</div>
                 </div>
             </div>
-            <div class="chart-card-body"><canvas id="timeChart"></canvas></div>
+            <div class="stat-card amber">
+                <div class="stat-icon icon-amber"><i class="fa-solid fa-laptop"></i></div>
+                <div>
+                    <div class="stat-label">Total Sit-ins</div>
+                    <div class="stat-value" id="statTotalSitin">—</div>
+                </div>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-icon icon-green"><i class="fa-solid fa-circle-dot"></i></div>
+                <div>
+                    <div class="stat-label">Active Now</div>
+                    <div class="stat-value" id="statActiveNow">—</div>
+                </div>
+            </div>
         </div>
 
-        <div class="chart-card">
-            <div class="chart-card-header">
-                <div class="chart-card-title"><i class="fa fa-pie-chart"></i> By Purpose</div>
+        <!-- TOP CHARTS -->
+        <div class="charts-top">
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <div class="chart-card-title"><i class="fa fa-bar-chart"></i> Sit-ins Over Time</div>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" onclick="switchTime('daily',this)">Daily</button>
+                        <button class="toggle-btn" onclick="switchTime('weekly',this)">Weekly</button>
+                        <button class="toggle-btn" onclick="switchTime('monthly',this)">Monthly</button>
+                    </div>
+                </div>
+                <div class="chart-card-body"><canvas id="timeChart"></canvas></div>
             </div>
-            <div class="chart-card-body"><canvas id="purposeChart"></canvas></div>
+
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <div class="chart-card-title"><i class="fa fa-pie-chart"></i> By Purpose</div>
+                </div>
+                <div class="chart-card-body"><canvas id="purposeChart"></canvas></div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <div class="chart-card-title"><i class="fa fa-building"></i> By Lab</div>
+                </div>
+                <div class="chart-card-body"><canvas id="labChart"></canvas></div>
+            </div>
         </div>
 
-        <div class="chart-card">
-            <div class="chart-card-header">
-                <div class="chart-card-title"><i class="fa fa-building"></i> By Lab</div>
+        <!-- BOTTOM CHARTS -->
+        <div class="charts-bottom">
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <div class="chart-card-title"><i class="fa fa-trophy"></i> Top Students</div>
+                    <button class="btn-export" onclick="exportCSV()"><i class="fa fa-download"></i> Export CSV</button>
+                </div>
+                <div class="chart-card-body" style="padding:0;">
+                    <div id="topStudentsContainer">
+                        <div class="chart-empty"><i class="fa fa-spinner fa-spin"></i> Loading...</div>
+                    </div>
+                </div>
             </div>
-            <div class="chart-card-body"><canvas id="labChart"></canvas></div>
+
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <div class="chart-card-title"><i class="fa fa-graduation-cap"></i> By Course</div>
+                </div>
+                <div class="chart-card-body" style="padding:0;">
+                    <div id="courseContainer">
+                        <div class="chart-empty"><i class="fa fa-spinner fa-spin"></i> Loading...</div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 
-    <!-- BOTTOM CHARTS -->
-    <div class="charts-bottom">
-        <div class="chart-card">
-            <div class="chart-card-header">
-                <div class="chart-card-title"><i class="fa fa-trophy"></i> Top Students</div>
-                <button class="btn-export" onclick="exportCSV()"><i class="fa fa-download"></i> Export CSV</button>
-            </div>
-            <div class="chart-card-body" style="padding:0;">
-                <div id="topStudentsContainer"><div class="chart-empty"><i class="fa fa-spinner fa-spin"></i> Loading...</div></div>
-            </div>
-        </div>
-
-        <div class="chart-card">
-            <div class="chart-card-header">
-                <div class="chart-card-title"><i class="fa fa-graduation-cap"></i> By Course</div>
-            </div>
-            <div class="chart-card-body" style="padding:0;">
-                <div id="courseContainer"><div class="chart-empty"><i class="fa fa-spinner fa-spin"></i> Loading...</div></div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    /* ══════════════════════════════════════
-    DARK / LIGHT MODE
-    ══════════════════════════════════════ */
-    function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        const icon  = document.getElementById('themeIcon');
-        const label = document.getElementById('themeLabel');
-        if (theme === 'dark') {
-            icon.className  = 'fa-solid fa-sun';
-        } else {
-            icon.className  = 'fa-solid fa-moon';
-        }
-    }
-    
-    function toggleTheme() {
-        const current = document.documentElement.getAttribute('data-theme');
-        const next    = current === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('ccs_theme', next);
-        applyTheme(next);
-    
-        // Animate the icon on toggle
-        const icon = document.getElementById('themeIcon');
-        icon.style.transform = 'rotate(360deg)';
-        icon.style.transition = 'transform 0.4s ease';
-        setTimeout(() => { icon.style.transform = ''; icon.style.transition = ''; }, 400);
-    }
-    
-    // Load saved theme on page start
-    (function() {
-        const saved = localStorage.getItem('ccs_theme') || 'light';
-        applyTheme(saved);
-    })();
-
-const BASE   = 'http://localhost:3000';
-const COLORS = ['#4e73df','#ffc107','#1cc88a','#e74c3c','#9b59b6','#e67e22','#3498db','#1abc9c'];
-
-let timeChartInst = null, purposeChartInst = null, labChartInst = null;
-let _allSitins = [], _topStudents = [];
-
-Chart.defaults.color       = '#555';
-Chart.defaults.borderColor = '#e3e6f0';
-Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
-
-// ── LOAD ──────────────────────────────────────────────────────────────────
-async function loadAll() {
-    try {
-        const [dashRes, sitinsRes, leaderRes] = await Promise.all([
-            fetch(`${BASE}/admin/dashboard-data`),
-            fetch(`${BASE}/admin/reports`),
-            fetch(`${BASE}/admin/leaderboard`)
-        ]);
-        const dash   = await dashRes.json();
-        _allSitins   = await sitinsRes.json();
-        _topStudents = await leaderRes.json();
-
-        document.getElementById('statRegistered').textContent  = dash.registered   ?? '—';
-        document.getElementById('statTotalSitin').textContent  = dash.totalSitin   ?? '—';
-        document.getElementById('statActiveNow').textContent   = dash.currentSitin ?? '—';
-
-        renderTimeChart('daily');
-        renderPurposeChart();
-        renderLabChart();
-        renderTopStudents();
-        renderCourseTable();
-    } catch(e) { console.error('Analytics error:', e); }
-}
-
-// ── TIME CHART ────────────────────────────────────────────────────────────
-function switchTime(mode, btn) {
-    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderTimeChart(mode);
-}
-
-function renderTimeChart(mode) {
-    const grouped = {};
-    _allSitins.forEach(row => {
-        if (!row.date) return;
-        let key = row.date;
-        if (mode === 'weekly') {
-            const d = new Date(row.date);
-            const w = Math.ceil((((d - new Date(d.getFullYear(),0,1))/86400000) + new Date(d.getFullYear(),0,1).getDay() + 1) / 7);
-            key = `${d.getFullYear()}-W${String(w).padStart(2,'0')}`;
-        } else if (mode === 'monthly') {
-            key = row.date.slice(0,7);
-        }
-        grouped[key] = (grouped[key] || 0) + 1;
-    });
-    const labels = Object.keys(grouped).sort();
-    if (timeChartInst) timeChartInst.destroy();
-    timeChartInst = new Chart(document.getElementById('timeChart').getContext('2d'), {
-        type: 'bar',
-        data: { labels, datasets: [{ label:'Sit-ins', data:labels.map(k=>grouped[k]), backgroundColor:'#4e73df', borderRadius:5, borderSkipped:false }] },
-        options: {
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: {
-                x: { grid:{ color:'#f0f2f5' }, ticks:{ color:'#858796' } },
-                y: { grid:{ color:'#f0f2f5' }, ticks:{ color:'#858796', stepSize:1 }, beginAtZero:true }
+    <script>
+        /* ══════════════════════════════════════
+        DARK / LIGHT MODE
+        ══════════════════════════════════════ */
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            const icon = document.getElementById('themeIcon');
+            const label = document.getElementById('themeLabel');
+            if (theme === 'dark') {
+                icon.className = 'fa-solid fa-sun';
+                if (label) label.textContent = 'Light Mode';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+                if (label) label.textContent = 'Dark Mode';
             }
         }
-    });
-}
 
-// ── PURPOSE CHART ─────────────────────────────────────────────────────────
-function renderPurposeChart() {
-    const grouped = {};
-    _allSitins.forEach(r => { const p=r.purpose||'Other'; grouped[p]=(grouped[p]||0)+1; });
-    const labels = Object.keys(grouped);
-    if (purposeChartInst) purposeChartInst.destroy();
-    purposeChartInst = new Chart(document.getElementById('purposeChart').getContext('2d'), {
-        type: 'doughnut',
-        data: { labels, datasets:[{ data:labels.map(k=>grouped[k]), backgroundColor:COLORS, borderColor:'#fff', borderWidth:3 }] },
-        options: { responsive:true, cutout:'60%', plugins:{ legend:{ position:'bottom', labels:{ color:'#555', boxWidth:12, font:{ size:11 } } } } }
-    });
-}
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('ccs_theme', next);
+            applyTheme(next);
 
-// ── LAB CHART ─────────────────────────────────────────────────────────────
-function renderLabChart() {
-    const grouped = {};
-    _allSitins.forEach(r => { const l=r.lab||'Unknown'; grouped[l]=(grouped[l]||0)+1; });
-    const labels = Object.keys(grouped).sort();
-    if (labChartInst) labChartInst.destroy();
-    labChartInst = new Chart(document.getElementById('labChart').getContext('2d'), {
-        type: 'bar',
-        data: { labels, datasets:[{ label:'Sit-ins', data:labels.map(k=>grouped[k]), backgroundColor:COLORS, borderRadius:5, borderSkipped:false }] },
-        options: {
-            indexAxis:'y', responsive:true,
-            plugins:{ legend:{ display:false } },
-            scales: {
-                x:{ grid:{ color:'#f0f2f5' }, ticks:{ color:'#858796', stepSize:1 }, beginAtZero:true },
-                y:{ grid:{ display:false }, ticks:{ color:'#333' } }
-            }
+            // Animate the icon on toggle
+            const icon = document.getElementById('themeIcon');
+            icon.style.transform = 'rotate(360deg)';
+            icon.style.transition = 'transform 0.4s ease';
+            setTimeout(() => { icon.style.transform = ''; icon.style.transition = ''; }, 400);
         }
-    });
-}
 
-// ── TOP STUDENTS ──────────────────────────────────────────────────────────
-function renderTopStudents() {
-    const container = document.getElementById('topStudentsContainer');
-    const top = _topStudents.slice(0, 8);
-    if (!top.length) { container.innerHTML='<div class="chart-empty">No student data yet.</div>'; return; }
+        // Load saved theme on page start
+        (function () {
+            const saved = localStorage.getItem('ccs_theme') || 'light';
+            applyTheme(saved);
+        })();
 
-    const pipClass=['pip-1','pip-2','pip-3'], trophyClr=['#ffd700','#c0c0c0','#cd7f32'];
-    const rows = top.map((s,i) => {
-        const rank=i+1;
-        const pip = rank<=3
-            ? `<span class="rank-pip ${pipClass[rank-1]}"><i class="fa fa-trophy" style="color:${trophyClr[rank-1]};font-size:12px;"></i></span>`
-            : `<span class="rank-pip pip-n">#${rank}</span>`;
-        return `<tr>
+        const BASE = 'http://localhost:3000';
+        const COLORS = ['#4e73df', '#ffc107', '#1cc88a', '#e74c3c', '#9b59b6', '#e67e22', '#3498db', '#1abc9c'];
+
+        let timeChartInst = null, purposeChartInst = null, labChartInst = null;
+        let _allSitins = [], _topStudents = [];
+
+        Chart.defaults.color = '#555';
+        Chart.defaults.borderColor = '#e3e6f0';
+        Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+
+        // ── LOAD ──────────────────────────────────────────────────────────────────
+        async function loadAll() {
+            try {
+                const [dashRes, sitinsRes, leaderRes] = await Promise.all([
+                    fetch(`${BASE}/admin/dashboard-data`),
+                    fetch(`${BASE}/admin/reports`),
+                    fetch(`${BASE}/admin/leaderboard`)
+                ]);
+                const dash = await dashRes.json();
+                _allSitins = await sitinsRes.json();
+                _topStudents = await leaderRes.json();
+
+                document.getElementById('statRegistered').textContent = dash.registered ?? '—';
+                document.getElementById('statTotalSitin').textContent = dash.totalSitin ?? '—';
+                document.getElementById('statActiveNow').textContent = dash.currentSitin ?? '—';
+
+                renderTimeChart('daily');
+                renderPurposeChart();
+                renderLabChart();
+                renderTopStudents();
+                renderCourseTable();
+            } catch (e) { console.error('Analytics error:', e); }
+        }
+
+        // ── TIME CHART ────────────────────────────────────────────────────────────
+        function switchTime(mode, btn) {
+            document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderTimeChart(mode);
+        }
+
+        function renderTimeChart(mode) {
+            const grouped = {};
+            _allSitins.forEach(row => {
+                if (!row.date) return;
+                let key = row.date;
+                if (mode === 'weekly') {
+                    const d = new Date(row.date);
+                    const w = Math.ceil((((d - new Date(d.getFullYear(), 0, 1)) / 86400000) + new Date(d.getFullYear(), 0, 1).getDay() + 1) / 7);
+                    key = `${d.getFullYear()}-W${String(w).padStart(2, '0')}`;
+                } else if (mode === 'monthly') {
+                    key = row.date.slice(0, 7);
+                }
+                grouped[key] = (grouped[key] || 0) + 1;
+            });
+            const labels = Object.keys(grouped).sort();
+            if (timeChartInst) timeChartInst.destroy();
+            timeChartInst = new Chart(document.getElementById('timeChart').getContext('2d'), {
+                type: 'bar',
+                data: { labels, datasets: [{ label: 'Sit-ins', data: labels.map(k => grouped[k]), backgroundColor: '#4e73df', borderRadius: 5, borderSkipped: false }] },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: '#f0f2f5' }, ticks: { color: '#858796' } },
+                        y: { grid: { color: '#f0f2f5' }, ticks: { color: '#858796', stepSize: 1 }, beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        // ── PURPOSE CHART ─────────────────────────────────────────────────────────
+        function renderPurposeChart() {
+            const grouped = {};
+            _allSitins.forEach(r => { const p = r.purpose || 'Other'; grouped[p] = (grouped[p] || 0) + 1; });
+            const labels = Object.keys(grouped);
+            if (purposeChartInst) purposeChartInst.destroy();
+            purposeChartInst = new Chart(document.getElementById('purposeChart').getContext('2d'), {
+                type: 'doughnut',
+                data: { labels, datasets: [{ data: labels.map(k => grouped[k]), backgroundColor: COLORS, borderColor: '#fff', borderWidth: 3 }] },
+                options: { responsive: true, cutout: '60%', plugins: { legend: { position: 'bottom', labels: { color: '#555', boxWidth: 12, font: { size: 11 } } } } }
+            });
+        }
+
+        // ── LAB CHART ─────────────────────────────────────────────────────────────
+        function renderLabChart() {
+            const grouped = {};
+            _allSitins.forEach(r => { const l = r.lab || 'Unknown'; grouped[l] = (grouped[l] || 0) + 1; });
+            const labels = Object.keys(grouped).sort();
+            if (labChartInst) labChartInst.destroy();
+            labChartInst = new Chart(document.getElementById('labChart').getContext('2d'), {
+                type: 'bar',
+                data: { labels, datasets: [{ label: 'Sit-ins', data: labels.map(k => grouped[k]), backgroundColor: COLORS, borderRadius: 5, borderSkipped: false }] },
+                options: {
+                    indexAxis: 'y', responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: '#f0f2f5' }, ticks: { color: '#858796', stepSize: 1 }, beginAtZero: true },
+                        y: { grid: { display: false }, ticks: { color: '#333' } }
+                    }
+                }
+            });
+        }
+
+        // ── TOP STUDENTS ──────────────────────────────────────────────────────────
+        function renderTopStudents() {
+            const container = document.getElementById('topStudentsContainer');
+            const top = _topStudents.slice(0, 8);
+            if (!top.length) { container.innerHTML = '<div class="chart-empty">No student data yet.</div>'; return; }
+
+            const pipClass = ['pip-1', 'pip-2', 'pip-3'], trophyClr = ['#ffd700', '#c0c0c0', '#cd7f32'];
+            const rows = top.map((s, i) => {
+                const rank = i + 1;
+                const pip = rank <= 3
+                    ? `<span class="rank-pip ${pipClass[rank - 1]}"><i class="fa fa-trophy" style="color:${trophyClr[rank - 1]};font-size:12px;"></i></span>`
+                    : `<span class="rank-pip pip-n">#${rank}</span>`;
+                return `<tr>
             <td>${pip}</td>
             <td><b>${s.firstName} ${s.lastName}</b><br><span style="font-size:11px;color:#858796;">${s.idNumber}</span></td>
-            <td>${s.course||'—'}</td>
+            <td>${s.course || '—'}</td>
             <td>${s.sitins}</td>
             <td><span class="pts-badge">${s.points} pts</span></td>
         </tr>`;
-    }).join('');
+            }).join('');
 
-    container.innerHTML = `<table class="an-table"><thead><tr><th>Rank</th><th>Student</th><th>Course</th><th>Sit-ins</th><th>Points</th></tr></thead><tbody>${rows}</tbody></table>`;
-}
+            container.innerHTML = `<table class="an-table"><thead><tr><th>Rank</th><th>Student</th><th>Course</th><th>Sit-ins</th><th>Points</th></tr></thead><tbody>${rows}</tbody></table>`;
+        }
 
-// ── COURSE TABLE ──────────────────────────────────────────────────────────
-function renderCourseTable() {
-    const courseMap = {};
-    _topStudents.forEach(s => {
-        const c=s.course||'Unknown';
-        if (!courseMap[c]) courseMap[c]={sitins:0,students:0};
-        courseMap[c].sitins   += parseInt(s.sitins)||0;
-        courseMap[c].students += 1;
-    });
-    const entries = Object.entries(courseMap).sort((a,b)=>b[1].sitins-a[1].sitins);
-    const max     = entries[0]?.[1].sitins||1;
-    const container = document.getElementById('courseContainer');
-    if (!entries.length) { container.innerHTML='<div class="chart-empty">No course data yet.</div>'; return; }
+        // ── COURSE TABLE ──────────────────────────────────────────────────────────
+        function renderCourseTable() {
+            const courseMap = {};
+            _topStudents.forEach(s => {
+                const c = s.course || 'Unknown';
+                if (!courseMap[c]) courseMap[c] = { sitins: 0, students: 0 };
+                courseMap[c].sitins += parseInt(s.sitins) || 0;
+                courseMap[c].students += 1;
+            });
+            const entries = Object.entries(courseMap).sort((a, b) => b[1].sitins - a[1].sitins);
+            const max = entries[0]?.[1].sitins || 1;
+            const container = document.getElementById('courseContainer');
+            if (!entries.length) { container.innerHTML = '<div class="chart-empty">No course data yet.</div>'; return; }
 
-    const rows = entries.map(([course,val],i) => {
-        const pct = Math.round((val.sitins/max)*100);
-        return `<tr>
+            const rows = entries.map(([course, val], i) => {
+                const pct = Math.round((val.sitins / max) * 100);
+                return `<tr>
             <td><b>${course}</b></td>
             <td style="color:#858796;">${val.students}</td>
             <td>${val.sitins}</td>
             <td style="min-width:100px;">
-                <div class="course-bar-wrap"><div class="course-bar-fill" style="width:${pct}%;background:${COLORS[i%COLORS.length]};"></div></div>
+                <div class="course-bar-wrap"><div class="course-bar-fill" style="width:${pct}%;background:${COLORS[i % COLORS.length]};"></div></div>
             </td>
         </tr>`;
-    }).join('');
+            }).join('');
 
-    container.innerHTML = `<table class="an-table"><thead><tr><th>Course</th><th>Students</th><th>Sit-ins</th><th>Share</th></tr></thead><tbody>${rows}</tbody></table>`;
-}
-
-// ── EXPORT CSV ────────────────────────────────────────────────────────────
-function exportCSV() {
-    if (!_allSitins.length) { Swal.fire({icon:'info',title:'No Data',text:'Nothing to export yet.'}); return; }
-    const headers = ['ID Number','First Name','Last Name','Purpose','Lab','Time In','Time Out','Date'];
-    const rows    = _allSitins.map(r =>
-        [r.idNumber,r.firstName,r.lastName,r.purpose,r.lab,r.timeIn,r.timeOut||'',r.date]
-            .map(v=>`"${(v??'').toString().replace(/"/g,'""')}"`)
-            .join(',')
-    );
-    const blob = new Blob([[headers.join(','),...rows].join('\n')],{type:'text/csv'});
-    const url  = URL.createObjectURL(blob);
-    Object.assign(document.createElement('a'),{href:url,download:`sitin_${new Date().toISOString().slice(0,10)}.csv`}).click();
-    URL.revokeObjectURL(url);
-}
-
-// ── UNIFIED MODAL ─────────────────────────────────────────────────────────
-function openUnifiedModal() {
-    document.getElementById('unifiedSitInModal').style.display='flex';
-    document.getElementById('searchResultsList').innerHTML='';
-    document.getElementById('studentDetailsBox').style.display='none';
-    document.getElementById('uniFooter').style.display='none';
-    document.getElementById('uniIdSearch').value='';
-    document.getElementById('uniPCSection').style.display = 'none';
-    document.getElementById('uniPCNumber').value = '';
-}
-function openModal(id) { document.getElementById(id).style.display='flex'; }
-function closeModal(id) { document.getElementById(id).style.display='none'; }
-
-let searchTimer;
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('uniIdSearch').addEventListener('input', function() {
-        clearTimeout(searchTimer);
-        if (!this.value.trim()) {
-            document.getElementById('searchResultsList').innerHTML='';
-            document.getElementById('studentDetailsBox').style.display='none';
-            document.getElementById('uniFooter').style.display='none';
-            return;
+            container.innerHTML = `<table class="an-table"><thead><tr><th>Course</th><th>Students</th><th>Sit-ins</th><th>Share</th></tr></thead><tbody>${rows}</tbody></table>`;
         }
-        searchTimer = setTimeout(searchAndPopulate, 300);
-    });
-    loadAll();
-});
 
-async function searchAndPopulate() {
-    const query = document.getElementById('uniIdSearch').value.trim();
-    const list  = document.getElementById('searchResultsList');
-    const details = document.getElementById('studentDetailsBox');
+        // ── EXPORT CSV ────────────────────────────────────────────────────────────
+        function exportCSV() {
+            if (!_allSitins.length) { Swal.fire({ icon: 'info', title: 'No Data', text: 'Nothing to export yet.' }); return; }
+            const headers = ['ID Number', 'First Name', 'Last Name', 'Purpose', 'Lab', 'Time In', 'Time Out', 'Date'];
+            const rows = _allSitins.map(r =>
+                [r.idNumber, r.firstName, r.lastName, r.purpose, r.lab, r.timeIn, r.timeOut || '', r.date]
+                    .map(v => `"${(v ?? '').toString().replace(/"/g, '""')}"`)
+                    .join(',')
+            );
+            const blob = new Blob([[headers.join(','), ...rows].join('\n')], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            Object.assign(document.createElement('a'), { href: url, download: `sitin_${new Date().toISOString().slice(0, 10)}.csv` }).click();
+            URL.revokeObjectURL(url);
+        }
 
-    if (!query) return;
+        // ── UNIFIED MODAL ─────────────────────────────────────────────────────────
+        function openUnifiedModal() {
+            document.getElementById('unifiedSitInModal').style.display = 'flex';
+            document.getElementById('searchResultsList').innerHTML = '';
+            document.getElementById('studentDetailsBox').style.display = 'none';
+            document.getElementById('uniFooter').style.display = 'none';
+            document.getElementById('uniIdSearch').value = '';
+            document.getElementById('uniPCSection').style.display = 'none';
+            document.getElementById('uniPCNumber').value = '';
+        }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    try {
-        const res  = await fetch(`http://localhost:3000/search-students?q=${encodeURIComponent(query)}`);
-        const data = await res.json();
+        let searchTimer;
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('uniIdSearch').addEventListener('input', function () {
+                clearTimeout(searchTimer);
+                if (!this.value.trim()) {
+                    document.getElementById('searchResultsList').innerHTML = '';
+                    document.getElementById('studentDetailsBox').style.display = 'none';
+                    document.getElementById('uniFooter').style.display = 'none';
+                    return;
+                }
+                searchTimer = setTimeout(searchAndPopulate, 300);
+            });
+            loadAll();
+        });
 
-        if (res.ok && data.length > 0) {
-            list.innerHTML = data.map(student => {
-                const initials = (student.firstName[0] + student.lastName[0]).toUpperCase();
-                return `
+        async function searchAndPopulate() {
+            const query = document.getElementById('uniIdSearch').value.trim();
+            const list = document.getElementById('searchResultsList');
+            const details = document.getElementById('studentDetailsBox');
+
+            if (!query) return;
+
+            try {
+                const res = await fetch(`http://localhost:3000/search-students?q=${encodeURIComponent(query)}`);
+                const data = await res.json();
+
+                if (res.ok && data.length > 0) {
+                    list.innerHTML = data.map(student => {
+                        const initials = (student.firstName[0] + student.lastName[0]).toUpperCase();
+                        return `
                     <div class="search-result-item" onclick='selectStudent(${JSON.stringify(student)})'>
                         <div class="user-avatar">${initials}</div>
                         <div class="user-info-text">
@@ -896,24 +1740,24 @@ async function searchAndPopulate() {
                             <span style="color:#4e73df; font-size:10px;">Click to select</span>
                         </div>
                     </div>`;
-            }).join('');
-            details.style.display = 'none';
-            document.getElementById('uniFooter').style.display = 'none';
-        } else {
-            list.innerHTML = '<p style="text-align:center; color:#858796; font-size:12px; padding:10px;">No student found.</p>';
+                    }).join('');
+                    details.style.display = 'none';
+                    document.getElementById('uniFooter').style.display = 'none';
+                } else {
+                    list.innerHTML = '<p style="text-align:center; color:#858796; font-size:12px; padding:10px;">No student found.</p>';
+                }
+            } catch (e) { console.error("Search Error:", e); }
         }
-    } catch (e) { console.error("Search Error:", e); }
-}
 
-function selectStudent(data) {
-    document.getElementById('searchResultsList').innerHTML = '';
-    document.getElementById('studentDetailsBox').style.display = 'block';
-    document.getElementById('uniFooter').style.display = 'flex';
+        function selectStudent(data) {
+            document.getElementById('searchResultsList').innerHTML = '';
+            document.getElementById('studentDetailsBox').style.display = 'block';
+            document.getElementById('uniFooter').style.display = 'flex';
 
-    document.getElementById('uniIdSearch').value = data.idNumber;
+            document.getElementById('uniIdSearch').value = data.idNumber;
 
-    const remaining = data.remainingSession ?? 30;
-    document.getElementById('accountInfoDisplay').innerHTML = `
+            const remaining = data.remainingSession ?? 30;
+            document.getElementById('accountInfoDisplay').innerHTML = `
         <span class="profile-name">${data.firstName} ${data.lastName}</span>
         <div class="profile-meta">
             <div class="meta-item"><label>ID Number</label><span>${data.idNumber}</span></div>
@@ -925,101 +1769,102 @@ function selectStudent(data) {
         </div>
         ${remaining <= 0 ? '<p style="color:#dc3545; font-size:12px; margin-top:8px;"><i class="fa fa-exclamation-triangle"></i> This student has no remaining sessions.</p>' : ''}`;
 
-    const confirmBtn = document.querySelector('#uniFooter .btn-confirm');
-    confirmBtn.disabled      = remaining <= 0;
-    confirmBtn.style.opacity = remaining <= 0 ? '0.5' : '1';
-    confirmBtn.style.cursor  = remaining <= 0 ? 'not-allowed' : 'pointer';
-    document.getElementById('uniPCSection').style.display = 'block';
-    renderUniPCGrid();
-}
-
-function renderUniPCGrid() {
-    const grid = document.getElementById('uniPCGrid');
-    document.getElementById('uniPCNumber').value = '';
-    grid.innerHTML = '';
-    for (let i = 1; i <= 45; i++) {
-        const pc = `PC${i}`;
-        const btn = document.createElement('button');
-        btn.textContent = pc;
-        btn.type = 'button';
-        btn.style.cssText = 'padding: 5px 2px; font-size: 11px; border: 1px solid #4e73df; border-radius: 4px; background: transparent; color: #4e73df; cursor: pointer; font-weight: 600;';
-        btn.onclick = function () {
-            document.querySelectorAll('#uniPCGrid button').forEach(b => {
-                b.style.background = 'transparent';
-                b.style.color = '#4e73df';
-            });
-            btn.style.background = '#4e73df';
-            btn.style.color = 'white';
-            document.getElementById('uniPCNumber').value = pc;
-        };
-        grid.appendChild(btn);
-    }
-}
-
-async function submitUnifiedSitIn() {
-    const idNumber = document.getElementById('uniIdSearch').value.trim();
-    const purpose  = document.getElementById('uniPurpose').value;
-    const lab      = document.getElementById('uniLab').value;
-    const pcNumber = document.getElementById('uniPCNumber').value;
-
-    if (!idNumber) return Swal.fire('Warning', 'No student selected. Please search and click a student first.', 'warning');
-    if (!pcNumber) return Swal.fire('Warning', 'Please select a PC number.', 'warning');
-
-    try {
-        const res = await fetch('http://localhost:3000/sit-in', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ idNumber, purpose, lab, pcNumber })
-        });
-        if (res.ok) {
-            await Swal.fire({ icon: 'success', title: 'Sit-in Recorded!', timer: 1500, showConfirmButton: false });
-            closeModal('unifiedSitInModal');
-        } else {
-            const txt = await res.text();
-            Swal.fire('Error', txt, 'error');
+            const confirmBtn = document.querySelector('#uniFooter .btn-confirm');
+            confirmBtn.disabled = remaining <= 0;
+            confirmBtn.style.opacity = remaining <= 0 ? '0.5' : '1';
+            confirmBtn.style.cursor = remaining <= 0 ? 'not-allowed' : 'pointer';
+            document.getElementById('uniPCSection').style.display = 'block';
+            renderUniPCGrid();
         }
-    } catch (e) { Swal.fire('Error', 'Connection failed.', 'error'); }
-}
 
-async function logout() {
-        const { isConfirmed } = await Swal.fire({
-            title: 'Logout Admin?',
-            text: "This will end your admin session.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, Logout!',
-            cancelButtonText: 'Stay Logged In'
-        });
+        function renderUniPCGrid() {
+            const grid = document.getElementById('uniPCGrid');
+            document.getElementById('uniPCNumber').value = '';
+            grid.innerHTML = '';
+            for (let i = 1; i <= 45; i++) {
+                const pc = `PC${i}`;
+                const btn = document.createElement('button');
+                btn.textContent = pc;
+                btn.type = 'button';
+                btn.style.cssText = 'padding: 5px 2px; font-size: 11px; border: 1px solid #4e73df; border-radius: 4px; background: transparent; color: #4e73df; cursor: pointer; font-weight: 600;';
+                btn.onclick = function () {
+                    document.querySelectorAll('#uniPCGrid button').forEach(b => {
+                        b.style.background = 'transparent';
+                        b.style.color = '#4e73df';
+                    });
+                    btn.style.background = '#4e73df';
+                    btn.style.color = 'white';
+                    document.getElementById('uniPCNumber').value = pc;
+                };
+                grid.appendChild(btn);
+            }
+        }
 
-        if (!isConfirmed) return;
+        async function submitUnifiedSitIn() {
+            const idNumber = document.getElementById('uniIdSearch').value.trim();
+            const purpose = document.getElementById('uniPurpose').value;
+            const lab = document.getElementById('uniLab').value;
+            const pcNumber = document.getElementById('uniPCNumber').value;
 
-        try {
+            if (!idNumber) return Swal.fire('Warning', 'No student selected. Please search and click a student first.', 'warning');
+            if (!pcNumber) return Swal.fire('Warning', 'Please select a PC number.', 'warning');
 
-            sessionStorage.removeItem("adminWelcomeShown");
-            localStorage.removeItem("adminId");
-            sessionStorage.clear();
+            try {
+                const res = await fetch('http://localhost:3000/sit-in', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ idNumber, purpose, lab, pcNumber })
+                });
+                if (res.ok) {
+                    await Swal.fire({ icon: 'success', title: 'Sit-in Recorded!', timer: 1500, showConfirmButton: false });
+                    closeModal('unifiedSitInModal');
+                } else {
+                    const txt = await res.text();
+                    Swal.fire('Error', txt, 'error');
+                }
+            } catch (e) { Swal.fire('Error', 'Connection failed.', 'error'); }
+        }
 
-            await Swal.fire({
-                icon: 'success',
-                title: 'Logged Out',
-                text: 'Admin session ended successfully.',
-                timer: 1500,
-                showConfirmButton: false
+        async function logout() {
+            const { isConfirmed } = await Swal.fire({
+                title: 'Logout Admin?',
+                text: "This will end your admin session.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, Logout!',
+                cancelButtonText: 'Stay Logged In'
             });
 
-            window.location.href = "index.html";
+            if (!isConfirmed) return;
 
-        } catch (err) {
-            console.error("Admin logout error:", err);
+            try {
 
-            sessionStorage.clear();
-            localStorage.removeItem("adminId");
+                sessionStorage.removeItem("adminWelcomeShown");
+                localStorage.removeItem("adminId");
+                sessionStorage.clear();
 
-            window.location.href = "index.html";
-        }
-    }   
-</script>
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'Logged Out',
+                    text: 'Admin session ended successfully.',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+
+                window.location.href = "index.html";
+
+            } catch (err) {
+                console.error("Admin logout error:", err);
+
+                sessionStorage.clear();
+                localStorage.removeItem("adminId");
+
+                window.location.href = "index.html";
+            }
+        }   
+    </script>
 </body>
+
 </html>

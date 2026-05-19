@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,17 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-         .register-wrapper {
+        .register-wrapper {
             display: flex;
             justify-content: center;
             padding: 40px 25px 60px;
             min-height: calc(100vh - 65px);
         }
- 
+
         .register-container {
             width: 100%;
             max-width: 950px;
@@ -23,7 +26,7 @@
             gap: 25px;
             align-items: flex-start;
         }
- 
+
         .profile-sidebar {
             width: 250px;
             flex-shrink: 0;
@@ -35,11 +38,11 @@
         .profile-avatar-card {
             background: #fff;
             border-radius: 20px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
             padding: 30px 25px 25px;
             text-align: center;
         }
- 
+
         .avatar-wrap {
             position: relative;
             width: 150px;
@@ -48,10 +51,10 @@
             cursor: pointer;
         }
 
-        .avatar-wrap:hover .avatar-overlay { 
-            opacity: 1; 
+        .avatar-wrap:hover .avatar-overlay {
+            opacity: 1;
         }
- 
+
         .profile-image {
             width: 150px;
             height: 150px;
@@ -74,13 +77,13 @@
             color: #fff;
             font-size: 15px;
         }
- 
+
         .avatar-hint {
             font-size: 11px;
             color: #bbb;
             margin-bottom: 10px;
         }
- 
+
         .profile-name {
             font-family: 'Sora', sans-serif;
             font-size: 14px;
@@ -101,15 +104,15 @@
             padding: 5px 15px;
             border-radius: 20px;
         }
- 
+
         /* ---- RIGHT FORM CARD ---- */
         .form-card {
             flex: 1;
             background: #fff;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
             padding: 35px 35px 30px;
         }
- 
+
         .form-card-header {
             display: flex;
             align-items: center;
@@ -143,7 +146,7 @@
             color: #999;
             margin-top: 2px;
         }
- 
+
         .section-label {
             font-size: 12px;
             font-weight: 700;
@@ -157,7 +160,7 @@
         .uc-card {
             background: #1a1a2e;
             border-radius: 20px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
             padding: 25px 20px;
             text-align: center;
             position: relative;
@@ -167,19 +170,23 @@
         .uc-card::before {
             content: '';
             position: absolute;
-            width: 170px; height: 170px;
+            width: 170px;
+            height: 170px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.05);
-            top: -50px; right: -50px;
+            background: rgba(255, 255, 255, 0.05);
+            top: -50px;
+            right: -50px;
         }
 
         .uc-card::after {
             content: '';
             position: absolute;
-            width: 100px; height: 100px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.04);
-            bottom: -30px; left: -30px;
+            background: rgba(255, 255, 255, 0.04);
+            bottom: -30px;
+            left: -30px;
         }
 
         .uc-card img {
@@ -190,21 +197,21 @@
             margin: 0 auto;
             position: relative;
             z-index: 1;
-            filter: drop-shadow(0 6px 16px rgba(44,62,112));
+            filter: drop-shadow(0 6px 16px rgba(44, 62, 112));
         }
 
         .uc-card-label {
             font-family: 'Sora', sans-serif;
             font-size: 12px;
             font-weight: 500;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             margin-top: 12px;
             position: relative;
             z-index: 1;
         }
- 
+
         /* ---- INPUTS ---- */
         .reg-input-group {
             position: relative;
@@ -227,11 +234,11 @@
         .reg-input-group input:focus {
             border-color: #1a1a2e;
             background: #fff;
-            box-shadow: 0 0 0 3px rgba(26,26,46,0.07);
+            box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.07);
         }
 
-        .reg-input-group input::placeholder { 
-            color: #aaa; 
+        .reg-input-group input::placeholder {
+            color: #aaa;
         }
 
         .reg-input-group input[readonly] {
@@ -240,7 +247,7 @@
             cursor: not-allowed;
             border-color: #eee;
         }
- 
+
         .input-icon {
             position: absolute;
             left: 12px;
@@ -250,7 +257,7 @@
             font-size: 13px;
             pointer-events: none;
         }
- 
+
         /* Dropdown */
         .reg-input-group.dropdown-group::after {
             content: '';
@@ -258,12 +265,14 @@
             right: 14px;
             top: 50%;
             transform: translateY(-50%);
-            width: 0; height: 0;
+            width: 0;
+            height: 0;
             border-left: 4px solid transparent;
             border-right: 4px solid transparent;
             border-top: 5px solid #bbb;
             pointer-events: none;
         }
+
         .dropdown-input {
             width: 100%;
             padding: 13px 45px 13px 35px;
@@ -281,21 +290,27 @@
             -webkit-appearance: none;
             -moz-appearance: none;
         }
+
         .dropdown-input:focus {
             border-color: #1a1a2e;
             background: #fff;
-            box-shadow: 0 0 0 3px rgba(26,26,46,0.07);
+            box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.07);
             color: #1a1a2e;
         }
-        .dropdown-input option { color: #1a1a2e; }
- 
-        .row-group { 
-            display: flex; gap: 12px; 
+
+        .dropdown-input option {
+            color: #1a1a2e;
         }
-        .row-group .reg-input-group { 
-            flex: 1; 
+
+        .row-group {
+            display: flex;
+            gap: 12px;
         }
- 
+
+        .row-group .reg-input-group {
+            flex: 1;
+        }
+
         /* ---- BUTTONS ---- */
         .btn-center {
             display: flex;
@@ -303,6 +318,7 @@
             margin-top: 22px;
             gap: 10px;
         }
+
         .cancel-btn {
             background: transparent;
             color: #999;
@@ -314,11 +330,12 @@
             font-weight: 600;
             cursor: pointer;
         }
-        .cancel-btn:hover { 
-            background: #f4f4f6; 
-            color: #555; 
+
+        .cancel-btn:hover {
+            background: #f4f4f6;
+            color: #555;
         }
- 
+
         .reg-submit-btn {
             background: #2c3e70;
             color: #fff;
@@ -400,8 +417,8 @@
         .theme-toggle-btn {
             display: flex;
             align-items: center;
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.22);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
             color: white;
             padding: 3px;
             border-radius: 20px;
@@ -409,13 +426,13 @@
         }
 
         .theme-toggle-btn:hover {
-            background: rgba(255,255,255,0.22);
+            background: rgba(255, 255, 255, 0.22);
             transform: translateY(-1px);
         }
 
         [data-theme="dark"] .theme-toggle-btn {
-            background: rgba(255,193,7,0.15);
-            border-color: rgba(255,193,7,0.4);
+            background: rgba(255, 193, 7, 0.15);
+            border-color: rgba(255, 193, 7, 0.4);
             color: #ffc107;
         }
 
@@ -423,55 +440,62 @@
            DARK / LIGHT MODE - CSS VARIABLES
         ══════════════════════════════════════ */
         :root {
-            --bg-page:      #f0f2f5;
-            --bg-card:      #ffffff;
-            --bg-input:     #f6f6f6;
-            --text-main:    #333333;
-            --text-muted:   #555555;
-            --text-label:   #1a1a2e;
+            --bg-page: #f0f2f5;
+            --bg-card: #ffffff;
+            --bg-input: #f6f6f6;
+            --text-main: #333333;
+            --text-muted: #555555;
+            --text-label: #1a1a2e;
             --border-color: #dddddd;
             --border-inner: #cccccc;
-            --shadow:       0 10px 30px rgba(0,0,0,0.2);
-            --table-even:   #f3f3f3;
-            --table-hover:  #f8f9fc;
-            --thead-bg:     #f0f2f5;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --table-even: #f3f3f3;
+            --table-hover: #f8f9fc;
+            --thead-bg: #f0f2f5;
         }
+
         [data-theme="dark"] {
-            --bg-page:      #0f1117;
-            --bg-card:      #1a1d27;
-            --bg-input:     #22263a;
-            --text-main:    #e0e0e0;
-            --text-muted:   #b0b8cc;
-            --text-label:   #ffffff;
+            --bg-page: #0f1117;
+            --bg-card: #1a1d27;
+            --bg-input: #22263a;
+            --text-main: #e0e0e0;
+            --text-muted: #b0b8cc;
+            --text-label: #ffffff;
             --border-color: #2e3347;
             --border-inner: #3a3f58;
-            --shadow:       0 10px 30px rgba(0,0,0,0.5);
-            --table-even:   #1e2235;
-            --table-hover:  #232840;
-            --thead-bg:     #1e2235;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --table-even: #1e2235;
+            --table-hover: #232840;
+            --thead-bg: #1e2235;
         }
+
         body {
             background: var(--bg-page);
             color: var(--text-main);
             transition: background 0.3s ease, color 0.3s ease;
         }
+
         [data-theme="dark"] .navbar {
             background: linear-gradient(to right, #111827, #0a0a1a) !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
         }
+
         [data-theme="dark"] .notif-dropdown {
             background: var(--bg-card);
             border-color: var(--border-color);
         }
- 
+
         /* ── register-container dark mode (editprofile) ── */
- 
+
         /* Page & wrapper */
-        .register-wrapper { background: var(--bg-page) !important; }
+        .register-wrapper {
+            background: var(--bg-page) !important;
+        }
+
         [data-theme="dark"] .register-wrapper {
             background: linear-gradient(135deg, #0f1117 0%, #111827 100%) !important;
         }
- 
+
         /* ── Left sidebar: avatar card ── */
         .profile-avatar-card {
             background: var(--bg-card) !important;
@@ -479,14 +503,25 @@
             box-shadow: var(--shadow) !important;
             transition: background 0.3s, border-color 0.3s;
         }
+
         .profile-image {
             border-color: var(--border-color) !important;
             background-color: var(--bg-input) !important;
         }
-        [data-theme="dark"] .profile-name   { color: #c8d0e8 !important; }
-        [data-theme="dark"] .profile-badge  { background: #2a3a6a !important; color: #fff !important; }
-        [data-theme="dark"] .avatar-hint    { color: var(--text-muted) !important; }
- 
+
+        [data-theme="dark"] .profile-name {
+            color: #c8d0e8 !important;
+        }
+
+        [data-theme="dark"] .profile-badge {
+            background: #2a3a6a !important;
+            color: #fff !important;
+        }
+
+        [data-theme="dark"] .avatar-hint {
+            color: var(--text-muted) !important;
+        }
+
         /* ── Right: form card ── */
         .form-card {
             background: var(--bg-card) !important;
@@ -494,70 +529,98 @@
             box-shadow: var(--shadow) !important;
             transition: background 0.3s, border-color 0.3s;
         }
-        [data-theme="dark"] .form-card-header { border-bottom-color: var(--border-inner) !important; }
-        [data-theme="dark"] .form-card-icon   { background: #1e2a50 !important; }
-        [data-theme="dark"] .form-card-title  { color: #c8d0e8 !important; }
-        [data-theme="dark"] .form-card-sub    { color: var(--text-muted) !important; }
-        [data-theme="dark"] .section-label    { color: var(--text-muted) !important; }
- 
+
+        [data-theme="dark"] .form-card-header {
+            border-bottom-color: var(--border-inner) !important;
+        }
+
+        [data-theme="dark"] .form-card-icon {
+            background: #1e2a50 !important;
+        }
+
+        [data-theme="dark"] .form-card-title {
+            color: #c8d0e8 !important;
+        }
+
+        [data-theme="dark"] .form-card-sub {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .section-label {
+            color: var(--text-muted) !important;
+        }
+
         /* ── Inputs ── */
         [data-theme="dark"] .reg-input-group input {
             background: var(--bg-input) !important;
             border-color: var(--border-color) !important;
             color: var(--text-main) !important;
         }
-        [data-theme="dark"] .reg-input-group input::placeholder { color: var(--text-muted) !important; }
+
+        [data-theme="dark"] .reg-input-group input::placeholder {
+            color: var(--text-muted) !important;
+        }
+
         [data-theme="dark"] .reg-input-group input:focus {
             border-color: #4e73df !important;
             background: #1e2235 !important;
-            box-shadow: 0 0 0 3px rgba(78,115,223,0.15) !important;
+            box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.15) !important;
         }
+
         [data-theme="dark"] .reg-input-group input[readonly] {
             background: #1a1d27 !important;
             color: var(--text-muted) !important;
             border-color: var(--border-color) !important;
             cursor: not-allowed;
         }
-        [data-theme="dark"] .input-icon { color: var(--text-muted) !important; }
- 
+
+        [data-theme="dark"] .input-icon {
+            color: var(--text-muted) !important;
+        }
+
         /* ── Dropdowns ── */
         [data-theme="dark"] .dropdown-input {
             background: var(--bg-input) !important;
             border-color: var(--border-color) !important;
             color: var(--text-main) !important;
         }
+
         [data-theme="dark"] .dropdown-input:focus {
             border-color: #4e73df !important;
             background: #1e2235 !important;
-            box-shadow: 0 0 0 3px rgba(78,115,223,0.15) !important;
+            box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.15) !important;
             color: var(--text-main) !important;
         }
+
         [data-theme="dark"] .dropdown-input option {
             background: var(--bg-input) !important;
             color: var(--text-main) !important;
         }
+
         /* dropdown arrow color in dark mode */
         [data-theme="dark"] .reg-input-group.dropdown-group::after {
             border-top-color: var(--text-muted) !important;
         }
- 
+
         /* ── Buttons ── */
         [data-theme="dark"] .cancel-btn {
             color: var(--text-muted) !important;
             border-color: var(--border-color) !important;
             background: transparent !important;
         }
+
         [data-theme="dark"] .cancel-btn:hover {
             background: var(--bg-input) !important;
             color: var(--text-main) !important;
         }
- 
+
         /* ── Notification dropdown ── */
         [data-theme="dark"] .notif-dropdown {
             background: var(--bg-card) !important;
             border-color: var(--border-color) !important;
         }
-        [data-theme="dark"] .notif-list > div {
+
+        [data-theme="dark"] .notif-list>div {
             background: var(--bg-card) !important;
             border-color: var(--border-inner) !important;
             color: var(--text-main) !important;
@@ -572,7 +635,7 @@
         [data-theme="dark"] .profile-avatar-card {
             background: #1a1d27 !important;
             border: 1px solid #2e3347 !important;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
         }
 
         /* ── Profile image circle ── */
@@ -607,8 +670,9 @@
         }
     </style>
 </head>
+
 <body>
- 
+
     <nav class="navbar">
         <div class="logo-text"><i class="fa fa-pencil"></i> Edit Profile Students</div>
         <ul class="nav-links">
@@ -638,16 +702,17 @@
                     <span id="themeLabel"></span>
                 </button>
             </li>
-            <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+            <li><a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fa fa-sign-out"></i> Logout</a>
+            </li>
         </ul>
     </nav>
- 
+
     <div class="register-wrapper">
         <div class="register-container">
- 
+
             <!-- LEFT: PROFILE SIDEBAR -->
             <div class="profile-sidebar">
- 
+
                 <div class="profile-avatar-card">
                     <div class="avatar-wrap" onclick="document.getElementById('photoUpload').click()">
                         <div id="noPhotoPlaceholder">
@@ -666,12 +731,12 @@
                     <img src="images/uc.png" alt="UC Logo">
                     <div class="uc-card-label">CCS Portal</div>
                 </div>
- 
+
             </div>
- 
+
             <!-- RIGHT: FORM CARD -->
             <div class="form-card">
- 
+
                 <div class="form-card-header">
                     <div class="form-card-icon">
                         <i class="fa fa-user-pen"></i>
@@ -681,19 +746,19 @@
                         <div class="form-card-sub">Update your personal information below.</div>
                     </div>
                 </div>
- 
+
                 <!-- original hidden file input -->
                 <input type="file" id="photoUpload" accept="image/*" style="display:none;">
- 
+
                 <form id="editProfileForm">
- 
+
                     <div class="section-label">Personal Information</div>
- 
+
                     <div class="reg-input-group">
                         <i class="fa fa-id-card input-icon"></i>
                         <input type="text" id="edit-id" placeholder="ID Number" required>
                     </div>
- 
+
                     <div class="row-group">
                         <div class="reg-input-group">
                             <i class="fa fa-user input-icon"></i>
@@ -704,14 +769,14 @@
                             <input type="text" id="edit-firstName" placeholder="First Name" required>
                         </div>
                     </div>
- 
+
                     <div class="reg-input-group">
                         <i class="fa fa-user input-icon"></i>
                         <input type="text" id="edit-middleName" placeholder="Middle Name">
                     </div>
- 
+
                     <div class="section-label">Academic Details</div>
- 
+
                     <div class="row-group">
                         <div class="reg-input-group dropdown-group">
                             <i class="fa fa-graduation-cap input-icon"></i>
@@ -734,387 +799,389 @@
                             </select>
                         </div>
                     </div>
- 
+
                     <div class="section-label">Contact Details</div>
- 
+
                     <div class="reg-input-group">
                         <i class="fa fa-envelope input-icon"></i>
                         <input type="email" id="edit-email" placeholder="Email" required>
                     </div>
- 
+
                     <div class="reg-input-group">
                         <i class="fa fa-home input-icon"></i>
                         <input type="text" id="edit-address" placeholder="Address" required>
                     </div>
- 
+
                     <div class="btn-center">
-                        <button type="submit" id="saveBtn" class="reg-submit-btn"><i class="fa fa-floppy-disk" style="margin-right:7px;"></i>Save Changes</button>
+                        <button type="submit" id="saveBtn" class="reg-submit-btn"><i class="fa fa-floppy-disk"
+                                style="margin-right:7px;"></i>Save Changes</button>
                         <button type="button" class="cancel-btn" onclick="history.back()">Cancel</button>
                     </div>
- 
+
                 </form>
             </div>
- 
+
         </div>
     </div>
 
-<script>
-/* ══════════════════════════════════════
-   DARK / LIGHT MODE
-══════════════════════════════════════ */
-function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    const icon  = document.getElementById('themeIcon');
-    const label = document.getElementById('themeLabel');
-    if (theme === 'dark') {
-        icon.className  = 'fa-solid fa-sun';
-    } else {
-        icon.className  = 'fa-solid fa-moon';
-    }
-}
- 
-function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next    = current === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('ccs_theme', next);
-    applyTheme(next);
- 
-    // Animate the icon on toggle
-    const icon = document.getElementById('themeIcon');
-    icon.style.transform = 'rotate(360deg)';
-    icon.style.transition = 'transform 0.4s ease';
-    setTimeout(() => { icon.style.transform = ''; icon.style.transition = ''; }, 400);
-}
- 
-// Load saved theme on page start
-(function() {
-    const saved = localStorage.getItem('ccs_theme') || 'light';
-    applyTheme(saved);
-})();
+    <script>
+        /* ══════════════════════════════════════
+           DARK / LIGHT MODE
+        ══════════════════════════════════════ */
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            const icon = document.getElementById('themeIcon');
+            const label = document.getElementById('themeLabel');
+            if (theme === 'dark') {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        }
 
-let _announcements = [];
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('ccs_theme', next);
+            applyTheme(next);
 
-function toggleNotifDropdown(e) {
-    e.preventDefault();
-    const d = document.getElementById('notifDropdown');
-    d.style.display = d.style.display === 'block' ? 'none' : 'block';
-}
+            // Animate the icon on toggle
+            const icon = document.getElementById('themeIcon');
+            icon.style.transform = 'rotate(360deg)';
+            icon.style.transition = 'transform 0.4s ease';
+            setTimeout(() => { icon.style.transform = ''; icon.style.transition = ''; }, 400);
+        }
 
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('li:has(#notifDropdown)')) {
-        const d = document.getElementById('notifDropdown');
-        if (d) d.style.display = 'none';
-    }
-});
+        // Load saved theme on page start
+        (function () {
+            const saved = localStorage.getItem('ccs_theme') || 'light';
+            applyTheme(saved);
+        })();
 
-function getReadIds() { return JSON.parse(localStorage.getItem('readIds') || '[]'); }
-function saveReadIds(ids) { localStorage.setItem('readIds', JSON.stringify(ids)); }
+        let _announcements = [];
 
-function markAllRead() {
-    saveReadIds(_announcements.map(a => a.id));
-    renderNotifs();
-}
+        function toggleNotifDropdown(e) {
+            e.preventDefault();
+            const d = document.getElementById('notifDropdown');
+            d.style.display = d.style.display === 'block' ? 'none' : 'block';
+        }
 
-function renderNotifs() {
-    const readIds = getReadIds();
-    const unread = _announcements.filter(a => !readIds.includes(a.id)).length;
-    const badge = document.getElementById('notifBadge');
-    badge.textContent = unread;
-    badge.style.display = unread > 0 ? 'flex' : 'none';
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('li:has(#notifDropdown)')) {
+                const d = document.getElementById('notifDropdown');
+                if (d) d.style.display = 'none';
+            }
+        });
 
-    document.getElementById('notifList').innerHTML = _announcements.length
-        ? _announcements.map(a => `
+        function getReadIds() { return JSON.parse(localStorage.getItem('readIds') || '[]'); }
+        function saveReadIds(ids) { localStorage.setItem('readIds', JSON.stringify(ids)); }
+
+        function markAllRead() {
+            saveReadIds(_announcements.map(a => a.id));
+            renderNotifs();
+        }
+
+        function renderNotifs() {
+            const readIds = getReadIds();
+            const unread = _announcements.filter(a => !readIds.includes(a.id)).length;
+            const badge = document.getElementById('notifBadge');
+            badge.textContent = unread;
+            badge.style.display = unread > 0 ? 'flex' : 'none';
+
+            document.getElementById('notifList').innerHTML = _announcements.length
+                ? _announcements.map(a => `
             <div onclick="markOneRead(${a.id})" style="padding:12px 14px; border-bottom:1px solid #eee;
                 cursor:pointer; background:${!readIds.includes(a.id) ? '#eaf3fb' : 'white'}">
                 <div style="font-size:11px; color:#888;">${a.author} | ${a.date}</div>
                 <div style="font-size:13px; color:#222; margin-top:3px;">${a.content}</div>
             </div>`).join('')
-        : '<p style="text-align:center;color:#aaa;padding:20px;font-size:13px;">No announcements yet.</p>';
-}
+                : '<p style="text-align:center;color:#aaa;padding:20px;font-size:13px;">No announcements yet.</p>';
+        }
 
-function markOneRead(id) {
-    const ids = getReadIds();
-    if (!ids.includes(id)) { ids.push(id); saveReadIds(ids); renderNotifs(); }
-}
+        function markOneRead(id) {
+            const ids = getReadIds();
+            if (!ids.includes(id)) { ids.push(id); saveReadIds(ids); renderNotifs(); }
+        }
 
-async function pollAnnouncements() {
-    try {
-        const res = await fetch('http://localhost:3000/announcements');
-        _announcements = await res.json();
-        renderNotifs();
-    } catch(e) {}
-}
+        async function pollAnnouncements() {
+            try {
+                const res = await fetch('http://localhost:3000/announcements');
+                _announcements = await res.json();
+                renderNotifs();
+            } catch (e) { }
+        }
 
-pollAnnouncements();
-setInterval(pollAnnouncements, 30000);
+        pollAnnouncements();
+        setInterval(pollAnnouncements, 30000);
 
-let _resNotifs = [];
+        let _resNotifs = [];
 
-async function pollResNotifs() {
-    const idNumber = localStorage.getItem('loggedInId');
-    if (!idNumber) return;
-    try {
-        const res = await fetch(`http://localhost:3000/notifications/${idNumber}`);
-        _resNotifs = await res.json();
-        renderCombinedNotifs();
-    } catch(e) {}
-}
+        async function pollResNotifs() {
+            const idNumber = localStorage.getItem('loggedInId');
+            if (!idNumber) return;
+            try {
+                const res = await fetch(`http://localhost:3000/notifications/${idNumber}`);
+                _resNotifs = await res.json();
+                renderCombinedNotifs();
+            } catch (e) { }
+        }
 
-function renderCombinedNotifs() {
-    const readIds    = getReadIds();
-    const unreadAnn  = _announcements.filter(a => !readIds.includes(a.id)).length;
-    const unreadRes  = _resNotifs.filter(n => n.isRead === 0).length;
-    const totalUnread = unreadAnn + unreadRes;
+        function renderCombinedNotifs() {
+            const readIds = getReadIds();
+            const unreadAnn = _announcements.filter(a => !readIds.includes(a.id)).length;
+            const unreadRes = _resNotifs.filter(n => n.isRead === 0).length;
+            const totalUnread = unreadAnn + unreadRes;
 
-    const badge = document.getElementById('notifBadge');
-    badge.textContent = totalUnread;
-    badge.style.display = totalUnread > 0 ? 'flex' : 'none';
+            const badge = document.getElementById('notifBadge');
+            badge.textContent = totalUnread;
+            badge.style.display = totalUnread > 0 ? 'flex' : 'none';
 
-    let html = '';
+            let html = '';
 
-    _resNotifs.forEach(n => {
-        const isAccepted = n.message.startsWith('✅');
-        html += `
+            _resNotifs.forEach(n => {
+                const isAccepted = n.message.startsWith('✅');
+                html += `
             <div onclick="markResNotifRead(${n.id})" style="padding:12px 14px;border-bottom:1px solid #eee;cursor:pointer;
                 background:${n.isRead ? 'white' : (isAccepted ? '#eaf7ee' : '#fdf0f0')};">
                 <div style="font-size:14px;color:#888;">Reservation Update | ${n.createdAt || ''}</div>
                 <div style="font-size:14px;color:${n.isRead ? '#888' : '#222'};margin-top:3px;font-family:'Sora',sans-serif;">${n.message}</div>
             </div>`;
-    });
+            });
 
-    _announcements.forEach(a => {
-        html += `
+            _announcements.forEach(a => {
+                html += `
             <div onclick="markOneRead(${a.id})" style="padding:12px 14px;border-bottom:1px solid #eee;cursor:pointer;
                 background:${!readIds.includes(a.id) ? '#eaf3fb' : 'white'}">
                 <div style="font-size:14px;color:#888;">${a.author} | ${a.date}</div>
                 <div style="font-size:14px;color:#222;margin-top:3px;font-family:'Sora',sans-serif;">${a.content}</div>
             </div>`;
-    });
-
-    document.getElementById('notifList').innerHTML = html ||
-        '<p style="text-align:center;color:#aaa;padding:20px;font-size:13px;">No notifications yet.</p>';
-}
-
-async function markResNotifRead(id) {
-    try {
-        await fetch(`http://localhost:3000/notifications/read/${id}`, { method: 'POST' });
-        const n = _resNotifs.find(x => x.id === id);
-        if (n) n.isRead = 1;
-        renderCombinedNotifs();
-    } catch(e) {}
-}
-
-// Override markAllRead to also clear reservation notifs
-const _origMarkAllRead = markAllRead;
-window.markAllRead = function() {
-    _origMarkAllRead();
-    const idNumber = localStorage.getItem('loggedInId');
-    if (idNumber) {
-        fetch(`http://localhost:3000/notifications/read-all/${idNumber}`, { method: 'POST' })
-            .then(() => { _resNotifs.forEach(n => n.isRead = 1); renderCombinedNotifs(); })
-            .catch(() => {});
-    }
-};
-
-// Override renderNotifs so announcements also trigger a combined re-render
-const _origRenderNotifs = renderNotifs;
-window.renderNotifs = function() {
-    _origRenderNotifs();
-    renderCombinedNotifs();
-};
-
-// SweetAlert popup when a new accept/deny arrives
-let _lastResNotifCount = 0;
-async function checkForNewResNotifs() {
-    const idNumber = localStorage.getItem('loggedInId');
-    if (!idNumber) return;
-    try {
-        const res    = await fetch(`http://localhost:3000/notifications/${idNumber}`);
-        const notifs = await res.json();
-        const unread = notifs.filter(n => n.isRead === 0);
-        if (unread.length > _lastResNotifCount && _lastResNotifCount !== -1) {
-            const latest     = unread[0];
-            const isAccepted = latest.message.startsWith('✅');
-            Swal.fire({
-                icon: isAccepted ? 'success' : 'error',
-                title: isAccepted ? 'Reservation Accepted!' : 'Reservation Denied',
-                text: latest.message.replace(/^[✅❌]\s*/, ''),
-                confirmButtonColor: isAccepted ? '#28a745' : '#dc3545',
-                confirmButtonText: 'OK'
             });
+
+            document.getElementById('notifList').innerHTML = html ||
+                '<p style="text-align:center;color:#aaa;padding:20px;font-size:13px;">No notifications yet.</p>';
         }
-        _lastResNotifCount = unread.length;
-        _resNotifs = notifs;
-        renderCombinedNotifs();
-    } catch(e) {}
-}
 
-pollResNotifs();
-setTimeout(async () => {
-    const idNumber = localStorage.getItem('loggedInId');
-    if (!idNumber) return;
-    try {
-        const res    = await fetch(`http://localhost:3000/notifications/${idNumber}`);
-        const notifs = await res.json();
-        _lastResNotifCount = notifs.filter(n => n.isRead === 0).length;
-    } catch(e) { _lastResNotifCount = 0; }
-}, 500);
-setInterval(checkForNewResNotifs, 15000);
+        async function markResNotifRead(id) {
+            try {
+                await fetch(`http://localhost:3000/notifications/read/${id}`, { method: 'POST' });
+                const n = _resNotifs.find(x => x.id === id);
+                if (n) n.isRead = 1;
+                renderCombinedNotifs();
+            } catch (e) { }
+        }
 
-
-let selectedPhoto = null;
-
-document.addEventListener("DOMContentLoaded", async () => {
-    const idNumber = localStorage.getItem("loggedInId");
-    if (!idNumber) { 
-        window.location.href = "index.html"; 
-        return; 
-    }
-
-    let originalID = idNumber;
-
-    try {
-        const res = await fetch(`http://localhost:3000/student/${idNumber}`);
-        const user = await res.json();
-
-        if (res.ok) {
-            originalID = user.idNumber;
-
-            document.getElementById("edit-id").value = user.idNumber || "";
-            document.getElementById("edit-lastName").value = user.lastName || "";
-            document.getElementById("edit-firstName").value = user.firstName || "";
-            document.getElementById("edit-middleName").value = user.middleName || "";
-            document.getElementById("edit-yearLevel").value = user.yearLevel || "";
-            document.getElementById("edit-course").value = user.course || "";
-            document.getElementById("edit-email").value = user.email || "";
-            document.getElementById("edit-address").value = user.address || "";
-
-            if (user.profilePhoto) {
-
-                selectedPhoto = user.profilePhoto;
-                document.getElementById("profilePhoto").src = user.profilePhoto;
-                document.getElementById("profilePhoto").style.display = "block";
-                document.getElementById("noPhotoPlaceholder").style.display = "none";
+        // Override markAllRead to also clear reservation notifs
+        const _origMarkAllRead = markAllRead;
+        window.markAllRead = function () {
+            _origMarkAllRead();
+            const idNumber = localStorage.getItem('loggedInId');
+            if (idNumber) {
+                fetch(`http://localhost:3000/notifications/read-all/${idNumber}`, { method: 'POST' })
+                    .then(() => { _resNotifs.forEach(n => n.isRead = 1); renderCombinedNotifs(); })
+                    .catch(() => { });
             }
-        }
-    } catch (err) {
-        console.error(err);
-    }
-
-    document.getElementById("photoUpload").addEventListener("change", function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            selectedPhoto = event.target.result;
-
-            document.getElementById("profilePhoto").src = selectedPhoto;
-            document.getElementById("profilePhoto").style.display = "block";
-            document.getElementById("noPhotoPlaceholder").style.display = "none";
-        };
-        reader.readAsDataURL(file);
-    });
-
-    const editForm = document.getElementById("editProfileForm");
-
-    editForm.addEventListener("submit", async function (e) {
-        e.preventDefault();
-        
-        const saveBtn = document.getElementById("saveBtn");
-        saveBtn.disabled = true;
-        saveBtn.innerText = "Saving...";
-
-        const updatedUser = {
-            oldIdNumber: originalID,
-            idNumber: document.getElementById("edit-id").value,
-            lastName: document.getElementById("edit-lastName").value,
-            firstName: document.getElementById("edit-firstName").value,
-            middleName: document.getElementById("edit-middleName").value,
-            yearLevel: document.getElementById("edit-yearLevel").value,
-            course: document.getElementById("edit-course").value,
-            email: document.getElementById("edit-email").value,
-            address: document.getElementById("edit-address").value,
-            profilePhoto: selectedPhoto 
         };
 
-        try {
-            const response = await fetch("http://localhost:3000/update-profile", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(updatedUser)
-            });
+        // Override renderNotifs so announcements also trigger a combined re-render
+        const _origRenderNotifs = renderNotifs;
+        window.renderNotifs = function () {
+            _origRenderNotifs();
+            renderCombinedNotifs();
+        };
 
-            if (response.ok) {
-                localStorage.setItem("loggedInId", updatedUser.idNumber);
-                
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Profile Updated!',
-                    text: 'Your changes have been saved.',
-                    confirmButtonColor: '#0056b3',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    timer: 5000,
-                    timerProgressBar: true,
-                }).then(() => {
-                    window.location.href = 'dashboard.html';
-                });
-            } else {
-                saveBtn.disabled = false;
-                saveBtn.innerText = "Save";
-                Swal.fire('Error', 'Update failed. ID might be taken.', 'error');
-            }
-        } catch (error) {
-            saveBtn.disabled = false;
-            saveBtn.innerText = "Save";
-            Swal.fire('Error', 'Server connection lost.', 'error');
+        // SweetAlert popup when a new accept/deny arrives
+        let _lastResNotifCount = 0;
+        async function checkForNewResNotifs() {
+            const idNumber = localStorage.getItem('loggedInId');
+            if (!idNumber) return;
+            try {
+                const res = await fetch(`http://localhost:3000/notifications/${idNumber}`);
+                const notifs = await res.json();
+                const unread = notifs.filter(n => n.isRead === 0);
+                if (unread.length > _lastResNotifCount && _lastResNotifCount !== -1) {
+                    const latest = unread[0];
+                    const isAccepted = latest.message.startsWith('✅');
+                    Swal.fire({
+                        icon: isAccepted ? 'success' : 'error',
+                        title: isAccepted ? 'Reservation Accepted!' : 'Reservation Denied',
+                        text: latest.message.replace(/^[✅❌]\s*/, ''),
+                        confirmButtonColor: isAccepted ? '#28a745' : '#dc3545',
+                        confirmButtonText: 'OK'
+                    });
+                }
+                _lastResNotifCount = unread.length;
+                _resNotifs = notifs;
+                renderCombinedNotifs();
+            } catch (e) { }
         }
-    });
-});
+
+        pollResNotifs();
+        setTimeout(async () => {
+            const idNumber = localStorage.getItem('loggedInId');
+            if (!idNumber) return;
+            try {
+                const res = await fetch(`http://localhost:3000/notifications/${idNumber}`);
+                const notifs = await res.json();
+                _lastResNotifCount = notifs.filter(n => n.isRead === 0).length;
+            } catch (e) { _lastResNotifCount = 0; }
+        }, 500);
+        setInterval(checkForNewResNotifs, 15000);
 
 
-async function logout() {
-    const studentId = localStorage.getItem('loggedInId');
-    
-    const { isConfirmed } = await Swal.fire({
-        title: 'Logout?',
-        text: "This will end your current lab session and log you out.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#0056b3',
-        confirmButtonText: 'Yes, Logout!'
-    });
+        let selectedPhoto = null;
 
-    if (isConfirmed) {
-        try {
-            if (studentId) {
-                await fetch("http://localhost:3000/record-final-logout", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ idNumber: studentId })
-                });
+        document.addEventListener("DOMContentLoaded", async () => {
+            const idNumber = localStorage.getItem("loggedInId");
+            if (!idNumber) {
+                window.location.href = "index.html";
+                return;
             }
 
-            localStorage.removeItem('loggedInId');
-            localStorage.removeItem('sessionExpiry');
-            sessionStorage.clear();
+            let originalID = idNumber;
 
-            await Swal.fire({
-                icon: 'success',
-                title: 'Logged Out',
-                text: 'Your session has been closed.',
-                timer: 1500,
-                showConfirmButton: false
+            try {
+                const res = await fetch(`http://localhost:3000/student/${idNumber}`);
+                const user = await res.json();
+
+                if (res.ok) {
+                    originalID = user.idNumber;
+
+                    document.getElementById("edit-id").value = user.idNumber || "";
+                    document.getElementById("edit-lastName").value = user.lastName || "";
+                    document.getElementById("edit-firstName").value = user.firstName || "";
+                    document.getElementById("edit-middleName").value = user.middleName || "";
+                    document.getElementById("edit-yearLevel").value = user.yearLevel || "";
+                    document.getElementById("edit-course").value = user.course || "";
+                    document.getElementById("edit-email").value = user.email || "";
+                    document.getElementById("edit-address").value = user.address || "";
+
+                    if (user.profilePhoto) {
+
+                        selectedPhoto = user.profilePhoto;
+                        document.getElementById("profilePhoto").src = user.profilePhoto;
+                        document.getElementById("profilePhoto").style.display = "block";
+                        document.getElementById("noPhotoPlaceholder").style.display = "none";
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+            }
+
+            document.getElementById("photoUpload").addEventListener("change", function (e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    selectedPhoto = event.target.result;
+
+                    document.getElementById("profilePhoto").src = selectedPhoto;
+                    document.getElementById("profilePhoto").style.display = "block";
+                    document.getElementById("noPhotoPlaceholder").style.display = "none";
+                };
+                reader.readAsDataURL(file);
             });
-            window.location.href = 'index.html';
-        } catch (err) {
-            console.error("Logout error:", err);
-            localStorage.removeItem('loggedInId');
-            window.location.href = 'index.html';
+
+            const editForm = document.getElementById("editProfileForm");
+
+            editForm.addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const saveBtn = document.getElementById("saveBtn");
+                saveBtn.disabled = true;
+                saveBtn.innerText = "Saving...";
+
+                const updatedUser = {
+                    oldIdNumber: originalID,
+                    idNumber: document.getElementById("edit-id").value,
+                    lastName: document.getElementById("edit-lastName").value,
+                    firstName: document.getElementById("edit-firstName").value,
+                    middleName: document.getElementById("edit-middleName").value,
+                    yearLevel: document.getElementById("edit-yearLevel").value,
+                    course: document.getElementById("edit-course").value,
+                    email: document.getElementById("edit-email").value,
+                    address: document.getElementById("edit-address").value,
+                    profilePhoto: selectedPhoto
+                };
+
+                try {
+                    const response = await fetch("http://localhost:3000/update-profile", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(updatedUser)
+                    });
+
+                    if (response.ok) {
+                        localStorage.setItem("loggedInId", updatedUser.idNumber);
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Profile Updated!',
+                            text: 'Your changes have been saved.',
+                            confirmButtonColor: '#0056b3',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            timer: 5000,
+                            timerProgressBar: true,
+                        }).then(() => {
+                            window.location.href = 'dashboard.html';
+                        });
+                    } else {
+                        saveBtn.disabled = false;
+                        saveBtn.innerText = "Save";
+                        Swal.fire('Error', 'Update failed. ID might be taken.', 'error');
+                    }
+                } catch (error) {
+                    saveBtn.disabled = false;
+                    saveBtn.innerText = "Save";
+                    Swal.fire('Error', 'Server connection lost.', 'error');
+                }
+            });
+        });
+
+
+        async function logout() {
+            const studentId = localStorage.getItem('loggedInId');
+
+            const { isConfirmed } = await Swal.fire({
+                title: 'Logout?',
+                text: "This will end your current lab session and log you out.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0056b3',
+                confirmButtonText: 'Yes, Logout!'
+            });
+
+            if (isConfirmed) {
+                try {
+                    if (studentId) {
+                        await fetch("http://localhost:3000/record-final-logout", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ idNumber: studentId })
+                        });
+                    }
+
+                    localStorage.removeItem('loggedInId');
+                    localStorage.removeItem('sessionExpiry');
+                    sessionStorage.clear();
+
+                    await Swal.fire({
+                        icon: 'success',
+                        title: 'Logged Out',
+                        text: 'Your session has been closed.',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                    window.location.href = 'index.html';
+                } catch (err) {
+                    console.error("Logout error:", err);
+                    localStorage.removeItem('loggedInId');
+                    window.location.href = 'index.html';
+                }
+            }
         }
-    }
-}
-</script>
+    </script>
 </body>
+
 </html>

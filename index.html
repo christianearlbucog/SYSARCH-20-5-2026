@@ -9,173 +9,348 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <style>
-        .theme-toggle-btn {
-            display: flex;
-            align-items: center;
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.22);
-            color: white;
-            padding: 3px;
-            border-radius: 20px;
-            transition: background 0.25s ease, transform 0.15s ease;
+        :root {
+            --bg-page: #f1f5fb;
+            --bg-panel: #ffffff;
+            --bg-card: #ffffff;
+            --bg-accent: #2f6df8;
+            --bg-accent-soft: rgba(47,109,248,0.12);
+            --text-main: #111827;
+            --text-muted: #5f6777;
+            --text-invert: #ffffff;
+            --border-color: #e2e8f0;
+            --input-bg: #f8fafc;
+            --shadow: 0 25px 60px rgba(15, 23, 42, 0.12);
+            --shadow-soft: 0 12px 40px rgba(15, 23, 42, 0.08);
+            --radius: 28px;
+            --transition: 0.28s ease;
+        }
+        [data-theme="dark"] {
+            --bg-page: #070b14;
+            --bg-panel: #0f172a;
+            --bg-card: #111827;
+            --bg-accent: #7c3aed;
+            --bg-accent-soft: rgba(124,58,237,0.16);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-invert: #ffffff;
+            --border-color: #1e293b;
+            --input-bg: #111827;
+            --shadow: 0 30px 70px rgba(15, 23, 42, 0.45);
+            --shadow-soft: 0 18px 50px rgba(15, 23, 42, 0.32);
         }
 
+        * {
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, rgba(47,109,248,0.16), transparent 28%),
+                        radial-gradient(circle at bottom right, rgba(124,58,237,0.12), transparent 24%),
+                        var(--bg-page);
+            color: var(--text-main);
+            transition: background var(--transition), color var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 22px 36px;
+            max-width: 1180px;
+            margin: 0 auto;
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(148,163,184,0.16);
+        }
+        [data-theme="dark"] .navbar {
+            background: rgba(15, 23, 42, 0.88);
+            border-color: rgba(148,163,184,0.16);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+        .logo-text i {
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links a,
+        .theme-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: transform var(--transition), background var(--transition), color var(--transition);
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            padding: 10px 16px;
+        }
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: var(--text-main);
+            background: var(--bg-accent-soft);
+        }
+
+        .theme-toggle-btn {
+            background: var(--bg-accent-soft);
+            border: 1px solid transparent;
+            padding: 10px 16px;
+            cursor: pointer;
+            color: var(--text-main);
+        }
         .theme-toggle-btn:hover {
-            background: rgba(255,255,255,0.22);
             transform: translateY(-1px);
         }
 
-        [data-theme="dark"] .theme-toggle-btn {
-            background: rgba(255,193,7,0.15);
-            border-color: rgba(255,193,7,0.4);
-            color: #ffc107;
-        }
-        
-        /* ══════════════════════════════════════════════════════════
-           DARK / LIGHT MODE — index.html (Login)
-           Paste this block just before &lt;/style&gt;
-        ══════════════════════════════════════════════════════════ */
- 
-        /* ── CSS Variables ── */
-        :root {
-            --bg-page:       #f0f2f5;
-            --bg-card:       #ffffff;
-            --bg-panel:      #2c3e70;
-            --bg-input:      #f6f6f6;
-            --text-main:     #1a1a2e;
-            --text-muted:    #666666;
-            --text-label:    #333333;
-            --border-color:  #e3e6f0;
-            --border-inner:  #dee2e6;
-            --input-border:  #d1d3e2;
-            --shadow:        0 10px 40px rgba(0,0,0,0.12);
-            --scrollbar-bg:  #e0e0e0;
-            --scrollbar-thumb: #b0b0b0;
-        }
-        [data-theme="dark"] {
-            --bg-page:       #0f1117;
-            --bg-card:       #1a1d27;
-            --bg-panel:      #111827;
-            --bg-input:      #252839;
-            --text-main:     #e0e6f0;
-            --text-muted:    #8892a4;
-            --text-label:    #c8d0e0;
-            --border-color:  #2a2f47;
-            --border-inner:  #2e3450;
-            --input-border:  #3a3f5c;
-            --shadow:        0 10px 40px rgba(0,0,0,0.45);
-            --scrollbar-bg:  #1e2235;
-            --scrollbar-thumb: #3a3f5c;
-        }
- 
-        /* ── Body & Navbar ── */
-        body {
-            background: var(--bg-page) !important;
-            color: var(--text-main) !important;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-        [data-theme="dark"] .navbar {
-            background: linear-gradient(to right, #0d1117, #111827) !important;
-        }
- 
-        /* ── Page background ── */
         .main-content {
-            background: var(--bg-page) !important;
-            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 96px);
+            padding: 36px 24px 48px;
         }
-        [data-theme="dark"] .main-content {
-            background: linear-gradient(135deg, #0f1117 0%, #0f1117 100%) !important;
-        }
- 
-        /* ── Login card ── */
+
         .login-card {
-            background: var(--bg-card) !important;
-            border-color: var(--border-color) !important;
-            box-shadow: var(--shadow) !important;
-            transition: background 0.3s, border-color 0.3s;
+            width: 100%;
+            max-width: 980px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--bg-card);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1fr 1.18fr;
         }
- 
-        /* ── Left image panel ── */
-        [data-theme="dark"] .card-image-panel {
-            border-right-color: var(--border-inner) !important;
+
+        .card-image-panel {
+            position: relative;
+            background: linear-gradient(180deg, var(--bg-accent) 0%, rgba(47,109,248,0.88) 100%);
+            display: grid;
+            place-items: center;
+            padding: 40px 24px;
+            text-align: center;
         }
- 
-        /* ── Right form panel ── */
-        [data-theme="dark"] .card-form-panel {
-            background: var(--bg-card) !important;
+        .card-image-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.28;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.45), transparent 38%);
         }
-        [data-theme="dark"] .card-form-panel h4 {
-            color: var(--text-muted) !important;
+        .card-image-panel img,
+        .card-image-panel h2,
+        .card-image-panel p {
+            position: relative;
+            z-index: 1;
         }
-        [data-theme="dark"] .card-form-panel h1 {
-            color: var(--text-main) !important;
+        .card-image-panel img {
+            width: clamp(180px, 70%, 240px);
+            max-width: 240px;
+            margin-bottom: 22px;
         }
- 
-        /* ── Inputs ── */
+        .card-image-panel h2 {
+            margin: 0 0 12px;
+            color: #f8fafc;
+            font-size: 1.9rem;
+            line-height: 1.1;
+        }
+        .card-image-panel p {
+            margin: 0;
+            color: rgba(248,250,252,0.88);
+            font-size: 0.98rem;
+        }
+
+        .card-form-panel {
+            padding: 44px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 24px;
+            background: var(--bg-card);
+        }
+
+        .card-form-panel h4 {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+        }
+        .card-form-panel h1 {
+            margin: 0;
+            font-size: 2.3rem;
+            letter-spacing: -0.06em;
+            line-height: 1.05;
+            color: var(--text-main);
+        }
+
+        form {
+            display: grid;
+            gap: 18px;
+        }
+
         .input-group {
-            background: var(--bg-input) !important;
-            border-color: var(--input-border) !important;
-            transition: background 0.3s, border-color 0.3s;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 14px 18px;
+            transition: border var(--transition), background var(--transition);
         }
         .input-group input {
-            background: transparent !important;
-            color: var(--text-main) !important;
+            background: transparent;
+            border: 0;
+            outline: none;
+            color: var(--text-main);
+            font-size: 1rem;
+            width: 100%;
         }
         .input-group input::placeholder {
-            color: var(--text-muted) !important;
+            color: var(--text-muted);
         }
-        [data-theme="dark"] .input-group:focus-within {
-            border-color: #4e73df !important;
+        .input-icon,
+        .password-toggle {
+            color: var(--text-muted);
+            font-size: 1rem;
         }
-        [data-theme="dark"] .input-icon {
-            color: var(--text-muted) !important;
+        .password-toggle {
+            cursor: pointer;
         }
-        [data-theme="dark"] .password-toggle {
-            color: var(--text-muted) !important;
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 0.94rem;
         }
-        [data-theme="dark"] .password-toggle:hover {
-            color: var(--text-main) !important;
+        .form-options input {
+            accent-color: var(--bg-accent);
         }
- 
-        /* ── Form options ── */
-        [data-theme="dark"] .remember-me {
-            color: var(--text-muted) !important;
+        .forgot-pass {
+            color: var(--bg-accent);
+            text-decoration: none;
         }
-        [data-theme="dark"] .forgot-pass {
-            color: #7b9cff !important;
+        .forgot-pass:hover {
+            text-decoration: underline;
         }
-        [data-theme="dark"] .forgot-pass:hover {
-            color: #a0bcff !important;
+
+        .login-button {
+            width: 100%;
+            border: 0;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--bg-accent), #5b82ff);
+            color: var(--text-invert);
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: transform var(--transition), filter var(--transition);
         }
- 
-        /* ── Register text ── */
-        [data-theme="dark"] .register-text {
-            color: var(--text-muted) !important;
+        .login-button:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.04);
         }
-        [data-theme="dark"] .register-link {
-            color: #7b9cff !important;
+
+        .register-text {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
         }
-        [data-theme="dark"] .register-link:hover {
-            color: #a0bcff !important;
+        .register-link {
+            color: var(--bg-accent);
+            font-weight: 700;
+            text-decoration: none;
         }
- 
-        /* ── Nav links ── */
-        [data-theme="dark"] .nav-links a {
-            color: rgba(255,255,255,0.75) !important;
+        .register-link:hover {
+            text-decoration: underline;
         }
-        [data-theme="dark"] .nav-links a:hover,
-        [data-theme="dark"] .nav-links a.active {
-            color: #fff !important;
+
+        @media (max-width: 900px) {
+            .login-card {
+                grid-template-columns: 1fr;
+            }
+            .card-image-panel,
+            .card-form-panel {
+                padding: 32px 24px;
+            }
         }
- 
-        /* ── Scrollbar ── */
-        ::-webkit-scrollbar { width: 7px; height: 7px; }
-        ::-webkit-scrollbar-track { background: var(--scrollbar-bg); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+
+        @media (max-width: 620px) {
+            .navbar {
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+            }
+            .nav-links {
+                justify-content: center;
+                width: 100%;
+            }
+            .nav-links a,
+            .theme-toggle-btn {
+                padding: 10px 12px;
+            }
+            .input-group {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .form-options a {
+                margin-top: 4px;
+            }
+            .card-image-panel {
+                padding: 28px 18px;
+            }
+            .card-form-panel {
+                padding: 28px 18px;
+            }
+            .card-image-panel h2 {
+                font-size: 1.6rem;
+            }
+            .main-content {
+                min-height: auto;
+                padding: 28px 16px 36px;
+            }
+        }
     </style>
 <body>
     <nav class="navbar">
-        <div class="logo-text"><i class="fa fa-desktop"></i> College of Computer Studies Sit-in Monitoring System</div>
+        <div class="logo-text"><i class="fa fa-desktop"></i> CCS Sit-in Monitoring</div>
         <ul class="nav-links">
             <li><a href="home.html"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="index.html" class="active"><i class="fa fa-right-to-bracket"></i> Login</a></li>
@@ -183,7 +358,7 @@
             <li>
                 <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
                     <i class="fa-solid fa-moon" id="themeIcon"></i>
-                    <span id="themeLabel"></span>
+                    <span id="themeLabel">Theme</span>
                 </button>
             </li>
         </ul>
@@ -191,20 +366,21 @@
 
     <div class="main-content">
         <div class="login-card">
-
             <div class="card-image-panel">
                 <img src="images/ccs.png" alt="CCS Logo">
+                <div>
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to continue to the CCS Sit-in Monitoring System.</p>
+                </div>
             </div>
-
             <div class="card-form-panel">
-                <h4>Have an account?</h4>
+                <h4>Continue where you left off</h4>
                 <h1>Sign In</h1>
                 <form id="loginForm">
                     <div class="input-group">
                         <i class="fa fa-user input-icon"></i>
                         <input type="text" id="loginID" placeholder="ID Number or Email" required>
                     </div>
-
                     <div class="input-group">
                         <i class="fa fa-lock input-icon"></i>
                         <input type="password" id="passwordField" placeholder="Password" required>
@@ -212,9 +388,8 @@
                             <i class="fa fa-eye"></i>
                         </span>
                     </div>
-                    
                     <div class="form-options">
-                        <label class="remember-me"><input type="checkbox"> Remember me </label>
+                        <label class="remember-me"><input type="checkbox"> Remember me</label>
                         <a href="#" class="forgot-pass">Forgot Password?</a>
                     </div>
 
@@ -238,8 +413,10 @@ function applyTheme(theme) {
     const label = document.getElementById('themeLabel');
     if (theme === 'dark') {
         icon.className  = 'fa-solid fa-sun';
+        label.textContent = 'Light';
     } else {
         icon.className  = 'fa-solid fa-moon';
+        label.textContent = 'Dark';
     }
 }
  

@@ -7,71 +7,28 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        .home-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, #f0f2f5 0%, #e8ecf3 100%);
-            
+        :root {
+            --bg-page:         #f0f2f5;
+            --bg-card:         #ffffff;
+            --text-main:       #1a1a2e;
+            --text-muted:      #666666;
+            --border-color:    #e3e6f0;
+            --scrollbar-bg:    #e0e0e0;
+            --scrollbar-thumb: #b0b0b0;
         }
-        .large-logo {
-            width: 500px;
-            height: auto;
-            margin-top: 50px;
-        }
-        .welcome-text {
-            font-size: 35px;
-            color: #333;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        .sub-text {
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        .btn-start {
-            padding: 15px 25px;
-            background: #1a1a2e;
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow: hidden;
-            position: relative;
-            text-decoration: none;
-            display: inline-block;
+        [data-theme="dark"] {
+            --bg-page:         #0f1117;
+            --bg-card:         #1a1d27;
+            --text-main:       #e0e6f0;
+            --text-muted:      #8892a4;
+            --border-color:    #2a2f47;
+            --scrollbar-bg:    #1e2235;
+            --scrollbar-thumb: #3a3f5c;
         }
 
-        .btn-start:hover {
-            background: #2d2d4e;
-            transform: translateY(-1px);
+        [data-theme="dark"] .navbar {
+            background: linear-gradient(to right, #0d1117, #111827) !important;
         }
-
-        .btn-start:active {
-            transform: translateY(0);
-        }
-
-        .btn-start::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.08) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
-        }
-
-        .btn-start:hover::after { 
-            transform: translateX(100%); 
-        }
-
         .theme-toggle-btn {
             display: flex;
             align-items: center;
@@ -94,127 +51,546 @@
             color: #ffc107;
         }
 
-        /* ══════════════════════════════════════════════════════════
-           DARK / LIGHT MODE — home.html
-           Paste this block just before &lt;/style&gt;
-        ══════════════════════════════════════════════════════════ */
- 
-        /* ── CSS Variables ── */
-        :root {
-            --bg-page:       #f0f2f5;
-            --bg-card:       #ffffff;
-            --text-main:     #1a1a2e;
-            --text-muted:    #666666;
-            --border-color:  #e3e6f0;
-            --scrollbar-bg:  #e0e0e0;
-            --scrollbar-thumb: #b0b0b0;
+        /* ── Split Layout ── */
+        .split-wrapper {
+            display: flex;
+            flex: 1;
+            min-height: calc(100vh - 52px);
         }
-        [data-theme="dark"] {
-            --bg-page:       #0f1117;
-            --bg-card:       #1a1d27;
-            --text-main:     #e0e6f0;
-            --text-muted:    #8892a4;
-            --border-color:  #2a2f47;
-            --scrollbar-bg:  #1e2235;
-            --scrollbar-thumb: #3a3f5c;
+
+        /* ══ LEFT PANEL — Leaderboard (LIGHT) ══ */
+        .leaderboard-panel {
+            width: 55%;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 30px 30px;
+            position: relative;
+            overflow: hidden;
         }
- 
-        /* ── Body & Navbar ── */
-        body {
-            background: var(--bg-page) !important;
-            color: var(--text-main) !important;
-            transition: background 0.3s ease, color 0.3s ease;
+        .leaderboard-panel::before {
+            display: none;
         }
-        [data-theme="dark"] .navbar {
-            background: linear-gradient(to right, #0d1117, #111827) !important;
-        }
- 
-        /* ── Home wrapper background ── */
-        .home-wrapper {
-            background: var(--bg-page) !important;
-        }
-        [data-theme="dark"] .home-wrapper {
+
+        /* ══ LEFT PANEL — Leaderboard (DARK) ══ */
+        [data-theme="dark"] .leaderboard-panel {
             background: linear-gradient(135deg, #0f1117 0%, #0f1117 100%) !important;
         }
- 
-        /* ── Text ── */
-        [data-theme="dark"] .welcome-text {
+
+        /* ── Logo ── */
+        .lb-logo {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            border-radius: 50%;
+            border: 2px solid rgba(255,193,7,0.4);
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Title ── */
+        .lb-title {
+            font-size: 30px;
+            font-weight: 600;
+            color: #1a1a2e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        [data-theme="dark"] .lb-title {
             color: #e0e6f0 !important;
         }
-        [data-theme="dark"] .sub-text {
+
+        /* ── Subtitle ── */
+        .lb-subtitle {
+            font-size: 15px;
+            color: #666666;
+            font-weight: 700;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        [data-theme="dark"] .lb-subtitle {
             color: #8892a4 !important;
         }
- 
-        /* ── Get Started button (keep it dark/branded, just soften in dark mode) ── */
+
+        /* ── Filter Tabs ── */
+        .lb-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            justify-content: center;
+        }
+        .lb-filter-btn {
+            padding: 5px 18px;
+            border-radius: 20px;
+            border: 1px solid #cccccc;
+            background: transparent;
+            color: #555555;
+            font-size: 13px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lb-filter-btn.active,
+        .lb-filter-btn:hover {
+            background: rgba(255,193,7,0.15);
+            border-color: rgba(255,193,7,0.5);
+            color: #b38a00;
+        }
+        [data-theme="dark"] .lb-filter-btn {
+            color: rgba(255,255,255,0.6) !important;
+            border-color: rgba(255,255,255,0.2) !important;
+        }
+        [data-theme="dark"] .lb-filter-btn.active,
+        [data-theme="dark"] .lb-filter-btn:hover {
+            color: #ffc107 !important;
+            border-color: rgba(255,193,7,0.5) !important;
+            background: rgba(255,193,7,0.15) !important;
+        }
+
+        /* ── Podium ── */
+        .podium-wrap {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto 28px auto;
+            position: relative;
+            z-index: 1;
+        }
+        .podium-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 120px;
+        }
+        .podium-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid rgba(0,0,0,0.1);
+            background: #1a1a2e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            overflow: hidden;
+            margin-bottom: 6px;
+            flex-shrink: 0;
+        }
+        .podium-avatar.rank1 {
+            width: 76px;
+            height: 76px;
+            border-color: #ffc107;
+            box-shadow: 0 0 18px rgba(255,193,7,0.5);
+        }
+        .podium-avatar.rank2 { border-color: #adb5bd; }
+        .podium-avatar.rank3 { border-color: #cd7f32; }
+        [data-theme="dark"] .podium-avatar {
+            background: #2a2d4a !important;
+            border-color: rgba(255,255,255,0.15) !important;
+        }
+        [data-theme="dark"] .podium-avatar.rank1 {
+            border-color: #ffc107 !important;
+        }
+        [data-theme="dark"] .podium-avatar.rank2 {
+            border-color: #adb5bd !important;
+        }
+        [data-theme="dark"] .podium-avatar.rank3 {
+            border-color: #cd7f32 !important;
+        }
+        .podium-crown { font-size: 22px; margin-bottom: 2px; }
+        .podium-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1a1a2e;
+            text-align: center;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        [data-theme="dark"] .podium-name {
+            color: #ffffff !important;
+        }
+        .podium-course {
+            font-size: 10px;
+            color: #888888;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        [data-theme="dark"] .podium-course {
+            color: rgba(255,255,255,0.45) !important;
+        }
+        .podium-pts {
+            font-size: 11px;
+            color: #b38a00;
+            margin-bottom: 8px;
+        }
+        [data-theme="dark"] .podium-pts {
+            color: #ffc107 !important;
+        }
+        .podium-block {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 800;
+            color: rgba(255,255,255,0.9);
+        }
+        .podium-block.rank1 { height: 90px; background: linear-gradient(180deg, #f5b800, #d4a000); }
+        .podium-block.rank2 { height: 64px; background: linear-gradient(180deg, #8a9299, #6c757d); }
+        .podium-block.rank3 { height: 48px; background: linear-gradient(180deg, #b07040, #8b5a2b); }
+
+        /* ── Ranks 4+ List ── */
+        .lb-list {
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .lb-list::-webkit-scrollbar { width: 5px; }
+        .lb-list::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 4px; }
+        .lb-list::-webkit-scrollbar-thumb { background: #cccccc; border-radius: 4px; }
+        [data-theme="dark"] .lb-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+        [data-theme="dark"] .lb-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
+
+        .lb-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 9px 14px;
+            transition: background 0.2s;
+        }
+        .lb-row:hover { background: #ebebeb; }
+        [data-theme="dark"] .lb-row {
+            background: rgba(255,255,255,0.05) !important;
+            border-color: rgba(255,255,255,0.07) !important;
+        }
+        [data-theme="dark"] .lb-row:hover {
+            background: rgba(255,255,255,0.09) !important;
+        }
+
+        .lb-rank {
+            font-size: 13px;
+            font-weight: 700;
+            color: #999999;
+            width: 22px;
+            text-align: center;
+        }
+        [data-theme="dark"] .lb-rank {
+            color: rgba(255,255,255,0.4) !important;
+        }
+
+        .lb-row-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #1a1a2e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        [data-theme="dark"] .lb-row-avatar {
+            background: #2a2d4a !important;
+        }
+
+        .lb-row-info { flex: 1; min-width: 0; }
+        .lb-row-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a2e;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        [data-theme="dark"] .lb-row-name {
+            color: #ffffff !important;
+        }
+        .lb-row-course { font-size: 11px; color: #888888; }
+        [data-theme="dark"] .lb-row-course {
+            color: rgba(255,255,255,0.4) !important;
+        }
+        .lb-row-pts { font-size: 12px; color: #b38a00; font-weight: 600; white-space: nowrap; }
+        [data-theme="dark"] .lb-row-pts {
+            color: #ffc107 !important;
+        }
+
+        .lb-empty {
+            text-align: center;
+            color: #aaaaaa;
+            font-size: 13px;
+            padding: 20px;
+            width: 100%;
+        }
+        [data-theme="dark"] .lb-empty {
+            color: rgba(255,255,255,0.3) !important;
+        }
+
+        /* ══ RIGHT PANEL — Welcome ══ */
+        .welcome-panel {
+            width: 45%;
+            background: var(--bg-card);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 36px;
+            transition: background 0.3s ease;
+        }
+        [data-theme="dark"] .welcome-panel {
+            background: linear-gradient(135deg, #0f1117 0%, #0f1117 100%) !important;
+        }
+        .large-logo {
+            width: 180px;
+            height: auto;
+            margin-bottom: 24px;
+            filter: drop-shadow(0 4px 18px rgba(0,0,0,0.12));
+        }
+        .welcome-text {
+            font-size: 26px;
+            color: var(--text-main);
+            margin: 0 0 10px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        .sub-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin: 0 0 32px;
+            line-height: 1.6;
+        }
+        .btn-start {
+            padding: 14px 28px;
+            background: #1a1a2e;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+            position: relative;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-start:hover {
+            background: #2d2d4e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(26,26,46,0.3);
+        }
+        .btn-start:active { transform: translateY(0); }
+        .btn-start::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.08) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+        .btn-start:hover::after { transform: translateX(100%); }
         [data-theme="dark"] .btn-start {
-            background: #1e2a50 !important;
-            color: #7b9cff !important;
-            border: 1px solid #2e3a6a !important;
+            background: #1e2a50;
+            color: #7b9cff;
+            border: 1px solid #2e3a6a;
         }
-        [data-theme="dark"] .btn-start:hover {
-            background: #263460 !important;
-        }
- 
+        [data-theme="dark"] .btn-start:hover { background: #263460; }
+
         /* ── Scrollbar ── */
         ::-webkit-scrollbar { width: 7px; height: 7px; }
         ::-webkit-scrollbar-track { background: var(--scrollbar-bg); border-radius: 4px; }
         ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .split-wrapper { flex-direction: column; }
+            .leaderboard-panel, .welcome-panel { width: 100%; }
+            .leaderboard-panel { padding: 28px 16px 20px; min-height: auto; }
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="logo-text"><i class="fa fa-desktop"></i> College of Computer Studies Sit-in Monitoring System</div>
-        <li>
-            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
-                <i class="fa-solid fa-moon" id="themeIcon"></i>
-                <span id="themeLabel"></span>
-            </button>
-        </li>
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
     </nav>
-    <div class="home-wrapper">
-        <div class="home-content">
+
+    <div class="split-wrapper">
+
+        <!-- LEFT: LEADERBOARD -->
+        <div class="leaderboard-panel">
+            <img src="images/ccs.png" alt="CCS Logo" class="lb-logo" onerror="this.style.display='none'">
+            <h2 class="lb-title">🏆Leaderboard</h2>
+            <p class="lb-subtitle">Top Sit-in Students this period</p>
+
+            <div class="lb-filters">
+                <button class="lb-filter-btn active" onclick="switchFilter(this, 'overall')">Overall</button>
+                <button class="lb-filter-btn" onclick="switchFilter(this, 'week')">This Week</button>
+                <button class="lb-filter-btn" onclick="switchFilter(this, 'today')">Today</button>
+            </div>
+
+            <div class="podium-wrap" id="podiumWrap">
+                <div class="lb-empty">Loading leaderboard…</div>
+            </div>
+
+            <div class="lb-list" id="lbList"></div>
+        </div>
+
+        <!-- RIGHT: WELCOME -->
+        <div class="welcome-panel">
             <img src="images/ccs.png" alt="CCS Logo" class="large-logo">
-            
             <h1 class="welcome-text">Welcome to the CCS Sit-in Monitoring System</h1>
             <p class="sub-text">Managing student laboratory sessions with efficiency and security.</p>
-            
             <a href="index.html" class="btn-start">Get Started <i class="fa fa-arrow-right"></i></a>
         </div>
+
     </div>
+
 </body>
 <script>
-/* ══════════════════════════════════════
-   DARK / LIGHT MODE
-══════════════════════════════════════ */
-function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    const icon  = document.getElementById('themeIcon');
-    const label = document.getElementById('themeLabel');
-    if (theme === 'dark') {
-        icon.className  = 'fa-solid fa-sun';
-    } else {
-        icon.className  = 'fa-solid fa-moon';
+    /* ── Theme ── */
+    function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        const icon = document.getElementById('themeIcon');
+        icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
     }
-}
- 
-function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next    = current === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('ccs_theme', next);
-    applyTheme(next);
- 
-    // Animate the icon on toggle
-    const icon = document.getElementById('themeIcon');
-    icon.style.transform = 'rotate(360deg)';
-    icon.style.transition = 'transform 0.4s ease';
-    setTimeout(() => { icon.style.transform = ''; icon.style.transition = ''; }, 400);
-}
- 
-// Load saved theme on page start
-(function() {
-    const saved = localStorage.getItem('ccs_theme') || 'light';
-    applyTheme(saved);
-})();
+    function toggleTheme() {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('ccs_theme', next);
+        applyTheme(next);
+        const icon = document.getElementById('themeIcon');
+        icon.style.transform = 'rotate(360deg)';
+        icon.style.transition = 'transform 0.4s ease';
+        setTimeout(() => { icon.style.transform = ''; icon.style.transition = ''; }, 400);
+    }
+    (function () { applyTheme(localStorage.getItem('ccs_theme') || 'light'); })();
+
+    /* ── Leaderboard ── */
+    let allData = [];
+
+    async function loadLeaderboard() {
+        try {
+            const res = await fetch('http://localhost:3000/leaderboard');
+            if (!res.ok) throw new Error('Failed');
+            allData = await res.json();
+            renderLeaderboard(allData);
+        } catch (e) {
+            document.getElementById('podiumWrap').innerHTML =
+                '<div class="lb-empty">Could not load leaderboard.<br>Make sure the server is running.</div>';
+        }
+    }
+
+    function switchFilter(btn, filter) {
+        document.querySelectorAll('.lb-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderLeaderboard(allData);
+    }
+
+    function initials(first, last) {
+        return ((first || '')[0] || '') + ((last || '')[0] || '');
+    }
+
+    function renderLeaderboard(data) {
+        const podiumWrap = document.getElementById('podiumWrap');
+        const lbList     = document.getElementById('lbList');
+
+        if (!data || data.length === 0) {
+            podiumWrap.innerHTML = '<div class="lb-empty">No data yet. Sit-ins will appear here.</div>';
+            lbList.innerHTML = '';
+            return;
+        }
+
+        const top3 = data.slice(0, 3);
+        const rest = data.slice(3);
+
+        const podiumOrder = [top3[1], top3[0], top3[2]].filter(Boolean);
+
+        podiumWrap.innerHTML = '';
+        podiumOrder.forEach((student) => {
+            const rank = student === top3[0] ? 1 : student === top3[1] ? 2 : 3;
+            const hrs  = student.totalMinutes ? (student.totalMinutes / 60).toFixed(1) : '0.0';
+
+            const card = document.createElement('div');
+            card.className = 'podium-card';
+
+            const avatarContent = student.profilePhoto
+                ? `<img src="${student.profilePhoto}" alt="" style="width:100%;height:100%;object-fit:cover;">`
+                : initials(student.firstName, student.lastName);
+
+            card.innerHTML = `
+                ${rank === 1 ? '<div class="podium-crown">👑</div>' : '<div style="height:26px"></div>'}
+                <div class="podium-avatar rank${rank}">${avatarContent}</div>
+                <div class="podium-name">${student.firstName} ${student.lastName}</div>
+                <div class="podium-course">${student.course || ''}</div>
+                <div class="podium-pts">⭐ ${hrs}h</div>
+                <div class="podium-block rank${rank}">${rank}</div>
+            `;
+            podiumWrap.appendChild(card);
+        });
+
+        lbList.innerHTML = '';
+        rest.forEach((student, i) => {
+            const rank = i + 4;
+            const hrs  = student.totalMinutes ? (student.totalMinutes / 60).toFixed(1) : '0.0';
+            const avatarContent = student.profilePhoto
+                ? `<img src="${student.profilePhoto}" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`
+                : initials(student.firstName, student.lastName);
+
+            const row = document.createElement('div');
+            row.className = 'lb-row';
+            row.innerHTML = `
+                <span class="lb-rank">${rank}</span>
+                <div class="lb-row-avatar">${avatarContent}</div>
+                <div class="lb-row-info">
+                    <div class="lb-row-name">${student.firstName} ${student.lastName}</div>
+                    <div class="lb-row-course">${student.course || ''}</div>
+                </div>
+                <span class="lb-row-pts">⭐ ${hrs}h</span>
+            `;
+            lbList.appendChild(row);
+        });
+    }
+
+    loadLeaderboard();
+    setInterval(loadLeaderboard, 30000);
 </script>
 </html>

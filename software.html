@@ -1144,7 +1144,7 @@
                         </div>
                         <div>
                             <label style="font-size: 12px; font-weight: 700; color: #4e73df;">Lab Room</label>
-                            <select id="uniLab" class="modern-select">
+                            <select id="uniLab" class="modern-select" onchange="renderUniPCGrid()">
                                 <option>Lab 524</option>
                                 <option>Lab 525</option>
                                 <option>Lab 526</option>
@@ -1153,8 +1153,16 @@
                             </select>
                         </div>
                     </div>
+                
+                <div id="uniPCSection" style="display: none; margin-top: 12px; padding: 0 5px;">
+                    <label style="font-size: 13px; font-weight: 700; color: #4e73df;">Select PC</label>
+                    <div id="uniPCGrid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 6px; max-height: 180px; overflow-y: auto;"></div>
+                    <input type="hidden" id="uniPCNumber" value="">
                 </div>
+
             </div>
+
+        </div>
 
             <div class="modal-footer" id="uniFooter" style="display: none;">
                 <button class="btn-cancel" onclick="closeModal('unifiedSitInModal')">Cancel</button>
@@ -1380,6 +1388,8 @@
             document.getElementById('studentDetailsBox').style.display = 'none';
             document.getElementById('uniFooter').style.display = 'none';
             document.getElementById('uniIdSearch').value = '';
+            document.getElementById('uniPCSection').style.display = 'none';
+            document.getElementById('uniPCNumber').value = '';
         }
 
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
@@ -1466,20 +1476,47 @@
             confirmBtn.disabled      = remaining <= 0;
             confirmBtn.style.opacity = remaining <= 0 ? '0.5' : '1';
             confirmBtn.style.cursor  = remaining <= 0 ? 'not-allowed' : 'pointer';
+            document.getElementById('uniPCSection').style.display = 'block';
+            renderUniPCGrid();
+        }
+
+        function renderUniPCGrid() {
+            const grid = document.getElementById('uniPCGrid');
+            document.getElementById('uniPCNumber').value = '';
+            grid.innerHTML = '';
+            for (let i = 1; i <= 45; i++) {
+                const pc = `PC${i}`;
+                const btn = document.createElement('button');
+                btn.textContent = pc;
+                btn.type = 'button';
+                btn.style.cssText = 'padding: 5px 2px; font-size: 11px; border: 1px solid #4e73df; border-radius: 4px; background: transparent; color: #4e73df; cursor: pointer; font-weight: 600;';
+                btn.onclick = function () {
+                    document.querySelectorAll('#uniPCGrid button').forEach(b => {
+                        b.style.background = 'transparent';
+                        b.style.color = '#4e73df';
+                    });
+                    btn.style.background = '#4e73df';
+                    btn.style.color = 'white';
+                    document.getElementById('uniPCNumber').value = pc;
+                };
+                grid.appendChild(btn);
+            }
         }
 
         async function submitUnifiedSitIn() {
             const idNumber = document.getElementById('uniIdSearch').value.trim();
             const purpose  = document.getElementById('uniPurpose').value;
             const lab      = document.getElementById('uniLab').value;
+            const pcNumber = document.getElementById('uniPCNumber').value;
 
             if (!idNumber) return Swal.fire('Warning', 'No student selected. Please search and click a student first.', 'warning');
+            if (!pcNumber) return Swal.fire('Warning', 'Please select a PC number.', 'warning');
 
             try {
                 const res = await fetch('http://localhost:3000/sit-in', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ idNumber, purpose, lab })
+                    body: JSON.stringify({ idNumber, purpose, lab, pcNumber })
                 });
                 if (res.ok) {
                     await Swal.fire({ icon: 'success', title: 'Sit-in Recorded!', timer: 1500, showConfirmButton: false });

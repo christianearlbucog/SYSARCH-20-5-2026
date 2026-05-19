@@ -312,9 +312,9 @@ app.get("/announcements", (req, res) => {
 // Dashboard stats: registered students, current sit-ins, total sit-ins, chart data
 app.get("/admin/dashboard-data", (req, res) => {
     db.get(`SELECT COUNT(*) as count FROM users WHERE idNumber != 'Admin'`, (err, r) => {
-        db.get(`SELECT COUNT(*) as count FROM reservations WHERE timeOut IS NULL OR timeOut = ''`, (err, c) => {
-            db.get(`SELECT COUNT(*) as count FROM reservations`, (err, t) => {
-                db.all(`SELECT purpose, COUNT(*) as count FROM reservations GROUP BY purpose`, (err, p) => {
+        db.get(`SELECT COUNT(*) as count FROM reservations WHERE status = 'Active' AND (timeOut IS NULL OR timeOut = '')`, (err, c) => {
+            db.get(`SELECT COUNT(*) as count FROM reservations WHERE status = 'Active'`, (err, t) => {
+                db.all(`SELECT purpose, COUNT(*) as count FROM reservations WHERE status = 'Active' GROUP BY purpose`, (err, p) => {
                     res.json({
                         registered:   r?.count || 0,
                         currentSitin: c?.count || 0,

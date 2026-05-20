@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,9 +32,12 @@
 
         body {
             min-height: 100vh;
-            background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.14), transparent 24%), radial-gradient(circle at 100% 16%, rgba(96, 165, 250, 0.08), transparent 18%), linear-gradient(135deg, #eef4ff 0%, #f8fafc 100%);
+            background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.14), transparent 24%), radial-gradient(circle at 100% 16%, rgba(96, 165, 250, 0.08), transparent 18%), var(--bg-page);
             color: var(--text-main);
             font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        [data-theme="dark"] body {
+            background: radial-gradient(circle at top left, rgba(96, 165, 250, 0.14), transparent 24%), radial-gradient(circle at 100% 16%, rgba(96, 165, 250, 0.08), transparent 18%), var(--bg-page);
         }
 
         .navbar {
@@ -102,7 +105,9 @@
             border: 1px solid var(--border);
         }
         [data-theme="dark"] .leaderboard-panel {
-            background: var(--bg-soft) !important;
+            background: rgba(17, 24, 39, 0.96) !important;
+            border-color: rgba(148, 163, 184, 0.12) !important;
+            box-shadow: 0 22px 48px rgba(0, 0, 0, 0.24);
         }
 
         .lb-logo {
@@ -161,6 +166,15 @@
             transform: translateY(-1px);
         }
 
+        @keyframes podiumEnter {
+            from { opacity: 0; transform: translateY(24px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes rowEnter {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .podium-wrap {
             display: flex;
             align-items: flex-end;
@@ -177,7 +191,12 @@
             flex-direction: column;
             align-items: center;
             width: 120px;
+            opacity: 0;
+            animation: podiumEnter 0.7s ease forwards;
         }
+        .podium-card:nth-child(1) { animation-delay: 0.16s; }
+        .podium-card:nth-child(2) { animation-delay: 0.28s; }
+        .podium-card:nth-child(3) { animation-delay: 0.40s; }
         .podium-avatar {
             width: 70px;
             height: 70px;
@@ -193,6 +212,10 @@
             overflow: hidden;
             margin-bottom: 10px;
             flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+        .podium-card:hover .podium-avatar {
+            transform: translateY(-5px) scale(1.04);
         }
         .podium-avatar.rank1 {
             width: 86px;
@@ -251,11 +274,20 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 12px 16px;
-            transition: transform 0.2s ease, background 0.2s ease;
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: rowEnter 0.55s ease forwards;
         }
+        .lb-row:nth-child(1) { animation-delay: 0.12s; }
+        .lb-row:nth-child(2) { animation-delay: 0.18s; }
+        .lb-row:nth-child(3) { animation-delay: 0.24s; }
+        .lb-row:nth-child(4) { animation-delay: 0.30s; }
+        .lb-row:nth-child(5) { animation-delay: 0.36s; }
         .lb-row:hover {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
             background: white;
+            box-shadow: 0 18px 36px rgba(59,130,246,0.12);
         }
         .lb-rank {
             font-size: 13px;
@@ -307,7 +339,9 @@
             box-shadow: var(--shadow);
         }
         [data-theme="dark"] .welcome-panel {
-            background: var(--bg-soft) !important;
+            background: rgba(17, 24, 39, 0.96) !important;
+            border: 1px solid rgba(148, 163, 184, 0.10);
+            box-shadow: 0 20px 44px rgba(0, 0, 0, 0.22);
         }
         .large-logo {
             width: 160px;
@@ -399,8 +433,8 @@
 
         <!-- LEFT: LEADERBOARD -->
         <div class="leaderboard-panel">
-            <img src="images/leaderboard.png" alt="CCS Logo" class="lb-logo" onerror="this.style.display='none'">
-            <h2 class="lb-title">🏆Leaderboard</h2>
+            <img src="images/leaders.jpg" alt="CCS Logo" class="lb-logo" onerror="this.style.display='none'">
+            <h2 class="lb-title">Leaderboard</h2>
             <p class="lb-subtitle">Top Sit-in Students this period</p>
 
             <div class="lb-filters">
@@ -443,7 +477,7 @@
         icon.style.transition = 'transform 0.4s ease';
         setTimeout(() => { icon.style.transform = ''; icon.style.transition = ''; }, 400);
     }
-    (function () { applyTheme(localStorage.getItem('ccs_theme') || 'light'); })();
+    (function () { applyTheme(localStorage.getItem('ccs_theme') || 'dark'); })();
 
     /* ── Leaderboard ── */
     let allData = [];

@@ -83,6 +83,52 @@ db.serialize(() => {
         idNumber TEXT UNIQUE,
         manualPoints INTEGER DEFAULT 0
     )`);
+
+    db.run(`CREATE TABLE IF NOT EXISTS unavailable_pcs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        lab TEXT,
+        pcNumber TEXT,
+        reason TEXT DEFAULT 'Broken/Unavailable',
+        markedAt TEXT,
+        UNIQUE(lab, pcNumber)
+    )`);
+});
+
+// --- MANAGE UNAVAILABLE PCs ---
+app.get("/admin/unavailable-pcs", (req, res) => {
+    const sql = `SELECT * FROM unavailable_pcs ORDER BY lab ASC, pcNumber ASC`;
+    db.all(sql, [], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(rows);
+    });
+});
+
+app.get("/admin/unavailable-pcs/:lab", (req, res) => {
+    const sql = `SELECT pcNumber FROM unavailable_pcs WHERE lab = ? ORDER BY pcNumber ASC`;
+    db.all(sql, [req.params.lab], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        const pcs = rows.map(r => r.pcNumber);
+        res.json(pcs);
+    });
+});
+
+app.post("/admin/mark-pc-unavailable", (req, res) => {
+    const { lab, pcNumber, reason } = req.body;
+    const markedAt = new Date().toLocaleString();
+    const sql = `INSERT OR IGNORE INTO unavailable_pcs (lab, pcNumber, reason, markedAt) VALUES (?, ?, ?, ?)`;
+    db.run(sql, [lab, pcNumber, reason || 'Broken/Unavailable', markedAt], (err) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ message: "PC marked as unavailable" });
+    });
+});
+
+app.post("/admin/remove-pc-unavailable", (req, res) => {
+    const { lab, pcNumber } = req.body;
+    const sql = `DELETE FROM unavailable_pcs WHERE lab = ? AND pcNumber = ?`;
+    db.run(sql, [lab, pcNumber], function (err) {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ message: "PC marked as available" });
+    });
 });
 
 // --- REGISTER & LOGIN ---

@@ -1032,8 +1032,11 @@
             </div>
             
             <div class="btn-actions">
-                <button class="btn-refresh" onclick="fetchReservations()">
+                <button class="btn-refresh" onclick="fetchReservations()" style="margin-right: 10px;">
                     <i class="fa fa-refresh"></i> Refresh Records
+                </button>
+                <button class="btn-refresh" onclick="openPCManagementModal()" style="background: linear-gradient(135deg, #ef4444, #dc2626); margin-right: 10px;">
+                    <i class="fa fa-laptop"></i> Manage PC Availability
                 </button>
             </div>
 
@@ -1064,6 +1067,48 @@
                 <div id="logBody" class="panel-body"></div>
             </div>
 
+        </div>
+    </div>
+
+    <!-- PC Management Modal -->
+    <div id="pcManagementModal" class="modal-overlay">
+        <div class="modal-content" style="width: 600px; max-height: 85vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h3><i class="fa fa-laptop"></i> Manage PC Availability</h3>
+                <button onclick="closePCManagementModal()" style="background:none; border:none; color:white; cursor:pointer; font-size:20px;">&times;</button>
+            </div>
+            
+            <div class="modal-body" style="padding: 20px;">
+                <div style="margin-bottom: 20px;">
+                    <label style="font-weight: 700; color: #4e73df; margin-bottom: 8px; display: block;">Select Laboratory:</label>
+                    <select id="pcManagementLabFilter" class="modern-select" onchange="loadPCManagementGrid()">
+                        <option value="Lab 524">Lab 524</option>
+                        <option value="Lab 525">Lab 525</option>
+                        <option value="Lab 526">Lab 526</option>
+                        <option value="Lab 527">Lab 527</option>
+                        <option value="Lab 528">Lab 528</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <p style="font-size: 12px; color: #858796; margin: 0 0 10px 0;">
+                        <i class="fa fa-info-circle"></i> Click on a PC to mark it as broken/unavailable (RED) or available (GREEN)
+                    </p>
+                </div>
+
+                <div id="pcManagementGrid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px;"></div>
+
+                <div style="margin-top: 20px; padding: 15px; background: #f8f9fc; border-radius: 8px;">
+                    <p style="margin: 0; font-size: 12px; color: #858796;">
+                        <i class="fa fa-circle" style="color: #10b981;"></i> <strong>Green</strong> = Available<br>
+                        <i class="fa fa-circle" style="color: #ef4444;"></i> <strong>Red</strong> = Unavailable/Broken
+                    </p>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closePCManagementModal()">Close</button>
+            </div>
         </div>
     </div>
 
@@ -1408,6 +1453,137 @@
             window.location.href = "index.html";
         }
     }   
+
+    // ── PC Management ────────────────────────────────────────
+    let unavailablePCs = [];
+
+    function openPCManagementModal() {
+        document.getElementById('pcManagementModal').style.display = 'flex';
+        loadPCManagementGrid();
+    }
+
+    function closePCManagementModal() {
+        document.getElementById('pcManagementModal').style.display = 'none';
+    }
+
+    // Close PC Management Modal when clicking outside
+    document.addEventListener('click', function(event) {
+        const modal = document.getElementById('pcManagementModal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    async function loadPCManagementGrid() {
+        const lab = document.getElementById('pcManagementLabFilter').value;
+        const grid = document.getElementById('pcManagementGrid');
+        
+        // Fetch unavailable PCs for this lab
+        try {
+            const res = await fetch(`http://localhost:3000/admin/unavailable-pcs/${lab}`);
+            unavailablePCs = await res.json();
+        } catch (e) {
+            console.error("Error fetching unavailable PCs:", e);
+            unavailablePCs = [];
+        }
+
+        grid.innerHTML = '';
+        
+        // Create 45 PC buttons
+        for (let i = 1; i <= 45; i++) {
+            const pcNumber = `PC${i}`;
+            const isUnavailable = unavailablePCs.includes(pcNumber);
+            
+            const btn = document.createElement('button');
+            btn.textContent = `PC${i}`;
+            btn.type = 'button';
+            btn.dataset.pc = pcNumber;
+            btn.style.cssText = `
+                padding: 12px 8px;
+                font-size: 12px;
+                font-weight: 600;
+                border: 2px solid ${isUnavailable ? '#ef4444' : '#10b981'};
+                background: ${isUnavailable ? '#fecaca' : '#dcfce7'};
+                color: ${isUnavailable ? '#991b1b' : '#166534'};
+                border-radius: 6px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            `;
+            
+            btn.onmouseover = function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            };
+            
+            btn.onmouseout = function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = 'none';
+            };
+            
+            btn.onclick = function() {
+                togglePCAvailability(lab, pcNumber);
+            };
+            
+            grid.appendChild(btn);
+        }
+    }
+
+    async function togglePCAvailability(lab, pcNumber) {
+        const isCurrentlyUnavailable = unavailablePCs.includes(pcNumber);
+        
+        try {
+            if (isCurrentlyUnavailable) {
+                // Mark as available
+                const res = await fetch('http://localhost:3000/admin/remove-pc-unavailable', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ lab, pcNumber })
+                });
+                if (res.ok) {
+                    await Swal.fire({
+                        icon: 'success',
+                        title: 'Updated!',
+                        text: `${pcNumber} is now available.`,
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                    loadPCManagementGrid();
+                }
+            } else {
+                // Mark as unavailable
+                const res = await Swal.fire({
+                    title: 'Mark PC as Unavailable?',
+                    input: 'text',
+                    inputLabel: 'Reason (optional)',
+                    inputPlaceholder: 'e.g., Broken monitor, No power',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ef4444',
+                    confirmButtonText: 'Mark Unavailable'
+                });
+
+                if (res.isConfirmed) {
+                    const reason = res.value || 'Broken/Unavailable';
+                    const markRes = await fetch('http://localhost:3000/admin/mark-pc-unavailable', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ lab, pcNumber, reason })
+                    });
+                    if (markRes.ok) {
+                        await Swal.fire({
+                            icon: 'success',
+                            title: 'Updated!',
+                            text: `${pcNumber} marked as unavailable.`,
+                            timer: 1500,
+                            showConfirmButton: false
+                        });
+                        loadPCManagementGrid();
+                    }
+                }
+            }
+        } catch (e) {
+            Swal.fire('Error', 'Failed to update PC status.', 'error');
+        }
+    }
 
     // ── On Load ──────────────────────────────────────────────
     document.addEventListener("DOMContentLoaded", () => {
